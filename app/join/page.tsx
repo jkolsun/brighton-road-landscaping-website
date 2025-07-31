@@ -1,0 +1,168 @@
+'use client';
+
+import { useState } from 'react';
+
+export default function JoinPage() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    position: '',
+    residence: '',
+    transportation: '',
+    availability: '',
+    experience: '',
+    resume: null,
+  });
+
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // You can replace this part with actual Airtable submission later
+    setShowSuccess(true);
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      position: '',
+      residence: '',
+      transportation: '',
+      availability: '',
+      experience: '',
+      resume: null,
+    });
+
+    // Hide success message after 3 seconds
+    setTimeout(() => setShowSuccess(false), 6000);
+  };
+
+  return (
+    <section
+      className="relative min-h-screen bg-cover bg-center py-12 px-6 text-gray-900"
+      style={{ backgroundImage: "url('/images.webp')" }}
+    >
+      {/* Background Overlay */}
+      <div className="absolute inset-0 bg-white/80 backdrop-blur-sm"></div>
+
+      {/* Success Popup */}
+      {showSuccess && (
+        <div className="fixed top-6 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded shadow-lg z-50 text-center font-semibold">
+          <span className="text-xl">Application Submitted!</span>
+          <p className="text-sm mt-1">Thanks for applying to Brighton Road Landscaping. We will reach out within 24 hours</p>
+        </div>
+      )}
+
+      {/* Form Content */}
+      <div className="relative z-10 max-w-3xl mx-auto">
+        <h1 className="text-4xl font-bold text-center mb-4">Join Our Team</h1>
+        <p className="text-center mb-8">
+          We’re always looking for hardworking, reliable team members to help us
+          keep lawns looking their best. Fill out the form below to apply.
+        </p>
+
+        <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded shadow-md">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input
+              placeholder="First Name"
+              required
+              className="border p-3 rounded"
+              value={formData.firstName}
+              onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+            />
+            <input
+              placeholder="Last Name"
+              required
+              className="border p-3 rounded"
+              value={formData.lastName}
+              onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+            />
+          </div>
+
+          <input
+            type="email"
+            placeholder="Email"
+            required
+            className="border w-full p-3 rounded"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          />
+
+          <input
+            type="tel"
+            placeholder="Phone"
+            required
+            className="border w-full p-3 rounded"
+            value={formData.phone}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+          />
+
+          <select
+            required
+            className="border w-full p-3 rounded"
+            value={formData.position}
+            onChange={(e) => setFormData({ ...formData, position: e.target.value })}
+          >
+            <option value="">Do you have a valid Drivers License?</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+
+          <input
+            placeholder="Where is your primary residence?"
+            required
+            className="border w-full p-3 rounded"
+            value={formData.residence}
+            onChange={(e) => setFormData({ ...formData, residence: e.target.value })}
+          />
+
+  
+
+          <input
+            placeholder="What’s your availability?"
+            required
+            className="border w-full p-3 rounded"
+            value={formData.availability}
+            onChange={(e) => setFormData({ ...formData, availability: e.target.value })}
+          />
+
+          <textarea
+            placeholder="Tell us about your related work experience (optional)"
+            rows={4}
+            className="border w-full p-3 rounded"
+            value={formData.experience}
+            onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
+          />
+
+
+<div className="mt-4 text-left">
+  <label className="block text-gray-700 font-semibold mb-2">
+    Attach Resume (Optional)
+  </label>
+  <input
+    type="file"
+    accept=".pdf,.doc,.docx"
+    className="border w-full p-3 rounded"
+    onChange={(e) =>
+      setFormData({ ...formData, resume: e.target.files?.[0] || null })
+    }
+  />
+</div>
+
+
+
+          <button
+            type="submit"
+            className="bg-green-700 text-white font-bold px-6 py-3 rounded hover:bg-green-800"
+          >
+            Submit Application
+          </button>
+        </form>
+      </div>
+    </section>
+  );
+}
+
+
