@@ -56,7 +56,7 @@ export default function Header() {
             <li><Link href="/about" onClick={() => setIsMenuOpen(false)}>About Us</Link></li>
             <li><Link href="/testimonials" onClick={() => setIsMenuOpen(false)}>Testimonials</Link></li>
             <li><Link href="/join" onClick={() => setIsMenuOpen(false)}>Join Our Team</Link></li>
-            <a href="tel:+16102569844" className="hover:text-green-700">Call Us</a>
+            <a href="tel:+14845351936" className="hover:text-green-700">Call Us</a>
             <li><Link href="#faq" onClick={() => setIsMenuOpen(false)}>FAQs</Link></li>
             <li><Link href="/quote" onClick={() => setIsMenuOpen(false)} className="block w-full bg-green-800 hover:bg-green-700 text-white px-4 py-2 rounded-md shadow text-center">
               Free Quote
