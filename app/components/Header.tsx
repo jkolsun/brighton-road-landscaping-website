@@ -35,8 +35,8 @@ export default function Header() {
           <Link href="/about" className="hover:text-green-700">About Us</Link>
           <Link href="/testimonials" className="hover:text-green-700">Testimonials</Link>
           <Link href="/join" className="hover:text-green-700">Join Our Team</Link>
-          <Link href="/contact" className="text-green-700">Contact Us</Link>
-          <Link href="#faq" className="text-xs bg-green-100 px-3 py-1.5 rounded-full hover:bg-green-200 transition">
+          <Link href="/contact" className="hover:text-green-700">Contact Us</Link>
+          <Link href="#faq" className="text-xs bg-green-100 px-3 py-2 rounded-full hover:bg-green-200 transition">
             FAQs <QuestionMarkCircleIcon className="w-4 h-4 inline-block ml-1" />
 
           </Link>
@@ -56,7 +56,7 @@ export default function Header() {
             <li><Link href="/about" onClick={() => setIsMenuOpen(false)}>About Us</Link></li>
             <li><Link href="/testimonials" onClick={() => setIsMenuOpen(false)}>Testimonials</Link></li>
             <li><Link href="/join" onClick={() => setIsMenuOpen(false)}>Join Our Team</Link></li>
-            <li><Link href="/contact" onClick={() => setIsMenuOpen(false)}>Contact Us</Link></li>
+            <a href="tel:+16102569844" className="hover:text-green-700">Call Us</a>
             <li><Link href="#faq" onClick={() => setIsMenuOpen(false)}>FAQs</Link></li>
             <li><Link href="/quote" onClick={() => setIsMenuOpen(false)} className="block w-full bg-green-800 hover:bg-green-700 text-white px-4 py-2 rounded-md shadow text-center">
               Free Quote

@@ -1,13 +1,14 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { imageConfigDefault } from 'next/dist/shared/lib/image-config';
 import Image from 'next/image';
 
 const team = [
   {
     name: "Declan O'Brien",
     role: "Co-Owner",
-    bio: "Declan is a 17 year old senior at Plymouth-Whitemarsh High School. After starting the business by himself in 2022 going into his freshman year, he relentlessly worked at it and watched it prosper into what it is today. After inviting his younger brother Tristan into the business in 2024, he joined forces with his older brother Aiden in 2025.",
+    bio: "Declan is a 17 year old senior at Plymouth-Whitemarsh High School. After starting the business by himself in 2022 going into his freshman year, he relentlessly worked at it and watched it prosper into what it is today, a 6 man crew with 2 trucks. After inviting his younger brother Tristan into the business in 2024, he joined forces with his older brother Aiden in 2025.",
     image: "/images/declan.jpg"
   },
   {
@@ -20,7 +21,11 @@ const team = [
     name: "Tristan O'Brien",
     role: "Co-Owner",
     bio: "Tristan is a sophomore at Plymouth Whitemarsh playing quarterback and outside linebacker. He joined the crew in 2024, working whenever he was not on the field. Tristan is looking to make a statement this year on Varsity and win the league.",
+<<<<<<< HEAD
     image: "/images/tob.jpg"
+=======
+    image: "/logos/tristan.jpg"
+>>>>>>> 8116bab (Updated About Us bio, added mobile 'Call Us' button, uploaded new image)
   },
   {
     name: "Jared Kolsun",
@@ -32,6 +37,10 @@ const team = [
 
 export default function AboutUsSection() {
   return (
+
+    <section className="px-6 py-14 max-w-4xl mx-auto">
+      <h2 className="text-xl font-bold text-center text-black-700 mb-12">Brighton Road Landscaping is a family owned and operated business. Located in Plymouth meeting, PA, we service all of Montgomery county. From weekly mowing to our tree service, we pride ourselves on doing excellent work, reliability, and fast, transparent customer service.</h2>
+    
     <section className="px-6 py-16 max-w-4xl mx-auto">
       <h2 className="text-3xl font-bold text-center text-green-700 mb-12">Meet Our Team</h2>
 
@@ -60,6 +69,7 @@ export default function AboutUsSection() {
           </motion.div>
         ))}
       </div>
+    </section>
     </section>
   );
 }
