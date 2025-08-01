@@ -21,11 +21,7 @@ const team = [
     name: "Tristan O'Brien",
     role: "Co-Owner",
     bio: "Tristan is a sophomore at Plymouth Whitemarsh playing quarterback and outside linebacker. He joined the crew in 2024, working whenever he was not on the field. Tristan is looking to make a statement this year on Varsity and win the league.",
-<<<<<<< HEAD
-    image: "/images/tob.jpg"
-=======
     image: "/logos/tristan.jpg"
->>>>>>> 8116bab (Updated About Us bio, added mobile 'Call Us' button, uploaded new image)
   },
   {
     name: "Jared Kolsun",
