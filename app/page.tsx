@@ -44,7 +44,7 @@ const isFAQInView = useInView(faqRef, { once: true });
 
         {/* Hero Text */}
         <section className="relative z-20 flex items-center justify-center text-center px-4 py-20 h-full">
-        <h1 className="text-white text-5xl md:text-7xl font-[impact] leading-tight text-center">
+        <h1 className="text-white text-5xl md:text-7xl font-[impact] leading-tight text-center mt-10 lg:mt-20">
   A Mowed Lawn for a Reasonable Price
 </h1>
         </section>
