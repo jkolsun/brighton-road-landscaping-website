@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
+import { PhoneIcon } from '@heroicons/react/24/outline';
+
 
 
 export default function Header() {
@@ -20,6 +22,11 @@ export default function Header() {
           
           </div>
         </Link>
+
+       {/* Phone icon mobile only */}
+  <a href="tel:4845351936" className="md:hidden mx-2">
+    <PhoneIcon className="h-6 w-6 text-green" />
+  </a> 
 
         {/* Hamburger - mobile only */}
         <button

@@ -6,6 +6,8 @@ import { useRef } from 'react';
 import WhyChoose from '@/components/WhyChoose';
 import FAQSection from '@/components/FAQSection';
 import Footer from '@/components/Footer';
+import Link from 'next/link';
+
 
 export default function Home() {
   const testimonialsRef = useRef(null);
@@ -43,10 +45,17 @@ const isFAQInView = useInView(faqRef, { once: true });
   </div>
 
         {/* Hero Text */}
-        <section className="relative z-20 flex items-center justify-center text-center px-4 py-20 h-full">
-        <h1 className="text-white text-5xl md:text-7xl font-[impact] leading-tight text-center mt-10 lg:mt-20">
+        <section className="relative z-20 flex flex-col items-center justify-center text-center px-4 py-20 h-full">
+        <h1 className="text-white text-4xl md:text-7xl font-[impact] leading-tight text-center mt-10 lg:mt-20">
   A Mowed Lawn for a Reasonable Price
 </h1>
+
+<Link href="/quote">
+    <button className="mt-6 bg-green-700 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-xl shadow-md text-lg transition">
+      Free Quote Today!
+    </button>
+</Link>
+
         </section>
       </div>
 
