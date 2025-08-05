@@ -16,34 +16,37 @@ export default function QuotePage() {
     e.preventDefault();
     setSubmitted(true);
   
-    // Send data to backend API
-    await fetch('/api/send-sms', {
+    const response = await fetch('https://formspree.io/f/myzpnepd', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        phone: formData.phone,
+        address: formData.address,
+        service: formData.service,
+        notes: formData.notes,
+      }),
     });
-    
   
-    setFormData({
-      name: '',
-      phone: '',
-      address: '',
-      service: '',
-      notes: ''
-    });
-  
-    setTimeout(() => {
-      setSubmitted(false);
+    if (response.ok) {
       setFormData({
         name: '',
         phone: '',
         address: '',
         service: '',
-        notes: ''
+        notes: '',
       });
-    }, 6000);
-    
+  
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 6000);
+    } else {
+      alert('Something went wrong. Please try again.');
+    }
   };
+  
 
   return (
     <section
