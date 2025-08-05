@@ -18,28 +18,38 @@ export default function JoinPage() {
 
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // You can replace this part with actual Airtable submission later
-    setShowSuccess(true);
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      position: '',
-      residence: '',
-      transportation: '',
-      availability: '',
-      experience: '',
-      resume: null,
+  
+    const formDataToSend = new FormData();
+    formDataToSend.append('First Name', formData.firstName);
+    formDataToSend.append('Last Name', formData.lastName);
+    formDataToSend.append('Email', formData.email);
+    formDataToSend.append('Phone', formData.phone);
+    formDataToSend.append('Position', formData.position);
+    formDataToSend.append('Residence', formData.residence);
+    formDataToSend.append('Availability', formData.availability);
+    formDataToSend.append('Experience', formData.experience);
+    if (formData.resume) {
+      formDataToSend.append('Resume', formData.resume);
+    }
+  
+    const res = await fetch('https://formspree.io/f/xkgzqppy', {
+      method: 'POST',
+      body: formDataToSend,
     });
-
-    // Hide success message after 3 seconds
-    setTimeout(() => setShowSuccess(false), 6000);
+  
+    if (res.ok) {
+      setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 6000);
+    } else {
+      alert('Something went wrong. Please try again.');
+    }
   };
+  
 
   return (
+
     <section
       className="relative min-h-screen bg-cover bg-center py-12 px-6 text-gray-900"
       style={{ backgroundImage: "url('/images.webp')" }}
@@ -54,6 +64,8 @@ export default function JoinPage() {
           <p className="text-sm mt-1">Thanks for applying to Brighton Road Landscaping. We will reach out within 24 hours</p>
         </div>
       )}
+
+      
 
       {/* Form Content */}
       <div className="relative z-10 max-w-3xl mx-auto">
