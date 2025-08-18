@@ -6,11 +6,11 @@ const faqs = [
     {
         question: 'Do you offer every other week?',
         answer:
-          'Yes, your grass will be cut as often as you want. You can cancel or reschedule at anytime.',
+          'Yes, your lawn will be mowed as often as you want. You can cancel or reschedule at anytime.',
       },
   {
-    question: 'Do we offer trimming?',
-    answer: 'Yes. The lawn mowing service offers all grass cutting, trimming, edging and blowing.',
+    question: 'Do you offer trimming with lawn mowing?',
+    answer: 'Yes. The lawn mowing service offers all lawn mowing, trimming, edging and blowing.',
   },
   {
     question: 'How do you get paid?',

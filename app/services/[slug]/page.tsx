@@ -19,7 +19,13 @@ const services = [
   {
     name: 'Seasonal Cleanups',
     video: '/cleanup-video.mp4',
-    description: 'Our cleanups include Fall leaf/stick removal, and bush/tree trimming, or any combination of the four. Our Spring cleanups include leaf/stick removal, weeding, mulching, and bush/tree trimming, or any combination of the six. ',
+    description: (
+      <>
+        <p><strong>Fall cleanup includes:</strong> leaf/stick removal, and bush/tree trimming, or any combination of the four.</p>
+        <br />
+        <p><strong>Spring cleanup includes:</strong> leaf/stick removal, weeding, mulching, and bush/tree trimming, or any combination of the six.</p>
+      </>
+    ),
   },
   {
     name: 'Flowerbed Installation',

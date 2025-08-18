@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const services = [
   {
-    name: 'Lawn Maintenance',
+    name: 'Lawn Mowing',
     image: '/images/lawns.jpg',
   },
   {
