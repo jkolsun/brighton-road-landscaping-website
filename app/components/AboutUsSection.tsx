@@ -35,6 +35,15 @@ export default function AboutUsSection() {
   return (
 
     <section className="px-6 py-14 max-w-4xl mx-auto">
+      <div className="flex justify-center mb-8">
+        <Image
+          src="/images/AboutUS.jpg" // Replace with the actual image path
+          alt="Brighton Road Landscaping Logo"
+          width={400} // Adjust width as needed
+          height={400} // Adjust height as needed
+          className="object-contain"
+        />
+      </div>
       <h2 className="text-xl font-bold text-center text-black-700 mb-12">Brighton Road Landscaping is a family owned and operated business. Located in Plymouth meeting, PA, we service all of Montgomery county. From weekly mowing to our tree service, we pride ourselves on doing excellent work, reliability, and fast, transparent customer service.</h2>
     
     <section className="px-6 py-16 max-w-4xl mx-auto">

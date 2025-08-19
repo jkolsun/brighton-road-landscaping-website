@@ -33,7 +33,7 @@ export default function Footer() {
           <h4 className="text-lg font-semibold mb-4">Contact</h4>
           <ul className="text-sm text-gray-300 space-y-1">
             <li>Phone: (484) 535-1936</li>
-            <li>Email: info@brightonroadlandscaping.com</li>
+            <li>Email: brightonroadlandscaping@gmail.com</li>
             <li>Hours: Mon–Sat: 8am–8pm</li>
           </ul>
         </div>
