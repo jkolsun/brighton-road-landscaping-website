@@ -8,16 +8,19 @@ import Link from 'next/link'
 const services = [
   {
     name: 'Lawn Maintenance',
-    video: '/lawn-video.mp4', // Replace this with your actual video file name
+    slug: 'lawn-mowing',
+    video: '/lawn-video.mp4',
     description: 'Our lawn mowing service offers a variety of lawn care plans. Whether you are in need of weekly or biweekly mowing, or only need a one time cut, Brighton Road Landscaping is here for all of your lawn maintenance needs.',
   },
   {
     name: 'Fertilization and Treatment',
+    slug: 'fertilization-and-treatment',
     image: '/images/fertilizer.jpg',
     description: 'Our fertilizing and treatment services help keep your lawn green, thick, and healthy all season long. We offer seasonal fertilizer applications, weed control, and preventative treatments tailored to your lawn’s specific needs.',
   },
   {
     name: 'Seasonal Cleanups',
+    slug: 'seasonal-cleanups',
     video: '/cleanup-video.mp4',
     description: (
       <>
@@ -29,16 +32,19 @@ const services = [
   },
   {
     name: 'Flowerbed Installation',
+    slug: 'flowerbed-installation',
     image: '/images/flowerbeds.jpg',
     description: 'Our flower bed installation service is perfect for our clients looking to enhance the look of their property with fresh, well-designed beds. Brighton Road Landscaping offers full-service installation, including bed design, edging, soil preparation, and planting.',
   },
   {
     name: 'Tree Service',
-    video:'/tree-video.mp4',
+    slug: 'tree-service',
+    video: '/tree-video.mp4',
     description: 'Our tree services include trimming, pruning, and small tree removal. Whether you need to shape overgrown branches, improve tree health, or clear space in your yard, Brighton Road Landscaping is equipped to handle the job safely and efficiently.',
   },
   {
     name: 'Snow Removal',
+    slug: 'snow-removal',
     image: '/images/snow.jpg',
     description: 'Fast, reliable snow removal during the winter season.',
   },
@@ -46,10 +52,7 @@ const services = [
 
 export default function ServiceDetailPage() {
   const { slug } = useParams()
-  const titleFromSlug = decodeURIComponent(slug as string).replace(/-/g, ' ')
-  const service = services.find(
-    (s) => s.name.toLowerCase() === titleFromSlug.toLowerCase()
-  )
+  const service = services.find((s) => s.slug === slug) // Match directly using slug
 
   if (!service) {
     return <div className="text-center py-10 text-red-500">Service not found.</div>
@@ -82,8 +85,12 @@ export default function ServiceDetailPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9 }}
       >
-        <h1 className="text-4xl font-bold text-green-800 mb-4"style={{ fontFamily: 'Impact, sans-serif' }} >{service.name}</h1>
-        <p className="text-gray-700 text-lg mb-6" style={{ fontFamily: 'Impact, sans-serif' }}>{service.description}</p>
+        <h1 className="text-4xl font-bold text-green-800 mb-4" style={{ fontFamily: 'Impact, sans-serif' }}>
+          {service.name}
+        </h1>
+        <p className="text-gray-700 text-lg mb-6" style={{ fontFamily: 'Impact, sans-serif' }}>
+          {service.description}
+        </p>
 
         <Link
           href="/quote"
