@@ -40,8 +40,8 @@ export default function JoinPage() {
     });
   
     if (res.ok) {
-      setShowSuccess(true);
-      setTimeout(() => setShowSuccess(false), 6000);
+      alert('Application Submitted! Thanks for applying to Brighton Road Landscaping. We will reach out within 24 hours.');
+      window.location.reload();
     } else {
       alert('Something went wrong. Please try again.');
     }
@@ -57,21 +57,11 @@ export default function JoinPage() {
       {/* Background Overlay */}
       <div className="absolute inset-0 bg-white/80 backdrop-blur-sm"></div>
 
-      {/* Success Popup */}
-      {showSuccess && (
-        <div className="fixed top-6 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded shadow-lg z-50 text-center font-semibold">
-          <span className="text-xl">Application Submitted!</span>
-          <p className="text-sm mt-1">Thanks for applying to Brighton Road Landscaping. We will reach out within 24 hours</p>
-        </div>
-      )}
-
-      
-
       {/* Form Content */}
       <div className="relative z-10 max-w-3xl mx-auto">
         <h1 className="text-4xl font-bold text-center mb-4">Join Our Team</h1>
         <p className="text-center mb-8">
-          We’re always looking for hardworking, reliable team members to help us
+          We're always looking for hardworking, reliable team members to help us
           keep lawns looking their best. Fill out the form below to apply.
         </p>
 
@@ -133,7 +123,7 @@ export default function JoinPage() {
   
 
           <input
-            placeholder="What’s your availability?"
+            placeholder="What's your availability?"
             required
             className="border w-full p-3 rounded"
             value={formData.availability}
@@ -176,5 +166,3 @@ export default function JoinPage() {
     </section>
   );
 }
-
-
