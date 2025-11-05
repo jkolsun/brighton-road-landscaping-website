@@ -16,8 +16,6 @@ export default function JoinPage() {
     resume: null,
   });
 
-  const [showSuccess, setShowSuccess] = useState(false);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
   
@@ -34,16 +32,27 @@ export default function JoinPage() {
       formDataToSend.append('Resume', formData.resume);
     }
   
-    const res = await fetch('https://formspree.io/f/xkgzqppy', {
-      method: 'POST',
-      body: formDataToSend,
-    });
-  
-    if (res.ok) {
-      alert('Application Submitted! Thanks for applying to Brighton Road Landscaping. We will reach out within 24 hours.');
-      window.location.reload();
-    } else {
-      alert('Something went wrong. Please try again.');
+    try {
+      const res = await fetch('https://formspree.io/f/xkgzqppy', {
+        method: 'POST',
+        body: formDataToSend,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+    
+      if (res.ok) {
+        // Show alert first
+        window.alert('Application Submitted! Thanks for applying to Brighton Road Landscaping. We will reach out within 24 hours.');
+        // Then refresh the page
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
+      } else {
+        window.alert('Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      window.alert('Something went wrong. Please try again.');
     }
   };
   
