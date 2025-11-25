@@ -40,7 +40,7 @@ const services = [
     name: 'Landscape Design & Installation',
     slug: 'landscape-design',
     description: 'Professional landscape architecture and installation services',
-    image: '/images/flowerbed.jpg',
+    image: '/images/install.JPG',
     icon: HomeIcon,
   },
   {
