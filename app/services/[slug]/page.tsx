@@ -71,7 +71,7 @@ const services = {
     name: 'Landscape Design and Installation',
     hero: {
       title: 'Professional Landscape Design',
-      image: '/images/landscape-design.jpg'
+      image: '/images/install.JPG'
     },
     sections: [
       {
