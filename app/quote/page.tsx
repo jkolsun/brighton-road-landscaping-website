@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Footer from '@/components/Footer';
 
 export default function QuotePage() {
   const [formData, setFormData] = useState({
@@ -46,82 +47,81 @@ export default function QuotePage() {
       alert('Something went wrong. Please try again.');
     }
   };
-  
 
   return (
-    <section
-      className="min-h-screen flex items-center justify-center bg-cover bg-center relative"
-      style={{ backgroundImage: "url('/images.webp')" }}
-    >
-      <div className="absolute inset-0 bg-white/40 backdrop-blur-sm z-0"></div>
+    <div>
+      <section
+        className="min-h-screen flex items-center justify-center bg-cover bg-center relative"
+        style={{ backgroundImage: "url('/images.webp')" }}
+      >
+        <div className="absolute inset-0 bg-white/40 backdrop-blur-sm z-0"></div>
 
-      <div className="relative z-10 w-full max-w-2xl bg-white bg-opacity-90 p-8 rounded-lg shadow-xl">
-        <h1 className="text-3xl font-bold text-center mb-2">Request a Free Quote</h1>
-        <p className="text-center text-gray-700 mb-6">
-          You'll get a personalized response within 24 hours. No spam, no subscriptions — just your quote.
-        </p>
+        <div className="relative z-10 w-full max-w-2xl bg-white bg-opacity-90 p-8 rounded-lg shadow-xl">
+          <h1 className="text-3xl font-bold text-center mb-2">Request a Free Quote</h1>
+          <p className="text-center text-gray-700 mb-6">
+            You'll get a personalized response within 24 hours. No spam, no subscriptions — just your quote.
+          </p>
 
-        {submitted && (
-          <div className="bg-green-100 text-green-800 text-sm text-center p-4 rounded mb-4">
-            Quote request submitted! We'll get back to you within 24 hours.
-          </div>
-        )}
+          {submitted && (
+            <div className="bg-green-100 text-green-800 text-sm text-center p-4 rounded mb-4">
+              Quote request submitted! We'll get back to you within 24 hours.
+            </div>
+          )}
 
-        <form onSubmit={handleSubmit} className="space-y-10">
-          <input
-            placeholder="Full Name"
-            required
-            className="w-full border border-gray-300 p-3 rounded"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          />
-          <input
-            placeholder="Phone Number"
-            required
-            className="w-full border border-gray-300 p-3 rounded"
-            value={formData.phone}
-            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-          />
-          <input
-            placeholder="Property Address"
-            required
-            className="w-full border border-gray-300 p-3 rounded"
-            value={formData.address}
-            onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-          />
-          <select
-            required
-            className="w-full border border-gray-300 p-3 rounded"
-            value={formData.service}
-            onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-          >
-            <option value="">Select a service</option>
-            <option value="Lawn Mowing">Lawn Mowing</option>
-            <option value="Cleanup (Mulching, Weeding, Leafs)">Cleanup (Mulching, Weeding, Leafs)</option>
-            <option value="Hedge Trimming">Hedge Trimming</option>
-            <option value="Tree Service">Tree Service</option>
-            <option value="Fertilizer">Fertilizer</option>
-            <option value="Other">Other</option>
-          </select>
-          <textarea
-            placeholder="Additional Notes (optional)"
-            rows={3}
-            className="w-full border border-gray-300 p-3 rounded"
-            value={formData.notes}
-            onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-          />
+          <form onSubmit={handleSubmit} className="space-y-10">
+            <input
+              placeholder="Full Name"
+              required
+              className="w-full border border-gray-300 p-3 rounded"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            />
+            <input
+              placeholder="Phone Number"
+              required
+              className="w-full border border-gray-300 p-3 rounded"
+              value={formData.phone}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            />
+            <input
+              placeholder="Property Address"
+              required
+              className="w-full border border-gray-300 p-3 rounded"
+              value={formData.address}
+              onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+            />
+            <select
+              required
+              className="w-full border border-gray-300 p-3 rounded"
+              value={formData.service}
+              onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+            >
+              <option value="">Select a service</option>
+              <option value="Lawn Mowing">Lawn Mowing</option>
+              <option value="Hardscaping">Hardscaping</option>
+              <option value="Tree Service">Tree Service</option>
+              <option value="Landscape Design and Installation">Landscape Design and Installation</option>
+              <option value="Lawncare">Lawncare</option>
+              <option value="Seasonal Cleanup">Seasonal Cleanup</option>
+            </select>
+            <textarea
+              placeholder="Additional Notes (optional)"
+              rows={3}
+              className="w-full border border-gray-300 p-3 rounded"
+              value={formData.notes}
+              onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+            />
 
-          <button
-            type="submit"
-            className="w-full bg-green-700 text-white font-semibold py-3 rounded hover:bg-green-800 transition"
-          >
-            Submit Quote Request
-          </button>
-        </form>
-        <div className="mt-12">
-</div>
-
-      </div>
-    </section>
+            <button
+              type="submit"
+              className="w-full bg-green-700 text-white font-semibold py-3 rounded hover:bg-green-800 transition"
+            >
+              Submit Quote Request
+            </button>
+          </form>
+        </div>
+      </section>
+      <Footer />
+    </div>
   );
 }

@@ -3,28 +3,33 @@
 import { useState } from 'react';
 
 const faqs = [
+  {
+    question: 'What areas do you service?',
+    answer:
+      'Brighton Road Landscaping serves all of Montgomery County, Pa, mainly focusing on our hometown, Plymouth Meeting and the surrounding areas of Conshohoken, Blue Bell, King of Prussia, Audubon, Fort Washington, and Lafayette Hill.',
+  },
     {
-        question: 'Do you offer every other week?',
+        question: 'Do you offer lawn mowing every other week?',
         answer:
-          'Yes, your lawn will be mowed as often as you want. You can cancel or reschedule at anytime.',
+          'Yes, at Brighton Road Landscaping, we promise that your lawn will be mowed as often as you want. You may cancel or reschedule anytime within 24 hours of the normal cut day.',
       },
   {
     question: 'Do you offer trimming with lawn mowing?',
-    answer: 'Yes. The lawn mowing service offers all lawn mowing, trimming, edging and blowing.',
+    answer: 'Yes, at Brighton Road Landscaping, our standard lawn mowing service includes all lawn mowing, edging, trimming, and blowing.',
   },
   {
     question: 'How do you get paid?',
     answer:
-      'We take cash, Check, Venmo, Zelle, Cash App and Apple Pay. You can also be billed every Friday, every other Friday, or the 1st of every month.',
+      'At Brighton Road Landscaping, we accept cash, check, Venmo, Zelle, Cash App and Apple Pay. Our clients can also choose to be billed once a month if they prefer.',
   },
   {
-    question: 'Do I need to sign anything or are there any contracts?',
-    answer: 'No, it is a handshake deal.',
+    question: 'Do I need to sign a contract for the lawn care service?',
+    answer: 'No, at Brighton Road Landscaping, we do not require our clients to sign any contracts to use our lawn care service.',
   },
   {
-    question: 'What equipment do you use?',
+    question: 'What lawn mowers/equipment do you use?',
     answer:
-      'We use a variety of lawn mowers. We have a 48in Scag zero turn, a 34in Hustler stand on, a 30in Ex-mark walk behind, and multiple Dewalt residential push mowers.',
+      'At Brighton Road Landscaping, we use a variety of lawn mowers, including multiple Scag zero-turn mowers, Dewalt residential push mowers, and Echo outdoor power equipment.',
   },
 ];
 
