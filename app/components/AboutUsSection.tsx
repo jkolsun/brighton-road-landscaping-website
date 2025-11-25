@@ -53,57 +53,58 @@ export default function AboutUsSection() {
   return (
     <>
       {/* Hero Section - Half Image, Half Text */}
-      <section className="min-h-[600px] bg-white">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="p-8 md:p-12"
-          >
-            <h1 className="text-4xl md:text-5xl font-[impact] text-gray-900 mb-6">
-              About Brighton Road Landscaping
-            </h1>
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8">
-              Brighton Road Landscaping is a family owned and operated business. Serving the areas of 
-              Plymouth Meeting, Conshohocken, Blue Bell and King of Prussia, PA, our mission is to provide 
-              our clients with reliable, high quality lawn care and landscaping services. We aim to create a 
-              culture that is rooted in respect for our clients and each other, and working hard to ensure the job 
-              is done right. We accomplish this by practicing what we preach as owners and hiring employees 
-              who share our values so that we can continue to build our reputation throughout Montgomery 
-              County. Our brand is known for reliability, honest pricing, and quality work.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/quote">
-                <button className="bg-green-700 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition transform hover:scale-105">
-                  Get a Quote
-                </button>
-              </Link>
-              <Link href="/join">
-                <button className="border-2 border-green-700 text-green-700 hover:bg-green-50 px-6 py-3 rounded-lg font-semibold transition transform hover:scale-105">
-                  Join Our Team
-                </button>
-              </Link>
-            </div>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="h-full min-h-[600px] relative"
-          >
-            <Image
-              src="/images/flyer.JPG"
-              alt="Brighton Road Landscaping Team"
-              fill
-              className="object-cover"
-            />
-          </motion.div>
-        </div>
-      </section>
+<section className="min-h-[600px] bg-white">
+  <div className="max-w-7xl mx-auto grid md:grid-cols-2 items-center">
+    <motion.div
+      initial={{ opacity: 0, x: -50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="p-8 md:p-12 order-2 md:order-1"  // Added order classes
+    >
+      <h1 className="text-4xl md:text-5xl font-[impact] text-gray-900 mb-6">
+        About Brighton Road Landscaping
+      </h1>
+      <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8">
+        Brighton Road Landscaping is a family owned and operated business. Serving the areas of 
+        Plymouth Meeting, Conshohocken, Blue Bell and King of Prussia, PA, our mission is to provide 
+        our clients with reliable, high quality lawn care and landscaping services. We aim to create a 
+        culture that is rooted in respect for our clients and each other, and working hard to ensure the job 
+        is done right. We accomplish this by practicing what we preach as owners and hiring employees 
+        who share our values so that we can continue to build our reputation throughout Montgomery 
+        County. Our brand is known for reliability, honest pricing, and quality work.
+      </p>
+      <div className="flex flex-col sm:flex-row gap-4">
+        <Link href="/quote">
+          <button className="bg-green-700 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition transform hover:scale-105">
+            Get a Quote
+          </button>
+        </Link>
+        <Link href="/join">
+          <button className="border-2 border-green-700 text-green-700 hover:bg-green-50 px-6 py-3 rounded-lg font-semibold transition transform hover:scale-105">
+            Join Our Team
+          </button>
+        </Link>
+      </div>
+    </motion.div>
+    
+    <motion.div
+      initial={{ opacity: 0, x: 50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="h-[400px] md:h-full md:min-h-[600px] relative order-1 md:order-2"  // Changed height for mobile
+    >
+      <Image
+        src="/images/flyer.JPG"
+        alt="Brighton Road Landscaping Team"
+        fill
+        className="object-contain md:object-cover"  // object-contain on mobile, object-cover on desktop
+        sizes="(max-width: 768px) 100vw, 50vw"
+      />
+    </motion.div>
+  </div>
+</section>
 
       {/* Meet Our Team Section - Bigger Text & Images */}
       <section className="px-6 py-20 bg-gray-50">
