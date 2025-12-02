@@ -155,7 +155,7 @@ const services = {
       {
         title: 'SPRING CLEANUP',
         content: 'Brighton Road Landscaping\'s spring cleanup includes removal of all sticks and branches, as well as a fresh layer of mulch and any needed cleaning of flower beds. Our team will ensure that all plants will grow, bloom and thrive during the warm months.',
-        video: '/springcleanup.mp4',
+        video: '/springcleanup.MP4',
         features: ['Debris Removal', 'Fresh Mulch', 'Bed Preparation', 'Plant Care'],
         style: 'normal',
         bgColor: 'gray'
@@ -163,7 +163,7 @@ const services = {
       {
         title: 'FALL CLEANUP',
         content: 'Brighton Road Landscaping\'s fall cleanup includes removal of all leaves and sticks, as well as any tree, plant, or shrub trimming and pruning. Whether you need your leaves all hauled away or simply placed on the curb, Brighton Road Landscaping will get the job done right.',
-        image: '/images/fallcleanup.jpg',
+        image: '/images/fallcleanup.JPG',
         features: ['Leaf Removal', 'Stick Cleanup', 'Shrub Trimming', 'Property Prep'],
         style: 'diagonal-right',
         bgColor: 'white'
