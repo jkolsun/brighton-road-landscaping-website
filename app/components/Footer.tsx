@@ -12,10 +12,10 @@ export default function Footer() {
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-8">
           
-          {/* Company Info with Social Media */}
+          {/* Company Info WITHOUT Social Media */}
           <div>
             <h3 className="text-xl font-bold mb-4">Brighton Road Landscaping</h3>
-            <p className="text-gray-400 text-sm mb-4">
+            <p className="text-gray-400 text-sm">
               Servicing Montgomery County with top of the line lawn care and landscaping services. 
               Our commercial and residential clients can count on us for the design and installation 
               of landscapes and hardscapes that are beautiful, functional, and guaranteed to stand 
@@ -23,7 +23,30 @@ export default function Footer() {
               maintenance of our clients' lawn and landscapes throughout Plymouth Meeting and the 
               surrounding areas.
             </p>
-            {/* Social Media Icons */}
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul className="space-y-2 text-sm text-gray-300">
+              <li><Link href="/" className="hover:text-white transition">Home</Link></li>
+              <li><Link href="/services" className="hover:text-white transition">Services</Link></li>
+              <li><Link href="/about" className="hover:text-white transition">About Us</Link></li>
+              <li><Link href="/join" className="hover:text-white transition">Join Our Team</Link></li>
+              <li><Link href="/quote" className="hover:text-white transition">Get a Free Quote</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition">Contact Us</Link></li>
+            </ul>
+          </div>
+
+          {/* Contact Info WITH Social Media */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Contact</h4>
+            <ul className="text-sm text-gray-300 space-y-1 mb-4">
+              <li>Phone: (484) 535-1936</li>
+              <li>Email: brightonroadlandscaping@gmail.com</li>
+              <li>Hours: Sun-Sun: 24/7</li>
+            </ul>
+            {/* Social Media Icons MOVED HERE */}
             <div className="flex space-x-4 mt-4">
               <a 
                 href="https://www.facebook.com/BrightonRoadLandscaping" 
@@ -50,29 +73,6 @@ export default function Footer() {
                 <FaGoogle size={20} />
               </a>
             </div>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-sm text-gray-300">
-              <li><Link href="/" className="hover:text-white transition">Home</Link></li>
-              <li><Link href="/services" className="hover:text-white transition">Services</Link></li>
-              <li><Link href="/about" className="hover:text-white transition">About Us</Link></li>
-              <li><Link href="/join" className="hover:text-white transition">Join Our Team</Link></li>
-              <li><Link href="/quote" className="hover:text-white transition">Get a Free Quote</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition">Contact Us</Link></li>
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Contact</h4>
-            <ul className="text-sm text-gray-300 space-y-1">
-              <li>Phone: (484) 535-1936</li>
-              <li>Email: brightonroadlandscaping@gmail.com</li>
-              <li>Hours: Sun-Sun: 24/7</li>
-            </ul>
           </div>
         </div>
 

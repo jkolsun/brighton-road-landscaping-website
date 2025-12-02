@@ -53,44 +53,56 @@ export default function Home() {
       </div>
 
       {/* Complete Landscaping Services Section - FULL BLEED */}
-      <section className="bg-white min-h-[600px]">
-        <div className="grid md:grid-cols-2 h-full">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="flex items-center p-8 md:p-12 lg:p-20"
-          >
-            <div>
-              <h2 className="text-4xl md:text-5xl font-[impact] text-gray-900 mb-6">
-                Complete Landscaping Services
-              </h2>
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-                Brighton Road Landscaping offers both residential and commercial landscaping services. 
-                Located in Plymouth Meeting PA, we service the surrounding areas of King of Prussia, 
-                Blue Bell, and Conshohocken, providing comprehensive lawn and landscape services. From the installation of landscapes, hardscapes, and irrigation systems, 
-                as well as the maintenance and enhancements of lawns, landscapes and trees, 
-                Brighton Road Landscaping is here to serve you.
-              </p>
-            </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="relative min-h-[600px]"
-          >
-            <Image
-              src="/images/homepage1.JPG"
-              alt="Complete Landscaping Services"
-              fill
-              className="object-cover"
-            />
-          </motion.div>
+<section className="bg-white min-h-[600px]">
+  <div className="grid md:grid-cols-2 h-full">
+    <motion.div
+      initial={{ opacity: 0, x: -30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="flex items-center p-8 md:p-12 lg:p-20"
+    >
+      <div>
+        <h2 className="text-4xl md:text-5xl font-[impact] text-gray-900 mb-6">
+          Complete Landscaping Services
+        </h2>
+        <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8">
+          Brighton Road Landscaping offers both residential and commercial landscaping services. 
+          Located in Plymouth Meeting PA, we service the surrounding areas of King of Prussia, 
+          Blue Bell, and Conshohocken, providing comprehensive lawn and landscape services. From the installation of landscapes, hardscapes, and irrigation systems, 
+          as well as the maintenance and enhancements of lawns, landscapes and trees, 
+          Brighton Road Landscaping is here to serve you.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Link href="/about">
+            <button className="bg-green-700 hover:bg-green-600 text-white px-8 py-3 rounded-lg font-semibold shadow-lg transition transform hover:scale-105 text-lg">
+              About Us
+            </button>
+          </Link>
+          <Link href="/quote">
+            <button className="border-2 border-green-700 text-green-700 hover:bg-green-50 px-8 py-3 rounded-lg font-semibold transition transform hover:scale-105 text-lg">
+              Get a Quote
+            </button>
+          </Link>
         </div>
-      </section>
+      </div>
+    </motion.div>
+    <motion.div
+      initial={{ opacity: 0, x: 30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="relative min-h-[600px]"
+    >
+      <Image
+        src="/images/homepage1.JPG"
+        alt="Complete Landscaping Services"
+        fill
+        className="object-cover"
+      />
+    </motion.div>
+  </div>
+</section>
 
       {/* Hardscaping Service - DIAGONAL DESKTOP, STACKED MOBILE */}
 <section className="relative bg-gradient-to-br from-green-50 to-white overflow-hidden">
@@ -164,7 +176,7 @@ export default function Home() {
           </h3>
           <p className="text-gray-700 mb-10 leading-relaxed text-lg md:text-xl lg:text-2xl">
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 ml-16">
             <Link href="/services/hardscaping">
               <button className="bg-green-700 hover:bg-green-600 text-white px-10 py-4 rounded-lg transition transform hover:scale-105 font-semibold shadow-lg text-xl">
                 Explore Services

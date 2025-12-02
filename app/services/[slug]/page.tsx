@@ -32,13 +32,13 @@ const services = {
       },
       {
         title: 'Commercial Landscape Maintenance',
-        content: 'Brighton Road Landscaping offers complete landscape maintenance for our commercial clients. Your outdoor space is the first impression for customers and tenants, and we know how important it is for every detail of the landscape to be up to par. We work with you to create a custom landscape maintenance plan at the beginning of each contract.',
+        content: 'Brighton Road Landscaping offers complete landscape maintenance for our commercial clients. Your outdoor space is the first impression for customers and tenants, and we know how important it is for every detail of the landscape to be up to par. We work with you to create a custom landscape maintenance plan at the beginning of each contract. We believe this is the foundation of a mutually beneficial relationship. Then, our experienced team members execute the landscape maintenance services, clearly communicated by the field manager. We proudly service HOA communities, office parks, retail centers, parks and public places, and more throughout Montgomery County.',
         image: '/images/jaguar.jpg',
         style: 'normal',
         bgColor: 'white'
       }
     ],
-    serviceArea: 'From our home base in Plymouth Meeting, PA, we proudly provide reliable residential and commercial lawn care services throughout Conshohocken, Blue Bell, King of Prussia, Audubon, Lafayette Hill, and Fort Washington.'
+    serviceArea: 'From our home base in Plymouth Meeting, PA, we proudly provide reliable residential and commercial lawn care services throughout Conshohocken, Blue Bell, King of Prussia, Audubon, Lafayette Hill, and Fort Washington. Our crews live and work in the same communities we serve, so we understand the local weather, grass types, and property needs. Choose Brighton Road Landscaping for a team that knows your neighborhood and treats your property like their own.'
   },
   
   'hardscaping': {
@@ -50,7 +50,7 @@ const services = {
     sections: [
       {
         title: 'Expert Hardscape Design & Installation',
-        content: 'At Brighton Road Landscaping, we offer a full range of hardscape features that are both functional and visually stunning. From new patios, walk ways, retaining walls, stairs, and fireplaces, our trained team meticulously designs and installs hardscapes that will stand the test of time.',
+        content: 'At Brighton Road Landscaping, we offer a full range of hardscape features that are both functional and visually stunning. From new patios, walk ways, retaining walls, stairs, and fireplaces, our trained team meticulously designs and installs hardscapes that will stand the test of time. Our team is experienced with a variety of hardscaping materials, including pavers, bricks, and stones. Each installation is customized to complement your property’s layout, style, and elevation. If you’re looking to add life to your property, Brighton Road Hardscaping will get the job done right.',
         image: '/images/hardscape2.jpg',
         features: ['Custom Design', 'Premium Materials', 'Expert Installation', 'Lifetime Warranty'],
         style: 'diagonal-right',
@@ -58,13 +58,13 @@ const services = {
       },
       {
         title: 'Patios, Walkways, and Retaining Walls',
-        content: 'Our hardscaping services include expertly designed patios, walkways, and retaining walls that add beauty and function to your property. A custom brick, paver, or stone patio creates the perfect gathering space for family and friends. Our walkways and stone steps provide seamless connections between different areas of your landscape.',
+        content: 'At Brighton Road Landscaping, our hardscaping services include expertly designed patios, walkways, and retaining walls that add beauty and function to your property. A custom brick, paver, or stone patio creates the perfect gathering space for family and friends. Our walkways and stone steps provide seamless connections between different areas of your landscape, improving both accessibility and visual appeal. And when it comes to retaining walls, we design and build durable structures that prevent erosion, define spaces, and add dimension to your yard. Whether you’re enhancing your backyard, front entry, or sloped terrain, our team will help you select the perfect materials and layout to create a hardscape that turns a simple backyard into a place to relax, entertain, and enjoy the outdoors for years to come.',
         image: '/images/retaining-wall.jpg',
         style: 'normal',
         bgColor: 'gray'
       }
     ],
-    serviceArea: 'Our hardscape installation services are available throughout Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, and the greater Montgomery County area.'
+    serviceArea: 'Our hardscape installation services are available throughout Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, and the greater Montgomery County area. Whether you’re upgrading your home or enhancing a commercial property, we’ll guide you through design, materials, and build a finished product that adds lasting value to your property.'
   },
 
   'landscape-design': {
@@ -76,7 +76,7 @@ const services = {
     sections: [
       {
         title: 'Custom Landscape Architecture',
-        content: 'At Brighton Road Landscaping, our team works with you to design a landscape that fits your preferences and budget. Our trained landscape architects use different landscaping softwares to create a clear outline of how your property will look, including dimensions, lighting, and the different trees, shrubs and/or flowers you want to include.',
+        content: 'At Brighton Road Landscaping, our team works with you to design a landscape that fits your preferences and budget. Our trained landscape architects use different landscaping softwares to create a clear outline of how your property will look, including dimensions, lighting, and the different trees, shrubs and/or flowers you want to include in your landscape beds. Then, our team handles full installation of the landscaping bed, including excavating, planting, and laying of mulch or landscape rocks.',
         video: '/Landscape.MP4',
         features: ['3D Design Software', 'Custom Plant Selection', 'Professional Installation', 'Seasonal Planning'],
         style: 'normal',
@@ -90,7 +90,7 @@ const services = {
         bgColor: 'gray'
       }
     ],
-    serviceArea: 'Serving Montgomery County, Pa'
+    serviceArea: 'We proudly design and install landscapes throughout Montgomery County, including Plymouth Meeting, Blue Bell, Conshohocken, King of Prussia, Audubon, and Fort Washington. As a local, family-owned business, we understand the region’s soil, drainage, and weather conditions, ensuring every project is perfectly tailored to your environment.'
   },
 
   'lawn-care': {
@@ -102,7 +102,7 @@ const services = {
     sections: [
       {
         title: 'Irrigation and Sprinkler Systems',
-        content: 'The most important part of lawn care is ensuring your grass is getting the proper amount of water regardless of the heat or rain throughout the summer. Here at Brighton Road Landscaping, we provide the installation and maintenance of sprinkler systems.',
+        content: 'The most important part of lawn care is ensuring your grass is getting the proper amount of water regardless of the heat or rain throughout the summer. The installation of a sprinkler system is a great, low effort way to ensure this is the case. Here at Brighton Road Landscaping, we provide the installation and maintenance of sprinkler systems. We offer spring start-up and winter shut-down services, routine inspections, customized irrigation zones, and more all on a sustainable budget.',
         image: '/images/sprinkle.jpg',
         features: ['System Installation', 'Spring Start-up', 'Winter Shut-down', 'Zone Customization'],
         style: 'diagonal-right',
@@ -110,13 +110,13 @@ const services = {
       },
       {
         title: 'Comprehensive Lawn Care',
-        content: 'Our team offers comprehensive lawn care from spring through fall that is sure to give your lawn a lush green look. In the spring and fall, we seed any bare spots in the lawn so the grass is full and thick. We then offer fertilization and treatment throughout the cutting season.',
+        content: 'At Brighton Road Landscaping, our team offers comprehensive lawn care from spring through fall that is sure to give your lawn a lush green look. In the spring and fall, we seed any bare spots in the lawn so the grass is full and thick. We then offer fertilization and treatment throughout the cutting season. In the fall, we aerate and overseed the lawn to help it rejuvenate from the summer heat and prepare for the winter months. We provide customer lawn care plans for our clients, so they can hire us for any/all of these services.',
         image: '/images/fertilizer.jpg',
         style: 'normal',
         bgColor: 'gray'
       }
     ],
-    serviceArea: 'Brighton Road Landscaping proudly offers lawn care throughout Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, and Fort Washington.'
+    serviceArea: 'Brighton Road Landscaping proudly offers lawn care throughout Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, and Fort Washington. Our team understands the region’s seasonal changes and soil conditions, giving you customized care that keeps your property beautiful all year long.'
   },
 
   'tree-service': {
@@ -136,13 +136,13 @@ const services = {
       },
       {
         title: 'Tree Trimming, Pruning & Removal',
-        content: 'We offer comprehensive tree trimming and pruning to promote growth, prevent disease, and maintain a beautiful landscape. When a tree is beyond saving or poses a safety hazard, we provide safe and efficient removal services.',
+        content: 'We offer comprehensive tree trimming and pruning to promote growth, prevent disease, and maintain a beautiful landscape. When a tree is beyond saving or poses a safety hazard, we provide safe and efficient removal services, ensuring minimal impact to your landscape. Our trained crew is skilled in handling trees of all sizes, and we always leave your property clean and hazard-free.',
         image: '/images/Tree.websiteJPG.JPG',
         style: 'diagonal-left',
         bgColor: 'gray'
       }
     ],
-    serviceArea: 'Our professional tree services are available throughout Montgomery County, including Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, and Fort Washington.'
+    serviceArea: 'Our professional tree services are available throughout Montgomery County, including Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, and Fort Washington. We combine local expertise with reliable service, ensuring your trees and property remain healthy and beautiful year-round.'
   },
 
   'seasonal-cleanups': {
@@ -153,23 +153,23 @@ const services = {
     },
     sections: [
       {
-        title: 'FALL CLEANUP',
-        content: 'Brighton Road Landscaping\'s fall cleanup includes removal of all leaves and sticks, as well as any tree, plant, or shrub trimming and pruning. Whether you need your leaves all hauled away or simply placed on the curb, Brighton Road Landscaping will get the job done right.',
-        image: '/images/fallcleanup.jpg',
-        features: ['Leaf Removal', 'Stick Cleanup', 'Shrub Trimming', 'Property Prep'],
-        style: 'diagonal-right',
-        bgColor: 'white'
-      },
-      {
         title: 'SPRING CLEANUP',
         content: 'Brighton Road Landscaping\'s spring cleanup includes removal of all sticks and branches, as well as a fresh layer of mulch and any needed cleaning of flower beds. Our team will ensure that all plants will grow, bloom and thrive during the warm months.',
         video: '/springcleanup.mp4',
         features: ['Debris Removal', 'Fresh Mulch', 'Bed Preparation', 'Plant Care'],
         style: 'normal',
         bgColor: 'gray'
+      },
+      {
+        title: 'FALL CLEANUP',
+        content: 'Brighton Road Landscaping\'s fall cleanup includes removal of all leaves and sticks, as well as any tree, plant, or shrub trimming and pruning. Whether you need your leaves all hauled away or simply placed on the curb, Brighton Road Landscaping will get the job done right.',
+        image: '/images/fallcleanup.jpg',
+        features: ['Leaf Removal', 'Stick Cleanup', 'Shrub Trimming', 'Property Prep'],
+        style: 'diagonal-right',
+        bgColor: 'white'
       }
     ],
-    serviceArea: 'We proudly perform seasonal cleanups in Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, and Fort Washington.'
+    serviceArea: 'We proudly perform seasonal cleanups in Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, and Fort Washington. With Brighton Road Landscaping, your property will always be well-prepared for every season.'
   }
 }
 
@@ -217,140 +217,58 @@ export default function ServiceDetailPage() {
         </motion.div>
       </section>
 
-      {/* Service Sections - Different Styles */}
+      {/* Service Sections - All use normal split layout */}
       {service.sections.map((section, index) => {
-        // Determine if image should be on right (alternates with each section)
         const imageOnRight = index % 2 === 0
+        const bgClass = section.bgColor === 'gray' ? 'bg-gray-50' : 'bg-white'
         
-        // NORMAL FULL BLEED STYLE
-        if (section.style === 'normal') {
-          const bgClass = section.bgColor === 'gray' ? 'bg-gray-50' : 'bg-white'
-          
-          return (
-            <section key={index} className={`${bgClass} min-h-[600px]`}>
-              <div className="grid md:grid-cols-2 h-full">
-                {/* Text Content */}
-                <motion.div
-                  initial={{ opacity: 0, x: imageOnRight ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: true }}
-                  className={`flex items-center p-8 md:p-12 lg:p-20 ${imageOnRight ? '' : 'md:order-2'}`}
-                >
-                  <div>
-                    <h2 className="text-3xl md:text-4xl font-[impact] text-gray-900 mb-6">
-                      {section.title}
-                    </h2>
-                    <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
-                      {section.content}
-                    </p>
-                    
-                    {section.features && (
-                      <div className="grid grid-cols-2 gap-4 mb-6">
-                        {section.features.map((feature, idx) => (
-                          <div key={idx} className="flex items-center gap-2">
-                            <CheckCircleIcon className="w-5 h-5 text-green-600 flex-shrink-0" />
-                            <span className="text-gray-700 font-medium text-sm md:text-base">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    
-                    <Link href="/quote">
-                      <button className="mt-6 bg-green-700 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transform hover:scale-105 transition inline-flex items-center gap-2">
-                        Get a Quote
-                        <ArrowRightIcon className="w-5 h-5" />
-                      </button>
-                    </Link>
-                  </div>
-                </motion.div>
-
-                {/* Image */}
-                <motion.div
-                  initial={{ opacity: 0, x: imageOnRight ? 50 : -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: true }}
-                  className={`relative min-h-[400px] md:min-h-[600px] ${imageOnRight ? 'md:order-2' : ''}`}
-                >
-                  {section.video ? (
-                    <video
-                      src={section.video}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  ) : (
-                    <Image
-                      src={section.image}
-                      alt={section.title}
-                      fill
-                      className="object-cover"
-                    />
-                  )}
-                </motion.div>
-              </div>
-            </section>
-          )
-        }
-        
-        // DIAGONAL RIGHT STYLE - WITH RESPONSIVE FIX AND ALTERNATING
-        if (section.style === 'diagonal-right') {
-          const bgClass = section.bgColor === 'gray' ? 'bg-gray-50' : 'bg-white'
-          
-          return (
-            <section key={index}>
-              {/* Mobile: Normal stacked layout */}
-              <div className={`md:hidden ${bgClass}`}>
-                <div className="relative h-[400px]">
-                  {section.video ? (
-                    <video
-                      src={section.video}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  ) : (
-                    <Image
-                      src={section.image}
-                      alt={section.title}
-                      fill
-                      className="object-cover"
-                    />
-                  )}
-                </div>
-                <div className="p-8">
-                  <h2 className="text-3xl font-[impact] text-gray-900 mb-6">
+        return (
+          <section key={index} className={`${bgClass} min-h-[600px]`}>
+            <div className="grid md:grid-cols-2 h-full">
+              {/* Text Content */}
+              <motion.div
+                initial={{ opacity: 0, x: imageOnRight ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className={`flex items-center p-8 md:p-12 lg:p-20 ${imageOnRight ? '' : 'md:order-2'}`}
+              >
+                <div>
+                  <h2 className="text-3xl md:text-4xl font-[impact] text-gray-900 mb-6">
                     {section.title}
                   </h2>
-                  <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                  <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
                     {section.content}
                   </p>
+                  
                   {section.features && (
                     <div className="grid grid-cols-2 gap-4 mb-6">
                       {section.features.map((feature, idx) => (
                         <div key={idx} className="flex items-center gap-2">
                           <CheckCircleIcon className="w-5 h-5 text-green-600 flex-shrink-0" />
-                          <span className="text-gray-700 font-medium text-sm">{feature}</span>
+                          <span className="text-gray-700 font-medium text-sm md:text-base">{feature}</span>
                         </div>
                       ))}
                     </div>
                   )}
+                  
                   <Link href="/quote">
-                    <button className="bg-green-700 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transform hover:scale-105 transition inline-flex items-center gap-2">
+                    <button className="mt-6 bg-green-700 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transform hover:scale-105 transition inline-flex items-center gap-2">
                       Get a Quote
                       <ArrowRightIcon className="w-5 h-5" />
                     </button>
                   </Link>
                 </div>
-              </div>
+              </motion.div>
 
-              {/* Desktop: Keep diagonal design WITH ALTERNATING */}
-              <div className="hidden md:block relative min-h-[700px] overflow-hidden">
+              {/* Image */}
+              <motion.div
+                initial={{ opacity: 0, x: imageOnRight ? 50 : -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className={`relative min-h-[400px] md:min-h-[600px] ${imageOnRight ? 'md:order-2' : ''}`}
+              >
                 {section.video ? (
                   <video
                     src={section.video}
@@ -368,161 +286,10 @@ export default function ServiceDetailPage() {
                     className="object-cover"
                   />
                 )}
-                <div className={`absolute inset-y-0 ${imageOnRight ? 'left-0' : 'right-0'} w-full md:w-[65%] lg:w-[55%] bg-white/95 backdrop-blur-sm`}
-                     style={{ 
-                       clipPath: imageOnRight ? 'polygon(0 0, 85% 0, 100% 100%, 0% 100%)' : 'polygon(15% 0, 100% 0, 100% 100%, 0% 100%)'
-                     }}>
-                </div>
-                <motion.div
-                  initial={{ opacity: 0, x: imageOnRight ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: true }}
-                  className={`relative z-10 h-full flex items-center ${imageOnRight ? '' : 'justify-end'} min-h-[700px]`}
-                >
-                  <div className="px-8 md:px-12 lg:px-20 max-w-3xl w-full md:w-[60%]">
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-[impact] text-gray-900 mb-6">
-                      {section.title}
-                    </h2>
-                    <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
-                      {section.content}
-                    </p>
-                    {section.features && (
-                      <div className="grid grid-cols-2 gap-4 mb-6">
-                        {section.features.map((feature, idx) => (
-                          <div key={idx} className="flex items-center gap-2">
-                            <CheckCircleIcon className="w-5 h-5 text-green-600 flex-shrink-0" />
-                            <span className="text-gray-700 font-medium">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    <Link href="/quote">
-                      <button className="bg-green-700 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transform hover:scale-105 transition inline-flex items-center gap-2">
-                        Get a Quote
-                        <ArrowRightIcon className="w-5 h-5" />
-                      </button>
-                    </Link>
-                  </div>
-                </motion.div>
-              </div>
-            </section>
-          )
-        }
-        
-        // DIAGONAL LEFT STYLE - WITH RESPONSIVE FIX AND ALTERNATING
-        if (section.style === 'diagonal-left') {
-          const bgClass = section.bgColor === 'gray' ? 'bg-gray-50' : 'bg-white'
-          
-          return (
-            <section key={index}>
-              {/* Mobile: Normal stacked layout */}
-              <div className={`md:hidden ${bgClass}`}>
-                <div className="relative h-[400px]">
-                  {section.video ? (
-                    <video
-                      src={section.video}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  ) : (
-                    <Image
-                      src={section.image}
-                      alt={section.title}
-                      fill
-                      className="object-cover"
-                    />
-                  )}
-                </div>
-                <div className="p-8">
-                  <h2 className="text-3xl font-[impact] text-gray-900 mb-6">
-                    {section.title}
-                  </h2>
-                  <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                    {section.content}
-                  </p>
-                  {section.features && (
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                      {section.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center gap-2">
-                          <CheckCircleIcon className="w-5 h-5 text-green-600 flex-shrink-0" />
-                          <span className="text-gray-700 font-medium text-sm">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  <Link href="/quote">
-                    <button className="bg-green-700 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transform hover:scale-105 transition inline-flex items-center gap-2">
-                      Get a Quote
-                      <ArrowRightIcon className="w-5 h-5" />
-                    </button>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Desktop: Keep diagonal design WITH ALTERNATING */}
-              <div className={`hidden md:block relative min-h-[700px] overflow-hidden ${bgClass}`}>
-                {section.video ? (
-                  <video
-                    src={section.video}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                ) : (
-                  <Image
-                    src={section.image}
-                    alt={section.title}
-                    fill
-                    className="object-cover"
-                  />
-                )}
-                <div className={`absolute inset-y-0 ${imageOnRight ? 'left-0' : 'right-0'} w-full md:w-[65%] lg:w-[55%] ${bgClass === 'bg-gray-50' ? 'bg-gray-50/95' : 'bg-white/95'} backdrop-blur-sm`}
-                     style={{ 
-                       clipPath: imageOnRight ? 'polygon(0 0, 85% 0, 100% 100%, 0% 100%)' : 'polygon(15% 0, 100% 0, 100% 100%, 0% 100%)'
-                     }}>
-                </div>
-                <motion.div
-                  initial={{ opacity: 0, x: imageOnRight ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: true }}
-                  className={`relative z-10 h-full flex items-center ${imageOnRight ? '' : 'justify-end'} min-h-[700px]`}
-                >
-                  <div className="px-8 md:px-12 lg:px-20 max-w-3xl w-full md:w-[60%]">
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-[impact] text-gray-900 mb-6">
-                      {section.title}
-                    </h2>
-                    <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
-                      {section.content}
-                    </p>
-                    {section.features && (
-                      <div className="grid grid-cols-2 gap-4 mb-6">
-                        {section.features.map((feature, idx) => (
-                          <div key={idx} className="flex items-center gap-2">
-                            <CheckCircleIcon className="w-5 h-5 text-green-600 flex-shrink-0" />
-                            <span className="text-gray-700 font-medium">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    <Link href="/quote">
-                      <button className="bg-green-700 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transform hover:scale-105 transition inline-flex items-center gap-2">
-                        Get a Quote
-                        <ArrowRightIcon className="w-5 h-5" />
-                      </button>
-                    </Link>
-                  </div>
-                </motion.div>
-              </div>
-            </section>
-          )
-        }
+              </motion.div>
+            </div>
+          </section>
+        )
       })}
 
       {/* Service Area Section */}

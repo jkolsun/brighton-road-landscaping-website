@@ -55,12 +55,12 @@ export default function Header() {
   <Link href="/contact" className="text-xl lg:text-2xl hover:text-green-700 transition-colors">
     Contact Us
   </Link>
-  <Link href="#faq" className="text-base bg-green-100 px-4 py-2 rounded-full hover:bg-green-200 transition flex items-center gap-1">
+  <Link href="/#faq" className="text-base bg-green-100 px-4 py-2 rounded-full hover:bg-green-200 transition flex items-center gap-1">
     FAQs <QuestionMarkCircleIcon className="w-5 h-5" />
   </Link>
   <Link href="/quote">
     <button className="bg-green-700 hover:bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg font-semibold text-xl transition-all transform hover:scale-105">
-      Free Quote
+      Get a Quote
     </button>
   </Link>
 </nav>
@@ -77,7 +77,7 @@ export default function Header() {
             <a href="tel:+14845351936" className="hover:text-green-700">Call Us</a>
             <li><Link href="#faq" onClick={() => setIsMenuOpen(false)}>FAQs</Link></li>
             <li><Link href="/quote" onClick={() => setIsMenuOpen(false)} className="block w-full bg-green-700 hover:bg-green-600 text-white px-4 py-2 rounded-md shadow text-center">
-              Free Quote
+              Get a Quote
             </Link></li>
           </ul>
         </div>
