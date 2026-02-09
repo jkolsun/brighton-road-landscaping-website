@@ -11,7 +11,9 @@ import {
   teamInfo,
   quickReplies,
   responseVariations,
-  synonyms
+  synonyms,
+  commonMisspellings,
+  vaguePatterns
 } from './chatbotData';
 
 interface Message {
@@ -42,6 +44,58 @@ interface ConversationContext {
 
 // Utility: Get random item from array
 const randomChoice = <T,>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
+
+// Utility: Correct common misspellings
+const correctSpelling = (text: string): string => {
+  let corrected = text.toLowerCase();
+  for (const [wrong, right] of Object.entries(commonMisspellings)) {
+    const regex = new RegExp(`\\b${wrong}\\b`, 'gi');
+    corrected = corrected.replace(regex, right);
+  }
+  return corrected;
+};
+
+// Check if question is too vague and needs clarification
+const isVagueQuestion = (text: string): boolean => {
+  const lowerText = text.toLowerCase().trim();
+
+  // Very short messages are often vague
+  if (lowerText.split(/\s+/).length <= 2 && !/quote|price|cost|service|area|contact|phone/i.test(lowerText)) {
+    for (const { pattern, needsClarification } of vaguePatterns) {
+      if (pattern.test(lowerText) && needsClarification) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
+
+// Try to infer what the user might want from vague input
+const inferIntent = (text: string): string | null => {
+  const lowerText = text.toLowerCase();
+
+  // Problem-related keywords
+  if (/brown|dead|dying|yellow|patchy|bare|ugly|terrible|bad|wrong|issue|problem/i.test(lowerText)) {
+    return 'lawn-problem';
+  }
+  if (/overgrown|tall|long|jungle|mess|neglected/i.test(lowerText)) {
+    return 'overgrown';
+  }
+  if (/busy|no time|don't have time|hassle/i.test(lowerText)) {
+    return 'no-time';
+  }
+  if (/new home|just bought|moving|sell/i.test(lowerText)) {
+    return 'new-home';
+  }
+  if (/recommend|referred|neighbor|friend told/i.test(lowerText)) {
+    return 'referral';
+  }
+  if (/improve|better|nice|beautiful|curb appeal/i.test(lowerText)) {
+    return 'improve';
+  }
+
+  return null;
+};
 
 // Utility: Calculate similarity between two strings (for fuzzy matching)
 const similarity = (s1: string, s2: string): number => {
@@ -74,7 +128,8 @@ const similarity = (s1: string, s2: string): number => {
 
 // Advanced text matching with synonyms and fuzzy matching
 const textMatches = (text: string, keywords: string[]): { matched: boolean; score: number } => {
-  const lowerText = text.toLowerCase();
+  // Apply spell correction before matching
+  const lowerText = correctSpelling(text.toLowerCase());
   let maxScore = 0;
 
   for (const keyword of keywords) {
@@ -278,7 +333,64 @@ export default function Chatbot() {
     links?: { text: string; url: string }[];
     newContext?: Partial<ConversationContext>;
   } => {
-    const lowerMessage = userMessage.toLowerCase().trim();
+    // Apply spell correction
+    const correctedMessage = correctSpelling(userMessage);
+    const lowerMessage = correctedMessage.toLowerCase().trim();
+
+    // === CHECK FOR INFERRED INTENT (problem descriptions) ===
+    const inferredIntent = inferIntent(lowerMessage);
+    if (inferredIntent) {
+      switch (inferredIntent) {
+        case 'lawn-problem':
+          return {
+            content: `I hear you - lawn issues can be frustrating! Based on what you're describing, it could be a few things:\n\n• **Brown/dead patches** → May need fertilization, aeration, or overseeding\n• **Thin/patchy grass** → Overseeding and proper lawn care program\n• **Weeds taking over** → Weed control treatments\n• **General decline** → Soil testing and customized treatment plan\n\nWould you like a free consultation? We can assess your lawn and recommend the right solution!`,
+            quickReplies: ['Get a Free Consultation', 'Lawn Care Services', 'Contact Us'],
+            links: [{ text: 'View Lawn Care', url: '/services/lawn-care' }],
+            newContext: { lastTopic: 'lawn-problem' }
+          };
+        case 'overgrown':
+          return {
+            content: `No worries - we can get that under control! For overgrown lawns, we typically:\n\n1. Do an initial cut at a higher setting to avoid shocking the grass\n2. Follow up with a regular-height cut\n3. Edge and trim everything professionally\n4. Blow all debris clean\n\nWant me to set up a quote? We can usually get there within a few days!`,
+            quickReplies: ['Get a Quote', 'View Lawn Mowing', 'Call Us'],
+            links: [{ text: 'Lawn Mowing Service', url: '/services/lawn-mowing' }],
+            newContext: { lastTopic: 'overgrown', lastService: 'lawn-mowing' }
+          };
+        case 'no-time':
+          return {
+            content: `Totally understand - life gets busy! That's exactly why we're here.\n\n**Our hassle-free service includes:**\n• Weekly or bi-weekly mowing (your choice)\n• No contracts - cancel anytime\n• You don't need to be home\n• We handle everything: mowing, edging, trimming, blowing\n\nMany of our customers are busy professionals who just want a great lawn without the work. Ready to get started?`,
+            quickReplies: ['Get a Quote', 'View Services', 'Call Us'],
+            newContext: { lastTopic: 'convenience' }
+          };
+        case 'new-home':
+          return {
+            content: `Congratulations on the new home! 🏠 We'd love to help you get settled.\n\n**We can help with:**\n• One-time cleanup to get things in shape\n• Regular mowing to maintain the lawn\n• Landscape design if you want to make changes\n• Tree trimming or removal if needed\n\nWhat does the yard currently look like? That'll help me point you in the right direction!`,
+            quickReplies: ['Get a Quote', 'View Services', 'Seasonal Cleanup'],
+            newContext: { lastTopic: 'new-home' }
+          };
+        case 'referral':
+          return {
+            content: `That's great to hear - we love referrals from happy customers! Thank you for giving us a try.\n\nI'd be happy to help you with any of our services:\n• Lawn mowing\n• Lawn care (fertilization, aeration)\n• Tree service\n• Landscape design\n• Hardscaping\n• Seasonal cleanups\n\nWhat are you looking for, or would you like a free quote?`,
+            quickReplies: ['Get a Quote', 'View Services', 'Contact Us'],
+            newContext: { lastTopic: 'referral' }
+          };
+        case 'improve':
+          return {
+            content: `Great goal! There are several ways to boost your property's appearance:\n\n**Quick wins:**\n• Fresh mulch in the beds\n• Clean lawn edges\n• Trimmed hedges and shrubs\n\n**Bigger projects:**\n• New plantings or flower beds\n• Landscape redesign\n• Hardscaping (patio, walkway)\n\nWould you like a free consultation to discuss ideas?`,
+            quickReplies: ['Get a Consultation', 'Landscape Design', 'View All Services'],
+            links: [{ text: 'Landscape Design', url: '/services/landscape-design' }],
+            newContext: { lastTopic: 'improve' }
+          };
+      }
+    }
+
+    // === HANDLE VAGUE QUESTIONS ===
+    if (isVagueQuestion(lowerMessage) && !context.lastTopic) {
+      return {
+        content: randomChoice(responseVariations.clarify) + `\n\n**I can help with:**\n• Getting a free quote\n• Learning about our services\n• Checking if we service your area\n• Answering specific questions\n\nWhat would you like to know?`,
+        quickReplies: quickReplies.greeting,
+        newContext: { lastTopic: 'clarify' }
+      };
+    }
 
     // === HANDLE "OTHER SERVICES" / "WHAT ELSE" REQUESTS ===
     if (isAskingForOthers(lowerMessage)) {

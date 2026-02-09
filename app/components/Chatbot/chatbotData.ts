@@ -13,7 +13,7 @@ export const businessInfo = {
   founderStory: "Brighton Road Landscaping was founded in 2022 by Declan O'Brien when he was just a rising freshman in high school. What started as a small neighborhood lawn mowing service has grown into a full-service landscaping company serving the greater Montgomery County area.",
   responseTime: "Within 24 hours",
   formspreeEndpoint: "https://formspree.io/f/myzpnepd",
-  formspreeQuestionEndpoint: "https://formspree.io/f/myzpnepd", // For capturing unknown questions
+  formspreeQuestionEndpoint: "https://formspree.io/f/myzpnepd",
   customerCount: "100+",
   rating: "5.0 stars",
   yearsExperience: "3+ years",
@@ -67,7 +67,7 @@ export const services = [
       "Bagging or mulching options available",
       "Commercial and residential properties"
     ],
-    keywords: ["mow", "mowing", "cut", "cutting", "grass", "lawn cutting", "yard", "weekly", "biweekly"],
+    keywords: ["mow", "mowing", "cut", "cutting", "grass", "lawn cutting", "yard", "weekly", "biweekly", "overgrown", "tall grass", "long grass"],
     priceRange: "Varies by lawn size - contact for free quote",
     frequency: "Weekly recommended during growing season, bi-weekly available",
     link: "/services/lawn-mowing"
@@ -86,7 +86,7 @@ export const services = [
       "Drainage solutions",
       "Premium pavers, bricks, and natural stone"
     ],
-    keywords: ["hardscape", "hardscaping", "patio", "patios", "walkway", "walkways", "retaining wall", "pavers", "stone", "brick", "fireplace", "fire pit", "stairs", "steps", "outdoor living"],
+    keywords: ["hardscape", "hardscaping", "patio", "patios", "walkway", "walkways", "retaining wall", "pavers", "stone", "brick", "fireplace", "fire pit", "stairs", "steps", "outdoor living", "backyard", "entertaining", "outdoor space"],
     priceRange: "Custom quotes based on project scope",
     warranty: "Lifetime warranty on workmanship",
     link: "/services/hardscaping"
@@ -106,7 +106,7 @@ export const services = [
       "Tree health assessment and disease treatment",
       "Hazardous tree evaluation"
     ],
-    keywords: ["tree", "trees", "trimming", "trim", "pruning", "prune", "removal", "remove", "stump", "branch", "branches", "dead", "storm", "fallen", "hazard", "disease", "dying"],
+    keywords: ["tree", "trees", "trimming", "trim", "pruning", "prune", "removal", "remove", "stump", "branch", "branches", "dead", "storm", "fallen", "hazard", "disease", "dying", "limb", "limbs", "overgrown tree", "big tree"],
     priceRange: "Varies by tree size and service - free estimates",
     emergency: "Storm damage response available",
     link: "/services/tree-service"
@@ -126,7 +126,7 @@ export const services = [
       "Landscape lighting design",
       "Seasonal color planning"
     ],
-    keywords: ["landscape", "landscaping", "design", "plants", "planting", "flowers", "shrubs", "bushes", "garden", "bed", "beds", "mulch", "installation", "renovate", "renovation", "beautify", "curb appeal"],
+    keywords: ["landscape", "landscaping", "design", "plants", "planting", "flowers", "shrubs", "bushes", "garden", "bed", "beds", "mulch", "installation", "renovate", "renovation", "beautify", "curb appeal", "front yard", "makeover", "redo", "new plants"],
     priceRange: "Custom design packages available",
     process: "Consultation → 3D Design → Approval → Installation",
     link: "/services/landscape-design"
@@ -148,7 +148,7 @@ export const services = [
       "Grub and pest control",
       "Soil testing and amendments"
     ],
-    keywords: ["lawn care", "lawncare", "fertilizer", "fertilization", "fertilize", "aeration", "aerate", "overseed", "overseeding", "irrigation", "sprinkler", "sprinklers", "water", "watering", "weed", "weeds", "grub", "pest", "green", "healthy", "thick"],
+    keywords: ["lawn care", "lawncare", "fertilizer", "fertilization", "fertilize", "aeration", "aerate", "overseed", "overseeding", "irrigation", "sprinkler", "sprinklers", "water", "watering", "weed", "weeds", "grub", "pest", "green", "healthy", "thick", "brown spots", "dead spots", "patchy", "thin grass"],
     priceRange: "Seasonal programs and one-time services available",
     seasons: "Spring through Fall treatments",
     link: "/services/lawn-care"
@@ -168,7 +168,7 @@ export const services = [
       "Mulch refresh",
       "Hauling services included"
     ],
-    keywords: ["cleanup", "clean up", "cleanups", "leaves", "leaf", "fall", "autumn", "spring", "seasonal", "debris", "sticks", "branches", "gutter", "gutters"],
+    keywords: ["cleanup", "clean up", "cleanups", "leaves", "leaf", "fall", "autumn", "spring", "seasonal", "debris", "sticks", "branches", "gutter", "gutters", "messy yard", "yard waste", "mess"],
     priceRange: "One-time or recurring cleanup packages",
     timing: "Spring (March-May) and Fall (October-December)",
     link: "/services/seasonal-cleanups"
@@ -236,6 +236,12 @@ export const faqs = [
     answer: `If rain prevents us from completing your service, we'll reschedule as soon as conditions allow - typically the next dry day. We'll communicate any changes via text or phone call.`,
     keywords: ["rain", "rains", "weather", "storm", "wet", "reschedule", "cancel"]
   },
+  {
+    category: "scheduling",
+    question: "How quickly can you start?",
+    answer: `We can often start within a few days of receiving your request! For urgent needs, give us a call and we'll do our best to accommodate you as soon as possible.`,
+    keywords: ["quickly", "soon", "fast", "start", "begin", "asap", "urgent", "right away", "immediately"]
+  },
 
   // Payment Questions
   {
@@ -296,7 +302,7 @@ export const faqs = [
     category: "business",
     question: "How long have you been in business?",
     answer: `Brighton Road Landscaping was founded in 2022 by Declan O'Brien. We've grown from a small neighborhood service to serving 100+ happy customers across Montgomery County with a perfect 5.0 star rating!`,
-    keywords: ["long", "years", "experience", "established", "founded", "history", "background", "started"]
+    keywords: ["long", "years", "experience", "established", "founded", "history", "background", "started", "new"]
   },
   {
     category: "business",
@@ -317,6 +323,12 @@ export const faqs = [
     question: "Can I see examples of your work?",
     answer: `Yes! Check out our Instagram (@brightonroadlandscaping) and Facebook page for photos of our recent projects. We're proud of our work and love showing it off!`,
     keywords: ["example", "examples", "photos", "pictures", "portfolio", "work", "projects", "before", "after"]
+  },
+  {
+    category: "trust",
+    question: "Are you any good?",
+    answer: `We take great pride in our work! With 100+ happy customers, a 5.0 star rating, and years of experience, we consistently deliver quality results. Check our testimonials to see what customers say about us!`,
+    keywords: ["good", "quality", "reliable", "trust", "recommend", "worth"]
   },
 
   // Specific Services
@@ -368,6 +380,18 @@ export const faqs = [
     answer: `Yes! We offer custom fertilization programs tailored to your lawn's needs. This includes seasonal applications from spring through fall to keep your lawn green and healthy.`,
     keywords: ["fertilize", "fertilization", "fertilizer", "feed", "feeding", "nutrients", "green up"]
   },
+  {
+    category: "specific",
+    question: "Can you edge my lawn?",
+    answer: `Yes! Edging is included with all our lawn mowing services. We edge along walkways, driveways, and bed lines to give your lawn that crisp, professional look.`,
+    keywords: ["edge", "edging", "edges", "border", "clean lines"]
+  },
+  {
+    category: "specific",
+    question: "Do you handle weeds?",
+    answer: `Yes! We offer weed control as part of our lawn care services. This includes pre-emergent treatments in spring and targeted weed control throughout the season to keep your lawn weed-free.`,
+    keywords: ["weed", "weeds", "dandelion", "crabgrass", "clover"]
+  },
 
   // Employment
   {
@@ -383,6 +407,68 @@ export const faqs = [
     question: "Do you handle storm damage?",
     answer: `Yes! We provide storm damage response for fallen trees and branches. Contact us as soon as possible after a storm and we'll prioritize getting your property safe and cleaned up.`,
     keywords: ["storm", "emergency", "fallen", "damage", "urgent", "asap", "down", "dangerous"]
+  },
+
+  // Common Problem Scenarios (Vague Questions)
+  {
+    category: "problems",
+    question: "My lawn looks bad",
+    answer: `I'm sorry to hear that! There are several things that could help: regular mowing, fertilization, aeration, or overseeding depending on the issue. Would you like to describe what's wrong, or should I get you a free consultation to assess what your lawn needs?`,
+    keywords: ["looks bad", "ugly", "terrible", "awful", "dying", "dead", "brown", "yellow", "patchy", "thin", "bare", "sparse"]
+  },
+  {
+    category: "problems",
+    question: "I need help with my yard",
+    answer: `I'd be happy to help! We offer a full range of services including lawn mowing, lawn care (fertilization, aeration), landscape design, tree service, hardscaping, and seasonal cleanups. What's going on with your yard that you'd like to address?`,
+    keywords: ["help", "yard", "need", "want", "looking"]
+  },
+  {
+    category: "problems",
+    question: "My grass is overgrown",
+    answer: `We can definitely help with that! We offer lawn mowing services to get your grass back under control. For very overgrown lawns, we may need to do an initial cut at a higher setting, then follow up. Want me to set up a quote for you?`,
+    keywords: ["overgrown", "too long", "tall", "jungle", "out of control", "neglected"]
+  },
+  {
+    category: "problems",
+    question: "Something is wrong with my tree",
+    answer: `We can help assess your tree! Our tree service includes health evaluations, disease treatment, trimming, and removal if necessary. Can you describe what you're seeing? Is it dropping leaves, has dead branches, or looks unhealthy?`,
+    keywords: ["wrong", "sick", "unhealthy", "problem", "issue", "dying tree", "dead tree"]
+  },
+  {
+    category: "problems",
+    question: "I want to improve my curb appeal",
+    answer: `Great goal! There are several ways to boost curb appeal: fresh mulch, new plantings, a clean lawn, trimmed hedges, or even hardscaping like a new walkway. Our landscape design service can help create a plan. Would you like a free consultation?`,
+    keywords: ["curb appeal", "front yard", "looks better", "improve", "upgrade", "nice", "beautiful", "attractive"]
+  },
+  {
+    category: "problems",
+    question: "I'm moving and need the yard cleaned up",
+    answer: `We can definitely help get your property ready for sale or move-in! We offer one-time cleanups, lawn mowing, mulching, and more to make your yard look its best. How soon do you need it done?`,
+    keywords: ["moving", "selling", "sale", "real estate", "move in", "new house", "new home"]
+  },
+  {
+    category: "problems",
+    question: "I don't have time to maintain my lawn",
+    answer: `That's exactly why we're here! We offer weekly or bi-weekly lawn mowing with no contracts - we take care of everything so you don't have to. Many of our customers are busy professionals who just want a great-looking lawn without the hassle.`,
+    keywords: ["no time", "busy", "don't have time", "can't", "too busy", "hassle", "convenient"]
+  },
+  {
+    category: "problems",
+    question: "My old landscaper stopped showing up",
+    answer: `That's frustrating! We pride ourselves on reliability - we show up when we say we will and communicate if anything changes. We'd be happy to take over your lawn care. Would you like a quote?`,
+    keywords: ["old landscaper", "previous", "stopped", "unreliable", "didn't show", "ghosted", "new landscaper", "switch"]
+  },
+  {
+    category: "problems",
+    question: "I just bought a house",
+    answer: `Congratulations on the new home! We'd love to help you get your new property in shape. Whether you need regular mowing, a cleanup, new landscaping, or just want to maintain what's there, we can help. What does the yard currently look like?`,
+    keywords: ["bought", "new house", "new home", "just moved", "homeowner", "first time"]
+  },
+  {
+    category: "problems",
+    question: "My neighbor recommended you",
+    answer: `That's great to hear! We love referrals from happy customers. We'd be honored to help you too! What services are you interested in, or would you like to know what we offer?`,
+    keywords: ["neighbor", "friend", "recommended", "referred", "heard about", "told me"]
   }
 ];
 
@@ -435,7 +521,8 @@ export const quickReplies = {
   services: ["Lawn Mowing", "Hardscaping", "Tree Service", "Landscape Design", "Lawn Care", "Seasonal Cleanups"],
   afterQuote: ["View Services", "Service Areas", "FAQs"],
   afterService: ["Get a Quote", "Other Services", "Contact Info"],
-  fallback: ["Get a Quote", "Call Us", "View Services", "FAQs"]
+  fallback: ["Get a Quote", "Call Us", "View Services", "FAQs"],
+  problem: ["Get a Quote", "Describe the Issue", "Call Us"]
 };
 
 // Response variations for more natural conversation
@@ -454,18 +541,63 @@ export const responseVariations = {
     "Thanks for chatting! Feel free to reach out anytime. Have a great day!",
     "Take care! We're here whenever you need us.",
     "Goodbye! Don't hesitate to contact us if you have more questions."
+  ],
+  clarify: [
+    "I want to make sure I help you with the right thing. Could you tell me a bit more about what you need?",
+    "I'd be happy to help! Can you give me a few more details about what you're looking for?",
+    "Let me help you find the right solution. What's going on with your property?"
   ]
 };
 
 // Synonyms for better intent matching
 export const synonyms: Record<string, string[]> = {
-  "price": ["cost", "pricing", "rate", "charge", "fee", "expensive", "cheap", "afford", "budget", "money", "dollar", "pay"],
-  "quote": ["estimate", "bid", "proposal", "pricing"],
-  "mow": ["cut", "mowing", "cutting", "trim lawn"],
-  "schedule": ["book", "appointment", "available", "availability", "when", "time", "day"],
-  "contact": ["call", "phone", "reach", "talk", "speak", "email", "message"],
+  "price": ["cost", "pricing", "rate", "charge", "fee", "expensive", "cheap", "afford", "budget", "money", "dollar", "pay", "spend"],
+  "quote": ["estimate", "bid", "proposal", "pricing", "price out"],
+  "mow": ["cut", "mowing", "cutting", "trim lawn", "grass cutting"],
+  "schedule": ["book", "appointment", "available", "availability", "when", "time", "day", "set up"],
+  "contact": ["call", "phone", "reach", "talk", "speak", "email", "message", "get in touch"],
   "area": ["location", "serve", "service", "come to", "cover", "town", "city", "neighborhood", "zip"],
-  "fast": ["quick", "soon", "asap", "urgent", "rush", "emergency", "today", "tomorrow"],
-  "good": ["great", "best", "quality", "professional", "reliable", "trusted"],
-  "help": ["assist", "support", "need", "want", "looking for", "question"]
+  "fast": ["quick", "soon", "asap", "urgent", "rush", "emergency", "today", "tomorrow", "right away"],
+  "good": ["great", "best", "quality", "professional", "reliable", "trusted", "nice", "excellent"],
+  "help": ["assist", "support", "need", "want", "looking for", "question", "fix", "solve"],
+  "bad": ["terrible", "awful", "ugly", "poor", "wrong", "issue", "problem", "dead", "dying"],
+  "lawn": ["yard", "grass", "turf", "property", "front yard", "back yard", "backyard"]
+};
+
+// Vague question patterns that need clarification
+export const vaguePatterns = [
+  { pattern: /^(help|hey|hi|hello)$/i, needsClarification: true },
+  { pattern: /^i need/i, needsClarification: true },
+  { pattern: /^can you/i, needsClarification: false },
+  { pattern: /^do you/i, needsClarification: false },
+  { pattern: /^what about/i, needsClarification: true },
+  { pattern: /^how about/i, needsClarification: true },
+  { pattern: /^i want/i, needsClarification: true },
+  { pattern: /^i have a/i, needsClarification: true },
+  { pattern: /^my (lawn|yard|property|grass)/i, needsClarification: true },
+  { pattern: /^something/i, needsClarification: true },
+  { pattern: /^anything/i, needsClarification: true }
+];
+
+// Common misspellings and corrections
+export const commonMisspellings: Record<string, string> = {
+  "lown": "lawn",
+  "gras": "grass",
+  "mowwing": "mowing",
+  "moweing": "mowing",
+  "landscapeing": "landscaping",
+  "treee": "tree",
+  "triming": "trimming",
+  "prunning": "pruning",
+  "fertlizer": "fertilizer",
+  "fertlize": "fertilize",
+  "areation": "aeration",
+  "sprinker": "sprinkler",
+  "sprinkelers": "sprinklers",
+  "hardscape": "hardscaping",
+  "pateio": "patio",
+  "pateo": "patio",
+  "walkeway": "walkway",
+  "esitmate": "estimate",
+  "qoute": "quote"
 };
