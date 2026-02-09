@@ -21,6 +21,7 @@ interface Message {
   timestamp: Date;
   quickReplies?: string[];
   links?: { text: string; url: string }[];
+  context?: string; // Track what this message was about
 }
 
 interface QuoteFormData {
@@ -29,6 +30,14 @@ interface QuoteFormData {
   address: string;
   service: string;
   notes: string;
+}
+
+interface ConversationContext {
+  lastTopic: string | null;
+  lastService: string | null;
+  mentionedServices: string[];
+  askedForQuote: boolean;
+  messageCount: number;
 }
 
 // Utility: Get random item from array
@@ -71,9 +80,16 @@ const textMatches = (text: string, keywords: string[]): { matched: boolean; scor
   for (const keyword of keywords) {
     const lowerKeyword = keyword.toLowerCase();
 
-    // Exact match
-    if (lowerText.includes(lowerKeyword)) {
+    // Exact match (whole word preferred)
+    const wordBoundaryRegex = new RegExp(`\\b${lowerKeyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+    if (wordBoundaryRegex.test(lowerText)) {
       maxScore = Math.max(maxScore, 1.0);
+      continue;
+    }
+
+    // Partial match (lower score)
+    if (lowerText.includes(lowerKeyword) && lowerKeyword.length > 3) {
+      maxScore = Math.max(maxScore, 0.85);
       continue;
     }
 
@@ -81,7 +97,7 @@ const textMatches = (text: string, keywords: string[]): { matched: boolean; scor
     for (const [base, syns] of Object.entries(synonyms)) {
       if (lowerKeyword.includes(base) || syns.some(s => lowerKeyword.includes(s))) {
         if (syns.some(s => lowerText.includes(s)) || lowerText.includes(base)) {
-          maxScore = Math.max(maxScore, 0.9);
+          maxScore = Math.max(maxScore, 0.8);
         }
       }
     }
@@ -89,10 +105,10 @@ const textMatches = (text: string, keywords: string[]): { matched: boolean; scor
     // Fuzzy match for words (handles typos)
     const words = lowerText.split(/\s+/);
     for (const word of words) {
-      if (word.length > 3) {
+      if (word.length > 3 && lowerKeyword.length > 3) {
         const sim = similarity(word, lowerKeyword);
-        if (sim > 0.7) {
-          maxScore = Math.max(maxScore, sim * 0.8);
+        if (sim > 0.75) {
+          maxScore = Math.max(maxScore, sim * 0.7);
         }
       }
     }
@@ -109,6 +125,13 @@ export default function Chatbot() {
   const [showQuoteForm, setShowQuoteForm] = useState(false);
   const [showQuestionForm, setShowQuestionForm] = useState(false);
   const [lastUnknownQuestion, setLastUnknownQuestion] = useState('');
+  const [context, setContext] = useState<ConversationContext>({
+    lastTopic: null,
+    lastService: null,
+    mentionedServices: [],
+    askedForQuote: false,
+    messageCount: 0
+  });
   const [quoteFormData, setQuoteFormData] = useState<QuoteFormData>({
     name: '',
     phone: '',
@@ -139,7 +162,8 @@ export default function Chatbot() {
         type: 'bot',
         content: `Hi! I'm Brighton, your landscaping assistant. I know everything about our services and can help you:\n\n• Get a free quote instantly\n• Learn about our landscaping services\n• Check if we service your area\n• Answer any questions you have\n\nHow can I help you today?`,
         timestamp: new Date(),
-        quickReplies: quickReplies.greeting
+        quickReplies: quickReplies.greeting,
+        context: 'greeting'
       };
       setMessages([welcomeMessage]);
     }
@@ -148,17 +172,65 @@ export default function Chatbot() {
     }
   }, [isOpen, messages.length]);
 
-  // Find the best matching service based on user input
-  const findMatchingService = (text: string) => {
+  // Check if user is asking for alternatives/other options
+  const isAskingForOthers = (text: string): boolean => {
+    const lowerText = text.toLowerCase();
+    const otherPatterns = [
+      /\bother\s*(service|option|choice|one)s?\b/i,
+      /\bwhat\s*else\b/i,
+      /\bdifferent\s*(service|option|one)s?\b/i,
+      /\bmore\s*(service|option)s?\b/i,
+      /\bshow\s*(me\s*)?(all|more|other)/i,
+      /\banything\s*else\b/i,
+      /\bsomething\s*(else|different)\b/i,
+      /\ball\s*(service|option)s?\b/i,
+      /\blist\s*(service|option|all)s?\b/i,
+      /^other\s*services?$/i,
+      /^others?$/i,
+      /^what\s*else\??$/i,
+      /^more$/i
+    ];
+    return otherPatterns.some(pattern => pattern.test(lowerText));
+  };
+
+  // Check if this is a follow-up question
+  const isFollowUp = (text: string): boolean => {
+    const lowerText = text.toLowerCase();
+    const followUpPatterns = [
+      /^(and|also|what about|how about|tell me more|more info|details)/i,
+      /^(yes|yeah|yep|sure|ok|okay|please|go ahead)/i,
+      /\bmore\s*(about|info|details|information)\b/i,
+      /\btell\s*me\s*more\b/i,
+      /\blearn\s*more\b/i
+    ];
+    return followUpPatterns.some(pattern => pattern.test(lowerText));
+  };
+
+  // Check if user wants to go back or see menu
+  const wantsMenu = (text: string): boolean => {
+    const lowerText = text.toLowerCase();
+    const menuPatterns = [
+      /\b(menu|start over|go back|main|home|beginning)\b/i,
+      /\bback to (start|beginning|menu)\b/i,
+      /\bstart\s*over\b/i
+    ];
+    return menuPatterns.some(pattern => pattern.test(lowerText));
+  };
+
+  // Find the best matching service based on user input (excluding already mentioned ones if asking for others)
+  const findMatchingService = (text: string, excludeServices: string[] = []) => {
     let bestMatch = null;
     let bestScore = 0;
 
     for (const service of services) {
-      const nameMatch = textMatches(text, [service.name, service.id]);
+      // Skip excluded services
+      if (excludeServices.includes(service.id)) continue;
+
+      const nameMatch = textMatches(text, [service.name]);
       const keywordMatch = textMatches(text, service.keywords);
       const score = Math.max(nameMatch.score, keywordMatch.score);
 
-      if (score > bestScore && score > 0.5) {
+      if (score > bestScore && score > 0.6) {
         bestScore = score;
         bestMatch = service;
       }
@@ -174,7 +246,7 @@ export default function Chatbot() {
 
     for (const faq of faqs) {
       const match = textMatches(text, faq.keywords);
-      if (match.score > bestScore && match.score > 0.5) {
+      if (match.score > bestScore && match.score > 0.6) {
         bestScore = match.score;
         bestMatch = faq;
       }
@@ -186,61 +258,160 @@ export default function Chatbot() {
   // Check if user is asking about a specific area
   const findMatchingArea = (text: string) => {
     const lowerText = text.toLowerCase();
-    return serviceAreas.find(area => lowerText.includes(area.toLowerCase()));
+    return serviceAreas.find(area => {
+      const areaLower = area.toLowerCase();
+      // Use word boundary matching to avoid partial matches
+      const regex = new RegExp(`\\b${areaLower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+      return regex.test(lowerText);
+    });
   };
 
-  // Main response generation logic
-  const generateResponse = (userMessage: string): { content: string; quickReplies?: string[]; links?: { text: string; url: string }[] } => {
-    const lowerMessage = userMessage.toLowerCase();
+  // Get services the user hasn't asked about yet
+  const getOtherServices = (excludeIds: string[]) => {
+    return services.filter(s => !excludeIds.includes(s.id));
+  };
+
+  // Main response generation logic with context awareness
+  const generateResponse = (userMessage: string): {
+    content: string;
+    quickReplies?: string[];
+    links?: { text: string; url: string }[];
+    newContext?: Partial<ConversationContext>;
+  } => {
+    const lowerMessage = userMessage.toLowerCase().trim();
+
+    // === HANDLE "OTHER SERVICES" / "WHAT ELSE" REQUESTS ===
+    if (isAskingForOthers(lowerMessage)) {
+      const otherServices = getOtherServices(context.mentionedServices);
+
+      if (otherServices.length === 0) {
+        return {
+          content: `You've already heard about all our services! Would you like a quote for any of them, or do you have specific questions?`,
+          quickReplies: ['Get a Quote', 'FAQs', 'Contact Us'],
+          newContext: { lastTopic: 'services' }
+        };
+      }
+
+      if (otherServices.length === services.length) {
+        // Haven't mentioned any specific services yet
+        return {
+          content: `We offer a full range of landscaping services:\n\n${services.map(s => `**${s.name}** - ${s.shortDesc}`).join('\n\n')}\n\nWhich one would you like to learn more about?`,
+          quickReplies: services.slice(0, 4).map(s => s.name),
+          links: [{ text: 'View All Services', url: '/services' }],
+          newContext: { lastTopic: 'services' }
+        };
+      }
+
+      // Show services they haven't asked about
+      return {
+        content: `Here are our other services:\n\n${otherServices.map(s => `**${s.name}** - ${s.shortDesc}`).join('\n\n')}\n\nWant details on any of these?`,
+        quickReplies: otherServices.slice(0, 4).map(s => s.name),
+        links: [{ text: 'View All Services', url: '/services' }],
+        newContext: { lastTopic: 'services' }
+      };
+    }
+
+    // === HANDLE MENU / START OVER ===
+    if (wantsMenu(lowerMessage)) {
+      return {
+        content: `No problem! Here's what I can help you with:\n\n• **Get a Quote** - Free estimates within 24 hours\n• **Our Services** - Mowing, hardscaping, trees, and more\n• **Service Areas** - Montgomery County, PA\n• **Contact Us** - Phone, email, and hours\n\nWhat would you like to know about?`,
+        quickReplies: quickReplies.greeting,
+        newContext: { lastTopic: 'menu', lastService: null }
+      };
+    }
 
     // === GREETINGS ===
-    if (/^(hi|hello|hey|howdy|good\s*(morning|afternoon|evening)|what'?s\s*up|sup)[\s!.?]*$/i.test(userMessage.trim())) {
+    if (/^(hi|hello|hey|howdy|good\s*(morning|afternoon|evening)|what'?s\s*up|sup)[\s!.?]*$/i.test(lowerMessage)) {
       return {
         content: randomChoice(responseVariations.greeting),
-        quickReplies: quickReplies.greeting
+        quickReplies: quickReplies.greeting,
+        newContext: { lastTopic: 'greeting' }
       };
     }
 
     // === THANKS ===
-    if (/thank|thanks|appreciate|helpful/i.test(lowerMessage)) {
+    if (/^(thank|thanks|thx|ty|appreciate|helpful)[\s!.?]*$/i.test(lowerMessage) ||
+        /thank\s*(you|u)|appreciate\s*(it|that)/i.test(lowerMessage)) {
       return {
         content: randomChoice(responseVariations.thanks),
-        quickReplies: ['Get a Quote', 'View Services', 'Contact Info']
+        quickReplies: ['Get a Quote', 'View Services', 'Contact Info'],
+        newContext: { lastTopic: 'thanks' }
       };
     }
 
     // === GOODBYE ===
-    if (/^(bye|goodbye|see\s*you|later|talk\s*soon|take\s*care)[\s!.?]*$/i.test(userMessage.trim())) {
+    if (/^(bye|goodbye|see\s*you|later|talk\s*soon|take\s*care|cya)[\s!.?]*$/i.test(lowerMessage)) {
       return {
         content: randomChoice(responseVariations.bye),
-        quickReplies: ['Get a Quote', 'Contact Info']
+        quickReplies: ['Get a Quote', 'Contact Info'],
+        newContext: { lastTopic: 'bye' }
+      };
+    }
+
+    // === YES/AFFIRMATIVE RESPONSES (context-dependent) ===
+    if (/^(yes|yeah|yep|yup|sure|ok|okay|please|definitely|absolutely)[\s!.?]*$/i.test(lowerMessage)) {
+      // If we just talked about a service, offer a quote for it
+      if (context.lastService) {
+        const service = services.find(s => s.id === context.lastService);
+        if (service) {
+          return {
+            content: `Great! I'll help you get a quote for ${service.name}. Fill out the form and we'll get back to you within 24 hours!`,
+            quickReplies: ['Fill out quote form', `Call ${businessInfo.phone}`],
+            newContext: { askedForQuote: true }
+          };
+        }
+      }
+      // Generic affirmative
+      return {
+        content: `What would you like to do?\n\n• Get a free quote\n• Learn about our services\n• Check service areas\n• Contact us directly`,
+        quickReplies: quickReplies.greeting
+      };
+    }
+
+    // === NO/NEGATIVE RESPONSES ===
+    if (/^(no|nope|nah|not really|i'm good|no thanks|no thank you)[\s!.?]*$/i.test(lowerMessage)) {
+      return {
+        content: `No problem! Is there anything else I can help you with? Feel free to ask about our services, pricing, or service areas.`,
+        quickReplies: ['View Services', 'Service Areas', 'Contact Info'],
+        newContext: { lastTopic: 'declined' }
       };
     }
 
     // === QUOTE REQUEST ===
-    if (/quote|estimate|price|pricing|cost|how\s*much|book|schedule|appointment|get\s*started|sign\s*up/i.test(lowerMessage)) {
+    if (/\b(quote|estimate|price|pricing|cost|how\s*much|book|schedule|appointment|get\s*started|sign\s*up)\b/i.test(lowerMessage)) {
       // Check if asking about a specific service
       const service = findMatchingService(lowerMessage);
       if (service) {
         return {
-          content: `Great! I'd love to help you get a quote for **${service.name}**.\n\n${service.shortDesc}\n\nWould you like to request a free quote now? We typically respond within 24 hours!`,
+          content: `Great choice! I'd love to help you get a quote for **${service.name}**.\n\n${service.shortDesc}\n\nWould you like to fill out a quick quote form? We typically respond within 24 hours!`,
           quickReplies: ['Yes, get a quote', `Call ${businessInfo.phone}`, 'Learn more first'],
-          links: [{ text: 'View Service Details', url: service.link }]
+          links: [{ text: 'View Service Details', url: service.link }],
+          newContext: { lastTopic: 'quote', lastService: service.id, mentionedServices: [...context.mentionedServices, service.id] }
         };
       }
       return {
-        content: `Awesome! I can help you get a free quote. We offer:\n\n${services.map(s => `• ${s.name}`).join('\n')}\n\nWould you like to fill out a quick quote form, or call us at ${businessInfo.phone}?`,
-        quickReplies: ['Fill out quote form', `Call ${businessInfo.phone}`, 'Learn about services'],
+        content: `Awesome! I can help you get a free quote. Which service are you interested in?\n\n${services.map(s => `• **${s.name}**`).join('\n')}\n\nOr fill out a general quote form and tell us what you need!`,
+        quickReplies: ['Fill out quote form', ...services.slice(0, 3).map(s => s.name)],
+        newContext: { lastTopic: 'quote', askedForQuote: true }
       };
     }
 
     // === SPECIFIC SERVICE INQUIRY ===
     const matchedService = findMatchingService(lowerMessage);
     if (matchedService) {
+      const newMentioned = context.mentionedServices.includes(matchedService.id)
+        ? context.mentionedServices
+        : [...context.mentionedServices, matchedService.id];
+
       return {
-        content: `**${matchedService.name}**\n\n${matchedService.fullDesc}\n\n**What's included:**\n${matchedService.features.slice(0, 5).map(f => `• ${f}`).join('\n')}\n\nWant a free quote for this service?`,
+        content: `**${matchedService.name}**\n\n${matchedService.fullDesc}\n\n**What's included:**\n${matchedService.features.slice(0, 5).map(f => `• ${f}`).join('\n')}\n\nWould you like a free quote for this service?`,
         quickReplies: ['Get a Quote', 'Other Services', 'Contact Us'],
-        links: [{ text: 'Learn More', url: matchedService.link }]
+        links: [{ text: 'Learn More', url: matchedService.link }],
+        newContext: {
+          lastTopic: 'service',
+          lastService: matchedService.id,
+          mentionedServices: newMentioned
+        }
       };
     }
 
@@ -249,83 +420,96 @@ export default function Chatbot() {
     if (matchedArea) {
       return {
         content: `Yes! We proudly serve **${matchedArea}** and the surrounding area. We'd be happy to provide a free estimate for your property!\n\nWould you like to request a quote?`,
-        quickReplies: ['Get a Quote', 'View All Areas', 'Contact Us']
+        quickReplies: ['Get a Quote', 'View All Areas', 'View Services'],
+        newContext: { lastTopic: 'area' }
       };
     }
 
     // === GENERAL AREA QUESTION ===
-    if (/area|location|where|service\s*area|do\s*you\s*(come|go|serve)|cover|zip|neighborhood/i.test(lowerMessage)) {
+    if (/\b(area|location|where|service\s*area|do\s*you\s*(come|go|serve)|cover|zip|neighborhood|near|nearby)\b/i.test(lowerMessage) &&
+        !/other|else|different/i.test(lowerMessage)) {
       return {
         content: `We service the greater Montgomery County, PA area including:\n\n${serviceAreas.map(a => `• ${a}`).join('\n')}\n\nDon't see your area? Give us a call at ${businessInfo.phone} - we may still be able to help!`,
-        quickReplies: ['Get a Quote', 'Contact Us', 'View Services']
+        quickReplies: ['Get a Quote', 'Contact Us', 'View Services'],
+        newContext: { lastTopic: 'area' }
       };
     }
 
     // === ALL SERVICES ===
-    if (/service|services|what\s*(do\s*you|can\s*you)\s*(do|offer)|offerings|help\s*with/i.test(lowerMessage)) {
+    if (/\b(service|services|what\s*(do\s*you|can\s*you)\s*(do|offer)|offerings|help\s*with|provide)\b/i.test(lowerMessage) &&
+        !/other|else|different/i.test(lowerMessage)) {
       return {
-        content: `We offer comprehensive landscaping services:\n\n${services.map(s => `**${s.name}** - ${s.shortDesc}`).join('\n\n')}\n\nWhich service interests you?`,
-        quickReplies: quickReplies.services,
-        links: [{ text: 'View All Services', url: '/services' }]
+        content: `We offer comprehensive landscaping services:\n\n${services.map(s => `**${s.name}** - ${s.shortDesc}`).join('\n\n')}\n\nWhich service would you like to learn more about?`,
+        quickReplies: quickReplies.services.slice(0, 4),
+        links: [{ text: 'View All Services', url: '/services' }],
+        newContext: { lastTopic: 'services' }
       };
     }
 
     // === CONTACT INFO ===
-    if (/contact|phone|call|email|reach|talk\s*to|speak|human|person|someone/i.test(lowerMessage)) {
+    if (/\b(contact|phone|call|email|reach|talk\s*to|speak|human|person|someone|representative)\b/i.test(lowerMessage)) {
       return {
         content: `Here's how to reach us:\n\n📞 **Phone:** ${businessInfo.phone}\n📧 **Email:** ${businessInfo.email}\n🕐 **Hours:** ${businessInfo.hours}\n📍 **Location:** ${businessInfo.location}\n\nWe respond to all inquiries within 24 hours!`,
         quickReplies: [`Call ${businessInfo.phone}`, 'Get a Quote', 'View Services'],
         links: [
           { text: 'Facebook', url: businessInfo.social.facebook },
           { text: 'Instagram', url: businessInfo.social.instagram }
-        ]
+        ],
+        newContext: { lastTopic: 'contact' }
       };
     }
 
     // === HOURS ===
-    if (/hour|open|available|when|time|schedule/i.test(lowerMessage) && !/appointment|book/i.test(lowerMessage)) {
+    if (/\b(hour|hours|open|available|when)\b/i.test(lowerMessage) &&
+        !/appointment|book|schedule/i.test(lowerMessage)) {
       return {
         content: `We're available **${businessInfo.hours}**!\n\nCall us anytime at ${businessInfo.phone} or leave a message and we'll respond within 24 hours.`,
-        quickReplies: ['Get a Quote', 'Contact Info', 'View Services']
+        quickReplies: ['Get a Quote', 'Contact Info', 'View Services'],
+        newContext: { lastTopic: 'hours' }
       };
     }
 
     // === PAYMENT ===
-    if (/pay|payment|accept|venmo|zelle|cash|check|credit|card|apple\s*pay|cashapp|invoice|bill/i.test(lowerMessage)) {
+    if (/\b(pay|payment|accept|venmo|zelle|cash|check|credit|card|apple\s*pay|cashapp|invoice|bill|billing)\b/i.test(lowerMessage)) {
       const paymentList = paymentMethods.map(p => `• **${p.name}** - ${p.description}`).join('\n');
       return {
         content: `We accept multiple payment options:\n\n${paymentList}\n\n**No contracts required!** Pay-as-you-go with no cancellation fees.`,
-        quickReplies: ['Get a Quote', 'View Services', 'Contact Us']
+        quickReplies: ['Get a Quote', 'View Services', 'Contact Us'],
+        newContext: { lastTopic: 'payment' }
       };
     }
 
     // === ABOUT / COMPANY ===
-    if (/about|who\s*(are|is)|company|team|owner|founded|history|background/i.test(lowerMessage)) {
+    if (/\b(about|who\s*(are|is)|company|team|owner|founded|history|background|story)\b/i.test(lowerMessage)) {
       return {
         content: `**About Brighton Road Landscaping**\n\n${teamInfo.description}\n\n**Our Team:**\n${teamInfo.members.map(m => `• ${m.name} - ${m.role}`).join('\n')}\n\n**Why customers choose us:**\n${keySellingPoints.slice(0, 5).map(p => `• ${p}`).join('\n')}`,
         quickReplies: ['Get a Quote', 'View Services', 'See Reviews'],
-        links: [{ text: 'About Us', url: '/about' }]
+        links: [{ text: 'About Us', url: '/about' }],
+        newContext: { lastTopic: 'about' }
       };
     }
 
     // === REVIEWS / TESTIMONIALS ===
-    if (/review|reviews|testimonial|rating|reputation|trust|reliable/i.test(lowerMessage)) {
+    if (/\b(review|reviews|testimonial|rating|reputation|trust|reliable|good)\b/i.test(lowerMessage) &&
+        /\b(review|testimonial|rating|reputation|customer|client)\b/i.test(lowerMessage)) {
       return {
-        content: `We're proud of our reputation!\n\n⭐ **${businessInfo.rating}** average rating\n👥 **${businessInfo.customerCount}** happy customers\n📅 **${businessInfo.yearsExperience}** in business\n\nCheck out what our customers are saying on our testimonials page!`,
+        content: `We're proud of our reputation!\n\n⭐ **${businessInfo.rating}** average rating\n👥 **${businessInfo.customerCount}** happy customers\n📅 **${businessInfo.yearsExperience}** in business\n\nCheck out what our customers are saying!`,
         quickReplies: ['Get a Quote', 'View Services', 'Contact Us'],
         links: [
           { text: 'Read Testimonials', url: '/testimonials' },
           { text: 'Google Reviews', url: businessInfo.social.google }
-        ]
+        ],
+        newContext: { lastTopic: 'reviews' }
       };
     }
 
     // === EMPLOYMENT ===
-    if (/hiring|job|jobs|work\s*(for|with)|employment|position|career|apply|join\s*(team|us)/i.test(lowerMessage)) {
+    if (/\b(hiring|job|jobs|work\s*(for|with)|employment|position|career|apply|join\s*(team|us|you))\b/i.test(lowerMessage)) {
       return {
         content: `We're always looking for hardworking team members!\n\n**What we offer:**\n• Flexible scheduling\n• Competitive pay\n• Great team environment\n• No experience necessary - we'll train you!\n\nApply now on our Join page!`,
         quickReplies: ['Apply Now', 'Contact Us'],
-        links: [{ text: 'Join Our Team', url: '/join' }]
+        links: [{ text: 'Join Our Team', url: '/join' }],
+        newContext: { lastTopic: 'jobs' }
       };
     }
 
@@ -335,32 +519,62 @@ export default function Chatbot() {
       return {
         content: `**${matchedFaq.question}**\n\n${matchedFaq.answer}`,
         quickReplies: ['More Questions', 'Get a Quote', 'View Services'],
-        links: [{ text: 'View All FAQs', url: '/#faq' }]
+        links: [{ text: 'View All FAQs', url: '/#faq' }],
+        newContext: { lastTopic: 'faq' }
       };
     }
 
     // === EMERGENCY / URGENT ===
-    if (/emergency|urgent|asap|fallen\s*tree|storm\s*damage|dangerous/i.test(lowerMessage)) {
+    if (/\b(emergency|urgent|asap|fallen\s*tree|storm\s*damage|dangerous|help)\b/i.test(lowerMessage) &&
+        /\b(tree|storm|damage|fallen|down|emergency|urgent)\b/i.test(lowerMessage)) {
       return {
         content: `For urgent situations like storm damage or fallen trees, please call us directly at **${businessInfo.phone}**.\n\nWe offer emergency response and will prioritize getting your property safe!`,
-        quickReplies: [`Call ${businessInfo.phone}`, 'Get a Quote']
+        quickReplies: [`Call ${businessInfo.phone}`, 'Get a Quote'],
+        newContext: { lastTopic: 'emergency' }
       };
     }
 
     // === COMPARISON / WHY CHOOSE ===
-    if (/why|better|best|compare|different|special|unique/i.test(lowerMessage)) {
+    if (/\b(why|better|best|compare|different|special|unique|choose|pick)\b/i.test(lowerMessage) &&
+        /\b(you|brighton|company|landscap)/i.test(lowerMessage)) {
       return {
         content: `**Why Choose Brighton Road Landscaping?**\n\n${keySellingPoints.map(p => `✓ ${p}`).join('\n')}\n\nWe're a local, family-owned business that treats every property like our own!`,
-        quickReplies: ['Get a Quote', 'View Services', 'See Reviews']
+        quickReplies: ['Get a Quote', 'View Services', 'See Reviews'],
+        newContext: { lastTopic: 'why-us' }
       };
     }
 
+    // === HANDLE FOLLOW-UP QUESTIONS ===
+    if (isFollowUp(lowerMessage) && context.lastService) {
+      const service = services.find(s => s.id === context.lastService);
+      if (service) {
+        return {
+          content: `Here's more about **${service.name}**:\n\n${service.fullDesc}\n\n**Full list of features:**\n${service.features.map(f => `• ${f}`).join('\n')}\n\nReady for a free quote?`,
+          quickReplies: ['Get a Quote', 'Other Services', 'Contact Us'],
+          links: [{ text: 'View Full Details', url: service.link }]
+        };
+      }
+    }
+
+    // === SIMPLE QUESTIONS ===
+    if (/^(how|what|when|where|why|can|do|does|is|are)\s/i.test(lowerMessage)) {
+      // Try to match a FAQ
+      const faqMatch = findMatchingFaq(lowerMessage);
+      if (faqMatch) {
+        return {
+          content: `${faqMatch.answer}`,
+          quickReplies: ['More Questions', 'Get a Quote', 'View Services'],
+          newContext: { lastTopic: 'faq' }
+        };
+      }
+    }
+
     // === FALLBACK - SMART UNKNOWN HANDLER ===
-    // If we can't match anything, offer to send the question to the team
     setLastUnknownQuestion(userMessage);
     return {
-      content: `That's a great question! While I don't have that specific information, I can:\n\n1. **Send your question to our team** - they'll respond within 24 hours\n2. **Connect you with us directly** - call ${businessInfo.phone}\n3. **Help with something else** - try asking about our services, pricing, or scheduling\n\nWhat would you like to do?`,
-      quickReplies: ['Send my question', `Call ${businessInfo.phone}`, 'View Services', 'Get a Quote']
+      content: `That's a great question! I want to make sure I give you the right answer.\n\nI can:\n1. **Send your question to our team** - they'll respond within 24 hours\n2. **Connect you directly** - call ${businessInfo.phone}\n3. **Help with something else** - ask about services, pricing, or scheduling\n\nWhat would you prefer?`,
+      quickReplies: ['Send my question', `Call ${businessInfo.phone}`, 'View Services', 'Get a Quote'],
+      newContext: { lastTopic: 'unknown' }
     };
   };
 
@@ -382,6 +596,9 @@ export default function Chatbot() {
     addMessage(messageText, 'user');
     setInputValue('');
 
+    // Update message count
+    setContext(prev => ({ ...prev, messageCount: prev.messageCount + 1 }));
+
     // Check for special triggers
     const lowerText = messageText.toLowerCase();
 
@@ -395,6 +612,15 @@ export default function Chatbot() {
       await new Promise(resolve => setTimeout(resolve, 600));
       setIsTyping(false);
       setShowQuoteForm(true);
+
+      // Pre-fill service if we know what they were asking about
+      if (context.lastService) {
+        const service = services.find(s => s.id === context.lastService);
+        if (service) {
+          setQuoteFormData(prev => ({ ...prev, service: service.name }));
+        }
+      }
+
       addMessage(
         `Perfect! Fill out this quick form and we'll get back to you within 24 hours with your free estimate.`,
         'bot'
@@ -423,9 +649,16 @@ export default function Chatbot() {
 
     // Generate response
     const response = generateResponse(messageText);
+
+    // Update context if provided
+    if (response.newContext) {
+      setContext(prev => ({ ...prev, ...response.newContext }));
+    }
+
     addMessage(response.content, 'bot', {
       quickReplies: response.quickReplies,
-      links: response.links
+      links: response.links,
+      context: response.newContext?.lastTopic || undefined
     });
   };
 
@@ -446,7 +679,7 @@ export default function Chatbot() {
           address: quoteFormData.address,
           service: quoteFormData.service,
           notes: quoteFormData.notes,
-          source: 'Website Chatbot'
+          source: 'Website Chatbot (Brighton)'
         }),
       });
 
@@ -458,6 +691,7 @@ export default function Chatbot() {
           { quickReplies: ['View Services', 'Service Areas', 'Contact Info'] }
         );
         setQuoteFormData({ name: '', phone: '', address: '', service: '', notes: '' });
+        setContext(prev => ({ ...prev, askedForQuote: true }));
       } else {
         throw new Error('Failed to submit');
       }
@@ -481,7 +715,7 @@ export default function Chatbot() {
           name: questionFormData.name,
           email: questionFormData.email,
           question: questionFormData.question,
-          source: 'Chatbot Question'
+          source: 'Chatbot Question (Brighton)'
         }),
       });
 
@@ -536,7 +770,7 @@ export default function Chatbot() {
       {/* Notification Badge */}
       {!isOpen && messages.length === 0 && (
         <div className="fixed bottom-24 right-6 z-50 bg-white rounded-lg shadow-lg p-3 max-w-[200px] border border-green-200">
-          <p className="text-sm text-gray-700 font-medium">Need help? Chat with us!</p>
+          <p className="text-sm text-gray-700 font-medium">Need help? Chat with Brighton!</p>
           <p className="text-xs text-gray-500 mt-1">Get instant answers</p>
         </div>
       )}
@@ -554,10 +788,10 @@ export default function Chatbot() {
               />
             </div>
             <div className="flex-1">
-              <h3 className="font-bold text-lg">Brighton Road</h3>
+              <h3 className="font-bold text-lg">Brighton</h3>
               <p className="text-green-100 text-sm flex items-center gap-1">
                 <span className="w-2 h-2 bg-green-300 rounded-full animate-pulse"></span>
-                Online • Instant replies
+                Online • Ask me anything
               </p>
             </div>
             <a
