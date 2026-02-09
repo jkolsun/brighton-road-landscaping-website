@@ -1,6 +1,7 @@
 import '../styles/global.css'; // Correct relative path
 import Header from './components/Header';
-import ScrollToTop from './components/ScrollToTop'; 
+import ScrollToTop from './components/ScrollToTop';
+import { Chatbot } from './components/Chatbot';
 
 export const metadata = {
   title: 'Brighton Road Landscaping',
@@ -18,6 +19,7 @@ export default function RootLayout({
       <ScrollToTop />
         <Header />
         <main>{children}</main>
+        <Chatbot />
       </body>
     </html>
   );
