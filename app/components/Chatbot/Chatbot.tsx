@@ -137,7 +137,7 @@ export default function Chatbot() {
       const welcomeMessage: Message = {
         id: '1',
         type: 'bot',
-        content: `Hi! I'm Brighton, your landscaping assistant. I know everything about our services and can help you:\n\n• Get a free quote instantly\n• Learn about our 6 landscaping services\n• Check if we service your area\n• Answer any questions you have\n\nHow can I help you today?`,
+        content: `Hi! I'm Brighton, your landscaping assistant. I know everything about our services and can help you:\n\n• Get a free quote instantly\n• Learn about our landscaping services\n• Check if we service your area\n• Answer any questions you have\n\nHow can I help you today?`,
         timestamp: new Date(),
         quickReplies: quickReplies.greeting
       };
