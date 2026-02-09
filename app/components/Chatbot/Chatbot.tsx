@@ -40,6 +40,13 @@ interface ConversationContext {
   mentionedServices: string[];
   askedForQuote: boolean;
   messageCount: number;
+  // Enhanced tracking
+  recentTopics: string[]; // Track last 5 topics for reference
+  lastQuestion: string | null; // What did user last ask about
+  lastBotResponse: string | null; // What did bot say (for follow-ups)
+  pendingClarification: boolean; // Did we ask for clarification?
+  userIntent: string | null; // Inferred user goal (quote, info, help)
+  conversationPhase: 'greeting' | 'exploring' | 'interested' | 'ready-to-convert';
 }
 
 // Utility: Get random item from array
@@ -185,7 +192,13 @@ export default function Chatbot() {
     lastService: null,
     mentionedServices: [],
     askedForQuote: false,
-    messageCount: 0
+    messageCount: 0,
+    recentTopics: [],
+    lastQuestion: null,
+    lastBotResponse: null,
+    pendingClarification: false,
+    userIntent: null,
+    conversationPhase: 'greeting'
   });
   const [quoteFormData, setQuoteFormData] = useState<QuoteFormData>({
     name: '',
@@ -259,6 +272,112 @@ export default function Chatbot() {
       /\blearn\s*more\b/i
     ];
     return followUpPatterns.some(pattern => pattern.test(lowerText));
+  };
+
+  // Check if user is using pronouns that refer to previous context
+  const usesPronounReference = (text: string): boolean => {
+    const lowerText = text.toLowerCase();
+    const pronounPatterns = [
+      /\b(it|that|this|them|those|these)\b/i,
+      /\bhow much (is|does|for) (it|that)\b/i,
+      /\bwhat (is|about|does) (it|that)\b/i,
+      /\bcan (you|I) (get|have|do) (it|that)\b/i,
+      /\bwhen can (you|I|we)\b/i,
+      /\bhow (long|often|quick)\b/i
+    ];
+    return pronounPatterns.some(pattern => pattern.test(lowerText));
+  };
+
+  // Detect the type of question being asked
+  const detectQuestionType = (text: string): string => {
+    const lowerText = text.toLowerCase();
+
+    if (/how much|price|cost|quote|estimate|pricing/i.test(lowerText)) return 'pricing';
+    if (/how (long|often|frequently|quick)/i.test(lowerText)) return 'timing';
+    if (/when|what time|schedule|available/i.test(lowerText)) return 'scheduling';
+    if (/where|area|location|service.*area/i.test(lowerText)) return 'location';
+    if (/what (is|are|do)|tell me about|explain/i.test(lowerText)) return 'information';
+    if (/why|should|recommend|better|best/i.test(lowerText)) return 'recommendation';
+    if (/can you|do you|are you able/i.test(lowerText)) return 'capability';
+    if (/who|owner|team|company/i.test(lowerText)) return 'about';
+
+    return 'general';
+  };
+
+  // Get contextual response based on previous conversation
+  const getContextualFollowUp = (text: string): { content: string; quickReplies?: string[]; links?: { text: string; url: string }[]; newContext?: Partial<ConversationContext> } | null => {
+    const lowerText = text.toLowerCase();
+    const questionType = detectQuestionType(lowerText);
+
+    // If they're asking about pricing/cost with pronouns, refer to last service
+    if (questionType === 'pricing' && context.lastService) {
+      const service = services.find(s => s.id === context.lastService);
+      if (service) {
+        return {
+          content: `For **${service.name}**, pricing varies based on your property size and specific needs.\n\n**To get an accurate quote:**\n• Fill out our quick form\n• We'll assess your property\n• You'll receive a detailed estimate within 24 hours\n\nNo obligation - just straightforward pricing!`,
+          quickReplies: ['Get a Quote', 'What\'s included?', 'Other Services'],
+          links: [{ text: 'View Service Details', url: service.link }],
+          newContext: { lastTopic: 'pricing', lastQuestion: 'price' }
+        };
+      }
+    }
+
+    // If asking about timing/frequency with context
+    if (questionType === 'timing' && context.lastService) {
+      const service = services.find(s => s.id === context.lastService);
+      if (service) {
+        if (service.id === 'lawn-mowing') {
+          return {
+            content: `For lawn mowing, we recommend:\n\n• **Weekly** during peak growing season (spring/summer)\n• **Bi-weekly** for slower growth periods or budget-conscious customers\n• **One-time** cuts are also available\n\nWe can start within a few days of receiving your request!`,
+            quickReplies: ['Get a Quote', 'What\'s included?', 'Service Areas'],
+            newContext: { lastTopic: 'timing' }
+          };
+        }
+        return {
+          content: `For ${service.name}, timing depends on the scope of work. After assessing your property, we'll provide a detailed timeline.\n\n**General turnaround:**\n• Quote: Within 24 hours\n• Scheduling: Usually within a few days\n• Project completion: Varies by scope\n\nWant to get the process started?`,
+          quickReplies: ['Get a Quote', 'Contact Us', 'Learn More'],
+          newContext: { lastTopic: 'timing' }
+        };
+      }
+    }
+
+    // If asking what's included with context
+    if (/what('s| is)? included|what do (you|I) get|comes with/i.test(lowerText) && context.lastService) {
+      const service = services.find(s => s.id === context.lastService);
+      if (service) {
+        return {
+          content: `**What's included with ${service.name}:**\n\n${service.features.map(f => `✓ ${f}`).join('\n')}\n\nWould you like a quote for this service?`,
+          quickReplies: ['Get a Quote', 'Other Services', 'Contact Us'],
+          links: [{ text: 'Full Details', url: service.link }],
+          newContext: { lastTopic: 'service-details' }
+        };
+      }
+    }
+
+    // If asking "can you" questions about capabilities
+    if (questionType === 'capability') {
+      // Check if asking about a specific task
+      if (/can you (come|do|help|handle|take care)/i.test(lowerText)) {
+        // Try to find what they're asking about
+        const matchedService = findMatchingService(lowerText);
+        if (matchedService) {
+          return {
+            content: `Yes, we can definitely help with **${matchedService.name}**!\n\n${matchedService.shortDesc}\n\nWould you like more details or a free quote?`,
+            quickReplies: ['Get a Quote', 'Tell me more', 'Other Services'],
+            links: [{ text: 'Learn More', url: matchedService.link }],
+            newContext: { lastService: matchedService.id, lastTopic: 'service' }
+          };
+        }
+        // Generic capability response
+        return {
+          content: `We offer a wide range of landscaping services! Tell me what you need help with and I'll let you know if it's something we can do.\n\n**Our main services:**\n${services.map(s => `• ${s.name}`).join('\n')}\n\nWhat specifically are you looking for?`,
+          quickReplies: services.slice(0, 4).map(s => s.name),
+          newContext: { lastTopic: 'services' }
+        };
+      }
+    }
+
+    return null;
   };
 
   // Check if user wants to go back or see menu
@@ -349,6 +468,14 @@ export default function Chatbot() {
     // Apply spell correction
     const correctedMessage = correctSpelling(userMessage);
     const lowerMessage = correctedMessage.toLowerCase().trim();
+
+    // === CHECK FOR CONTEXTUAL FOLLOW-UP (pronouns, "it", "that", etc.) ===
+    if (usesPronounReference(lowerMessage) && (context.lastService || context.lastTopic)) {
+      const contextualResponse = getContextualFollowUp(lowerMessage);
+      if (contextualResponse) {
+        return contextualResponse;
+      }
+    }
 
     // === CHECK FOR INFERRED INTENT (problem descriptions) ===
     const inferredIntent = inferIntent(lowerMessage);
@@ -677,9 +804,56 @@ export default function Chatbot() {
         return {
           content: `Here's more about **${service.name}**:\n\n${service.fullDesc}\n\n**Full list of features:**\n${service.features.map(f => `• ${f}`).join('\n')}\n\nReady for a free quote?`,
           quickReplies: ['Get a Quote', 'Other Services', 'Contact Us'],
-          links: [{ text: 'View Full Details', url: service.link }]
+          links: [{ text: 'View Full Details', url: service.link }],
+          newContext: { lastTopic: 'service-details' }
         };
       }
+    }
+
+    // === HANDLE SIMPLE PRICING QUESTIONS ("how much", "price?", "cost?") ===
+    if (/^(how much|price|cost|pricing)\??$/i.test(lowerMessage)) {
+      if (context.lastService) {
+        const service = services.find(s => s.id === context.lastService);
+        if (service) {
+          return {
+            content: `For **${service.name}**, pricing depends on your property size and specific requirements.\n\nThe best way to get an accurate price is a free quote - we'll assess your needs and provide a detailed estimate within 24 hours. No obligation!`,
+            quickReplies: ['Get a Quote', 'What\'s included?', 'Other Services'],
+            newContext: { lastTopic: 'pricing' }
+          };
+        }
+      }
+      return {
+        content: `Our pricing varies by service and property size. To give you an accurate quote, I'll need to know:\n\n• What service you're interested in\n• Your property address\n\nWhich service would you like a quote for?`,
+        quickReplies: services.slice(0, 4).map(s => s.name),
+        newContext: { lastTopic: 'pricing' }
+      };
+    }
+
+    // === HANDLE "WHEN" / SCHEDULING QUESTIONS ===
+    if (/^when\??$/i.test(lowerMessage) || /^(when can|how soon)\b/i.test(lowerMessage)) {
+      return {
+        content: `Great question! Here's our typical timeline:\n\n• **Quote:** Within 24 hours\n• **Scheduling:** Usually within a few days\n• **Service completion:** Depends on the project\n\nFor recurring services like lawn mowing, we offer flexible weekly or bi-weekly schedules.\n\nWould you like to get started with a quote?`,
+        quickReplies: ['Get a Quote', 'View Services', 'Contact Us'],
+        newContext: { lastTopic: 'scheduling' }
+      };
+    }
+
+    // === HANDLE "WHERE" / LOCATION QUESTIONS ===
+    if (/^where\??$/i.test(lowerMessage)) {
+      return {
+        content: `We're based in **${businessInfo.location}** and service the greater Montgomery County, PA area!\n\n**Areas we serve:**\n${serviceAreas.slice(0, 8).map(a => `• ${a}`).join('\n')}\n\n...and more! Tell me your location and I'll confirm if we can help.`,
+        quickReplies: ['Get a Quote', 'View All Areas', 'Contact Us'],
+        newContext: { lastTopic: 'location' }
+      };
+    }
+
+    // === HANDLE "WHY" / RECOMMENDATION QUESTIONS ===
+    if (/^why\??$/i.test(lowerMessage) || /^why should/i.test(lowerMessage)) {
+      return {
+        content: `**Why choose Brighton Road Landscaping?**\n\n${keySellingPoints.slice(0, 6).map(p => `✓ ${p}`).join('\n')}\n\nWe're a local, family-owned business that genuinely cares about making your property look great!`,
+        quickReplies: ['Get a Quote', 'View Services', 'See Reviews'],
+        newContext: { lastTopic: 'why-us' }
+      };
     }
 
     // === SIMPLE QUESTIONS ===
@@ -695,12 +869,89 @@ export default function Chatbot() {
       }
     }
 
-    // === FALLBACK - SMART UNKNOWN HANDLER ===
+    // === HANDLE CONFUSION/CLARIFICATION REQUESTS ===
+    if (/^\?+$|^what\??$|^huh\??$|^come again\??$|^sorry\??$|^i don'?t understand/i.test(lowerMessage)) {
+      if (context.lastBotResponse) {
+        return {
+          content: `No problem! Let me try to explain differently.\n\n**I was talking about:** ${context.lastTopic || 'our services'}\n\n**What would help you most?**\n• Learn about our services\n• Get a free quote\n• Talk to our team directly\n\nJust let me know what you're looking for!`,
+          quickReplies: ['View Services', 'Get a Quote', `Call ${businessInfo.phone}`],
+          newContext: { lastTopic: 'clarify' }
+        };
+      }
+      return {
+        content: `No problem! Let me help you get started.\n\n**What can I help you with today?**\n• Information about our landscaping services\n• Getting a free quote\n• Checking if we service your area\n• Speaking with our team directly\n\nJust tell me what you need!`,
+        quickReplies: quickReplies.greeting,
+        newContext: { lastTopic: 'greeting' }
+      };
+    }
+
+    // === HANDLE COMPARISON QUESTIONS ("vs", "or", "difference") ===
+    if (/\b(vs\.?|versus|or|difference between|compared to)\b/i.test(lowerMessage)) {
+      // Check if comparing services
+      const matchedServices: typeof services = [];
+      for (const service of services) {
+        if (textMatches(lowerMessage, [service.name]).matched ||
+            textMatches(lowerMessage, service.keywords.slice(0, 5)).matched) {
+          matchedServices.push(service);
+        }
+      }
+
+      if (matchedServices.length >= 2) {
+        const [s1, s2] = matchedServices;
+        return {
+          content: `Great question! Here's a quick comparison:\n\n**${s1.name}:**\n${s1.shortDesc}\n\n**${s2.name}:**\n${s2.shortDesc}\n\nBoth are popular services! Would you like more details on either, or a quote for one?`,
+          quickReplies: [s1.name, s2.name, 'Get a Quote'],
+          newContext: { lastTopic: 'comparison' }
+        };
+      }
+    }
+
+    // === HANDLE NEGATION ("not", "don't want", "without") ===
+    if (/\b(not|don'?t|no|without|never|can'?t)\s+(want|need|like|interested)/i.test(lowerMessage)) {
+      return {
+        content: `No problem at all! Let me know what you ARE looking for and I'll point you in the right direction.\n\n**Popular requests:**\n• Regular lawn mowing\n• One-time cleanup\n• Tree trimming\n• Landscape redesign\n\nWhat sounds closer to what you need?`,
+        quickReplies: ['Lawn Mowing', 'Seasonal Cleanup', 'Tree Service', 'Something else'],
+        newContext: { lastTopic: 'alternative' }
+      };
+    }
+
+    // === FALLBACK - SMART CONTEXTUAL HANDLER ===
+    // Try to understand what they might be asking based on key words
+    const words = lowerMessage.split(/\s+/);
+
+    // Check if they mentioned any partial service keywords
+    for (const service of services) {
+      for (const keyword of service.keywords) {
+        if (words.some(w => w.length > 3 && keyword.includes(w))) {
+          return {
+            content: `Are you asking about **${service.name}**?\n\n${service.shortDesc}\n\nI can tell you more about this service or help you get a quote!`,
+            quickReplies: ['Yes, tell me more', 'No, something else', 'Get a Quote'],
+            links: [{ text: 'View Service', url: service.link }],
+            newContext: { lastTopic: 'clarify-service', lastService: service.id, pendingClarification: true }
+          };
+        }
+      }
+    }
+
+    // If we have recent context, offer to continue that conversation
+    if (context.lastService) {
+      const service = services.find(s => s.id === context.lastService);
+      if (service) {
+        setLastUnknownQuestion(userMessage);
+        return {
+          content: `I'm not quite sure what you mean. Are you still asking about **${service.name}**, or is this something different?\n\n**I can help you with:**\n• More info about ${service.name}\n• Getting a quote\n• Looking at other services\n• Answering specific questions`,
+          quickReplies: [`More about ${service.name}`, 'Something else', 'Get a Quote', 'View All Services'],
+          newContext: { lastTopic: 'clarify', pendingClarification: true }
+        };
+      }
+    }
+
+    // General fallback
     setLastUnknownQuestion(userMessage);
     return {
-      content: `That's a great question! I want to make sure I give you the right answer.\n\nI can:\n1. **Send your question to our team** - they'll respond within 24 hours\n2. **Connect you directly** - call ${businessInfo.phone}\n3. **Help with something else** - ask about services, pricing, or scheduling\n\nWhat would you prefer?`,
-      quickReplies: ['Send my question', `Call ${businessInfo.phone}`, 'View Services', 'Get a Quote'],
-      newContext: { lastTopic: 'unknown' }
+      content: `I want to make sure I understand correctly. Could you rephrase that or tell me more about what you need?\n\n**I'm great at helping with:**\n• Getting quotes for our services\n• Explaining what we offer\n• Checking if we service your area\n• Answering questions about pricing, scheduling, etc.\n\nOr I can send your question directly to our team!`,
+      quickReplies: ['View Services', 'Get a Quote', 'Send my question', `Call ${businessInfo.phone}`],
+      newContext: { lastTopic: 'unknown', pendingClarification: true }
     };
   };
 
@@ -776,10 +1027,23 @@ export default function Chatbot() {
     // Generate response
     const response = generateResponse(messageText);
 
-    // Update context if provided
-    if (response.newContext) {
-      setContext(prev => ({ ...prev, ...response.newContext }));
-    }
+    // Update context with enhanced tracking
+    setContext(prev => {
+      const newTopic = response.newContext?.lastTopic || prev.lastTopic;
+      const recentTopics = newTopic && newTopic !== prev.lastTopic
+        ? [newTopic, ...prev.recentTopics.slice(0, 4)]
+        : prev.recentTopics;
+
+      return {
+        ...prev,
+        ...response.newContext,
+        recentTopics,
+        lastQuestion: messageText,
+        lastBotResponse: response.content,
+        pendingClarification: response.newContext?.pendingClarification || false,
+        conversationPhase: prev.messageCount > 5 ? 'interested' : prev.conversationPhase
+      };
+    });
 
     addMessage(response.content, 'bot', {
       quickReplies: response.quickReplies,
