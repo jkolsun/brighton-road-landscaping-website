@@ -441,9 +441,9 @@ export const quickReplies = {
 // Response variations for more natural conversation
 export const responseVariations = {
   greeting: [
-    "Hi there! Welcome to Brighton Road Landscaping. How can I help you today?",
-    "Hello! Thanks for reaching out to Brighton Road Landscaping. What can I do for you?",
-    "Hey! Great to hear from you. I'm here to help with any landscaping questions!"
+    "Hi there! I'm Brighton, your landscaping assistant. How can I help you today?",
+    "Hello! I'm Brighton. Thanks for reaching out! What can I do for you?",
+    "Hey! I'm Brighton. Great to hear from you - I'm here to help with any landscaping questions!"
   ],
   thanks: [
     "You're welcome! Is there anything else I can help you with?",
