@@ -274,6 +274,18 @@ export default function Chatbot() {
 
   // Find the best matching service based on user input (excluding already mentioned ones if asking for others)
   const findMatchingService = (text: string, excludeServices: string[] = []) => {
+    const lowerText = correctSpelling(text.toLowerCase());
+
+    // Don't match if the query is too vague (just "service" or "services" without specifics)
+    if (/^(what|your|the|all|list)?\s*(service|services|offerings?)\s*\??$/i.test(lowerText)) {
+      return null;
+    }
+
+    // Don't match generic questions about services
+    if (/what.*(service|offer|do|provide)/i.test(lowerText) && !/tree|lawn|mow|hardscap|cleanup|design|care|patio|mulch|trim|prune/i.test(lowerText)) {
+      return null;
+    }
+
     let bestMatch = null;
     let bestScore = 0;
 
@@ -285,7 +297,8 @@ export default function Chatbot() {
       const keywordMatch = textMatches(text, service.keywords);
       const score = Math.max(nameMatch.score, keywordMatch.score);
 
-      if (score > bestScore && score > 0.6) {
+      // Require a higher score (0.7) for better accuracy
+      if (score > bestScore && score > 0.7) {
         bestScore = score;
         bestMatch = service;
       }
@@ -489,6 +502,18 @@ export default function Chatbot() {
       };
     }
 
+    // === ALL SERVICES / WHAT DO YOU OFFER (must come before specific service check) ===
+    if (/\b(what|your|all|list|show)\b.*(service|offer|do|provide)/i.test(lowerMessage) ||
+        /^services?\??$/i.test(lowerMessage) ||
+        /\b(services?|offerings?)\b/i.test(lowerMessage) && !/tree|lawn|mow|hardscap|cleanup|design|care/i.test(lowerMessage)) {
+      return {
+        content: `We offer a full range of landscaping services:\n\n${services.map(s => `**${s.name}** - ${s.shortDesc}`).join('\n\n')}\n\nWhich service would you like to learn more about?`,
+        quickReplies: quickReplies.services.slice(0, 4),
+        links: [{ text: 'View All Services', url: '/services' }],
+        newContext: { lastTopic: 'services' }
+      };
+    }
+
     // === QUOTE REQUEST ===
     if (/\b(quote|estimate|price|pricing|cost|how\s*much|book|schedule|appointment|get\s*started|sign\s*up)\b/i.test(lowerMessage)) {
       // Check if asking about a specific service
@@ -508,7 +533,7 @@ export default function Chatbot() {
       };
     }
 
-    // === SPECIFIC SERVICE INQUIRY ===
+    // === SPECIFIC SERVICE INQUIRY (only if they mention a specific service keyword) ===
     const matchedService = findMatchingService(lowerMessage);
     if (matchedService) {
       const newMentioned = context.mentionedServices.includes(matchedService.id)
@@ -544,17 +569,6 @@ export default function Chatbot() {
         content: `We service the greater Montgomery County, PA area including:\n\n${serviceAreas.map(a => `• ${a}`).join('\n')}\n\nDon't see your area? Give us a call at ${businessInfo.phone} - we may still be able to help!`,
         quickReplies: ['Get a Quote', 'Contact Us', 'View Services'],
         newContext: { lastTopic: 'area' }
-      };
-    }
-
-    // === ALL SERVICES ===
-    if (/\b(service|services|what\s*(do\s*you|can\s*you)\s*(do|offer)|offerings|help\s*with|provide)\b/i.test(lowerMessage) &&
-        !/other|else|different/i.test(lowerMessage)) {
-      return {
-        content: `We offer comprehensive landscaping services:\n\n${services.map(s => `**${s.name}** - ${s.shortDesc}`).join('\n\n')}\n\nWhich service would you like to learn more about?`,
-        quickReplies: quickReplies.services.slice(0, 4),
-        links: [{ text: 'View All Services', url: '/services' }],
-        newContext: { lastTopic: 'services' }
       };
     }
 
