@@ -26,14 +26,6 @@ interface Message {
   context?: string; // Track what this message was about
 }
 
-interface QuoteFormData {
-  name: string;
-  phone: string;
-  address: string;
-  service: string;
-  notes: string;
-}
-
 interface ConversationContext {
   lastTopic: string | null;
   lastService: string | null;
@@ -184,7 +176,6 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [showQuoteForm, setShowQuoteForm] = useState(false);
   const [showQuestionForm, setShowQuestionForm] = useState(false);
   const [lastUnknownQuestion, setLastUnknownQuestion] = useState('');
   const [context, setContext] = useState<ConversationContext>({
@@ -200,13 +191,6 @@ export default function Chatbot() {
     userIntent: null,
     conversationPhase: 'greeting'
   });
-  const [quoteFormData, setQuoteFormData] = useState<QuoteFormData>({
-    name: '',
-    phone: '',
-    address: '',
-    service: '',
-    notes: ''
-  });
   const [questionFormData, setQuestionFormData] = useState({
     name: '',
     email: '',
@@ -221,7 +205,7 @@ export default function Chatbot() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, showQuoteForm, showQuestionForm]);
+  }, [messages, showQuestionForm]);
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
@@ -979,29 +963,32 @@ export default function Chatbot() {
     // Check for special triggers
     const lowerText = messageText.toLowerCase();
 
-    // Quote form trigger
+    // Quote form trigger - direct to Jobber quote page
     if (lowerText.includes('fill out') ||
         lowerText === 'yes, get a quote' ||
         lowerText === 'get a quote' ||
         lowerText === 'get a free quote' ||
+        lowerText === 'get a free consultation' ||
         lowerText === 'fill out quote form') {
       setIsTyping(true);
       await new Promise(resolve => setTimeout(resolve, 600));
       setIsTyping(false);
-      setShowQuoteForm(true);
 
-      // Pre-fill service if we know what they were asking about
-      if (context.lastService) {
-        const service = services.find(s => s.id === context.lastService);
-        if (service) {
-          setQuoteFormData(prev => ({ ...prev, service: service.name }));
-        }
-      }
+      const serviceNote = context.lastService
+        ? ` for **${services.find(s => s.id === context.lastService)?.name || 'your service'}**`
+        : '';
 
       addMessage(
-        `Perfect! Fill out this quick form and we'll get back to you within 24 hours with your free estimate.`,
-        'bot'
+        `Perfect! I'll take you to our quote form${serviceNote}. Fill it out and we'll get back to you within 24 hours with your free estimate!`,
+        'bot',
+        {
+          quickReplies: ['View Services', 'Contact Info'],
+          links: [{ text: 'Open Quote Form', url: '/quote' }]
+        }
       );
+
+      // Open quote page
+      window.open('/quote', '_blank');
       return;
     }
 
@@ -1054,44 +1041,6 @@ export default function Chatbot() {
 
   const handleQuickReply = (reply: string) => {
     handleSend(reply);
-  };
-
-  const handleQuoteSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch(businessInfo.formspreeEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: quoteFormData.name,
-          phone: quoteFormData.phone,
-          address: quoteFormData.address,
-          service: quoteFormData.service,
-          notes: quoteFormData.notes,
-          source: 'Website Chatbot (Brighton)'
-        }),
-      });
-
-      if (response.ok) {
-        setShowQuoteForm(false);
-        addMessage(
-          `Thank you, ${quoteFormData.name}! 🎉\n\nYour quote request for **${quoteFormData.service}** has been submitted!\n\nWe'll contact you at ${quoteFormData.phone} within 24 hours.\n\nAnything else I can help with?`,
-          'bot',
-          { quickReplies: ['View Services', 'Service Areas', 'Contact Info'] }
-        );
-        setQuoteFormData({ name: '', phone: '', address: '', service: '', notes: '' });
-        setContext(prev => ({ ...prev, askedForQuote: true }));
-      } else {
-        throw new Error('Failed to submit');
-      }
-    } catch {
-      addMessage(
-        `Sorry, there was an issue. Please call us directly at ${businessInfo.phone} or try again.`,
-        'bot',
-        { quickReplies: [`Call ${businessInfo.phone}`, 'Try Again'] }
-      );
-    }
   };
 
   const handleQuestionSubmit = async (e: React.FormEvent) => {
@@ -1235,7 +1184,7 @@ export default function Chatbot() {
             ))}
 
             {/* Quick Replies */}
-            {messages.length > 0 && messages[messages.length - 1].quickReplies && !showQuoteForm && !showQuestionForm && (
+            {messages.length > 0 && messages[messages.length - 1].quickReplies && !showQuestionForm && (
               <div className="flex flex-wrap gap-2 mt-2">
                 {messages[messages.length - 1].quickReplies?.map((reply, idx) => (
                   <button
@@ -1246,74 +1195,6 @@ export default function Chatbot() {
                     {reply}
                   </button>
                 ))}
-              </div>
-            )}
-
-            {/* Quote Form */}
-            {showQuoteForm && (
-              <div className="bg-white rounded-xl p-4 shadow-md border border-green-100">
-                <h4 className="font-bold text-gray-800 mb-3 flex items-center gap-2">
-                  <span className="text-green-600">📋</span> Request a Free Quote
-                </h4>
-                <form onSubmit={handleQuoteSubmit} className="space-y-3">
-                  <input
-                    type="text"
-                    placeholder="Full Name *"
-                    required
-                    value={quoteFormData.name}
-                    onChange={(e) => setQuoteFormData({ ...quoteFormData, name: e.target.value })}
-                    className="w-full border border-gray-300 p-2.5 rounded-lg text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  />
-                  <input
-                    type="tel"
-                    placeholder="Phone Number *"
-                    required
-                    value={quoteFormData.phone}
-                    onChange={(e) => setQuoteFormData({ ...quoteFormData, phone: e.target.value })}
-                    className="w-full border border-gray-300 p-2.5 rounded-lg text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Property Address *"
-                    required
-                    value={quoteFormData.address}
-                    onChange={(e) => setQuoteFormData({ ...quoteFormData, address: e.target.value })}
-                    className="w-full border border-gray-300 p-2.5 rounded-lg text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  />
-                  <select
-                    required
-                    value={quoteFormData.service}
-                    onChange={(e) => setQuoteFormData({ ...quoteFormData, service: e.target.value })}
-                    className="w-full border border-gray-300 p-2.5 rounded-lg text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  >
-                    <option value="">Select a Service *</option>
-                    {services.map(service => (
-                      <option key={service.id} value={service.name}>{service.name}</option>
-                    ))}
-                  </select>
-                  <textarea
-                    placeholder="Additional notes (optional)"
-                    value={quoteFormData.notes}
-                    onChange={(e) => setQuoteFormData({ ...quoteFormData, notes: e.target.value })}
-                    className="w-full border border-gray-300 p-2.5 rounded-lg text-sm resize-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                    rows={2}
-                  />
-                  <div className="flex gap-2">
-                    <button
-                      type="submit"
-                      className="flex-1 bg-green-700 text-white py-2.5 rounded-lg font-semibold hover:bg-green-600 transition text-sm"
-                    >
-                      Submit Request
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setShowQuoteForm(false)}
-                      className="px-4 py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-sm text-gray-600"
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </form>
               </div>
             )}
 
