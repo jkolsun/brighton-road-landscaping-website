@@ -22,6 +22,7 @@ export default function JoinPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [resumeNote, setResumeNote] = useState('');
 
   const validateFile = (file: File): string | null => {
     // Check file size
@@ -65,67 +66,65 @@ export default function JoinPage() {
     setErrorMessage('');
     setSubmitStatus('idle');
 
-    const formDataToSend = new FormData();
-    formDataToSend.append('First Name', formData.firstName);
-    formDataToSend.append('Last Name', formData.lastName);
-    formDataToSend.append('Email', formData.email);
-    formDataToSend.append('Phone', formData.phone);
-    formDataToSend.append('Drivers License', formData.driversLicense);
-    formDataToSend.append('Residence', formData.residence);
-    formDataToSend.append('Availability', formData.availability);
-    formDataToSend.append('Experience', formData.experience || 'Not provided');
-
-    if (resumeFile) {
-      // Validate again before sending
-      const fileError = validateFile(resumeFile);
-      if (fileError) {
-        setErrorMessage(fileError);
-        setIsSubmitting(false);
-        return;
+    // Build form data without file first (text-only always works)
+    const buildFormData = (includeFile: boolean) => {
+      const fd = new FormData();
+      fd.append('First Name', formData.firstName);
+      fd.append('Last Name', formData.lastName);
+      fd.append('Email', formData.email);
+      fd.append('Phone', formData.phone);
+      fd.append('Drivers License', formData.driversLicense);
+      fd.append('Residence', formData.residence);
+      fd.append('Availability', formData.availability);
+      fd.append('Experience', formData.experience || 'Not provided');
+      if (includeFile && resumeFile) {
+        fd.append('Resume', resumeFile, resumeFile.name);
+      } else if (resumeFile) {
+        fd.append('Resume Note', `Applicant attached "${resumeFile.name}" but file upload was not supported. They were asked to email it directly.`);
       }
-      formDataToSend.append('Resume', resumeFile, resumeFile.name);
-    }
+      return fd;
+    };
 
     try {
-      const res = await fetch('https://formspree.io/f/xkgzqppy', {
+      // First attempt: try with file if one was attached
+      let res = await fetch('https://formspree.io/f/xkgzqppy', {
         method: 'POST',
-        body: formDataToSend,
-        headers: {
-          'Accept': 'application/json'
-        }
+        body: buildFormData(!!resumeFile),
+        headers: { 'Accept': 'application/json' }
       });
+
+      // If failed with file, auto-retry WITHOUT the file
+      if (!res.ok && resumeFile) {
+        res = await fetch('https://formspree.io/f/xkgzqppy', {
+          method: 'POST',
+          body: buildFormData(false),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          // Succeeded without file - show success with email note
+          setSubmitStatus('success');
+          setResumeNote(`Your application was submitted! However, the resume couldn't be attached. Please email "${resumeFile.name}" to brightonroadlandscaping@gmail.com`);
+          setFormData({
+            firstName: '', lastName: '', email: '', phone: '',
+            driversLicense: '', residence: '', availability: '', experience: '',
+          });
+          setResumeFile(null);
+          setIsSubmitting(false);
+          return;
+        }
+      }
 
       if (res.ok) {
         setSubmitStatus('success');
+        setResumeNote('');
         setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          driversLicense: '',
-          residence: '',
-          availability: '',
-          experience: '',
+          firstName: '', lastName: '', email: '', phone: '',
+          driversLicense: '', residence: '', availability: '', experience: '',
         });
         setResumeFile(null);
       } else {
-        // Try to get error details from Formspree
-        let detail = '';
-        try {
-          const errorData = await res.json();
-          if (errorData.errors) {
-            detail = errorData.errors.map((err: { message?: string }) => err.message).join('. ');
-          }
-        } catch {
-          // Couldn't parse error response
-        }
-
-        // If file upload failed, suggest submitting without file
-        if (resumeFile && (res.status === 413 || detail.toLowerCase().includes('file') || detail.toLowerCase().includes('upload'))) {
-          setErrorMessage(`The file upload failed. Try submitting without the resume, or email it directly to brightonroadlandscaping@gmail.com`);
-        } else {
-          setErrorMessage(detail || 'Something went wrong. Please try again or call us at (484) 535-1936.');
-        }
+        setErrorMessage('Something went wrong. Please try again or call us at (484) 535-1936.');
         setSubmitStatus('error');
       }
     } catch {
@@ -155,6 +154,11 @@ export default function JoinPage() {
             <div className="bg-green-100 border border-green-400 text-green-800 text-center p-4 rounded-lg mb-6">
               <p className="font-bold text-lg">Application Submitted!</p>
               <p className="mt-1">Thanks for applying to Brighton Road Landscaping. We&apos;ll reach out within 24 hours.</p>
+              {resumeNote && (
+                <p className="mt-3 text-sm bg-yellow-50 border border-yellow-300 text-yellow-800 p-3 rounded-lg">
+                  {resumeNote}
+                </p>
+              )}
             </div>
           )}
 
