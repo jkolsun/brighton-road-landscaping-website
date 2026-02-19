@@ -237,23 +237,7 @@ export default function JoinPage() {
                 onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
               />
 
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">
-                  Attach Resume (Optional)
-                </label>
-                <input
-                  type="file"
-                  accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                  className="border border-gray-300 w-full p-3 rounded-lg text-base file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
-                  onChange={handleFileChange}
-                />
-                <p className="text-xs text-gray-500 mt-1">PDF or Word documents up to {MAX_FILE_SIZE_MB}MB</p>
-                {resumeFile && (
-                  <p className="text-sm text-green-600 mt-1">
-                    Selected: {resumeFile.name} ({(resumeFile.size / 1024 / 1024).toFixed(1)}MB)
-                  </p>
-                )}
-              </div>
+
 
               {errorMessage && (
                 <div className="bg-red-50 border border-red-300 text-red-700 p-3 rounded-lg text-sm">
