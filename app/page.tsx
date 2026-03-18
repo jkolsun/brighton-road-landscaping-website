@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <div>
-      {/* Hero Section - KEEP AS IS */}
+      {/* Hero Section */}
       <div className="relative h-screen w-full overflow-hidden">
         <video
           className="absolute top-0 left-0 w-full h-full object-cover z-0"
@@ -30,25 +30,41 @@ export default function Home() {
           <source src="/Grass.Cutting.mp4" type="video/mp4" />
         </video>
 
-        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-40 z-10" />
+        <div className="absolute top-0 left-0 w-full h-full bg-black/45 z-10" />
 
-        <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 w-64 md:w-80 opacity-200">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 w-64 md:w-80"
+        >
           <img
             src="/images/brighton-logo.png"
             alt="Brighton Road Landscaping Logo"
             className="w-full h-auto"
           />
-        </div>
+        </motion.div>
 
         <section className="relative z-20 flex flex-col items-center justify-center text-center px-4 py-20 h-full">
-          <h1 className="text-white text-4xl md:text-7xl font-[impact] leading-tight text-center mt-10 lg:mt-20">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="text-white text-4xl md:text-7xl font-[impact] leading-tight text-center mt-10 lg:mt-20"
+          >
             A Mowed Lawn for a Reasonable Price
-          </h1>
-          <Link href="/quote">
-            <button className="mt-6 bg-green-700 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-xl shadow-md text-lg transition transform hover:scale-105">
-              Get a Quote Today!
-            </button>
-          </Link>
+          </motion.h1>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <Link href="/quote">
+              <button className="mt-6 bg-green-700 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl text-lg transition-all duration-300 transform hover:scale-105">
+                Get a Quote Today!
+              </button>
+            </Link>
+          </motion.div>
         </section>
       </div>
 
