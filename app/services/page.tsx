@@ -109,33 +109,33 @@ export default function ServicesPage() {
                 viewport={{ once: true }}
               >
                 <Link href={`/services/${service.slug}`}>
-                  <div className="group relative h-[380px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl cursor-pointer transition-all duration-500">
+                  <div className="group relative h-[380px] rounded-xl overflow-hidden shadow-xl hover:shadow-2xl cursor-pointer transition-all">
                     {/* Background Image */}
                     <Image
                       src={service.image}
                       alt={service.name}
                       fill
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent group-hover:from-black/85 group-hover:via-black/40 transition-all duration-500"></div>
-
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                    
                     {/* Content */}
                     <div className="absolute bottom-0 left-0 right-0 p-6">
                       <div className="flex items-center gap-3 mb-3">
-                        <div className="bg-white/15 backdrop-blur-md p-3 rounded-xl group-hover:bg-green-600/80 transition-colors duration-300">
+                        <div className="bg-white/20 backdrop-blur-sm p-3 rounded-lg">
                           <service.icon className="w-6 h-6 text-white" />
                         </div>
                         <h3 className="text-2xl font-[impact] text-white">
                           {service.name}
                         </h3>
                       </div>
-                      <p className="text-white/80 text-base mb-4 group-hover:text-white/95 transition-colors duration-300">
+                      <p className="text-white/90 text-base mb-4">
                         {service.description}
                       </p>
-                      <div className="flex items-center gap-2 text-white group-hover:gap-4 transition-all duration-300">
+                      <div className="flex items-center gap-2 text-white group-hover:gap-4 transition-all">
                         <span className="font-semibold">Learn More</span>
-                        <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                        <ArrowRightIcon className="w-5 h-5" />
                       </div>
                     </div>
                   </div>

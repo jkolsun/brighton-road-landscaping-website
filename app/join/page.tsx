@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import Footer from '@/components/Footer';
 
 const MAX_FILE_SIZE_MB = 10;
@@ -23,13 +23,14 @@ export default function JoinPage() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const [resumeNote, setResumeNote] = useState('');
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const validateFile = (file: File): string | null => {
+    // Check file size
     if (file.size > MAX_FILE_SIZE_BYTES) {
       return `File is too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Maximum size is ${MAX_FILE_SIZE_MB}MB.`;
     }
 
+    // Check file extension (more reliable than MIME type on mobile)
     const fileName = file.name.toLowerCase();
     const hasValidExtension = ALLOWED_EXTENSIONS.some(ext => fileName.endsWith(ext));
     if (!hasValidExtension) {
@@ -56,34 +57,16 @@ export default function JoinPage() {
     setResumeFile(file);
   };
 
-  const resetForm = () => {
-    setFormData({
-      firstName: '', lastName: '', email: '', phone: '',
-      driversLicense: '', residence: '', availability: '', experience: '',
-    });
-    setResumeFile(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (isSubmitting) return;
 
-    // Basic phone validation - at least 7 digits
-    const digitsOnly = formData.phone.replace(/\D/g, '');
-    if (digitsOnly.length < 7) {
-      setErrorMessage('Please enter a valid phone number.');
-      return;
-    }
-
     setIsSubmitting(true);
     setErrorMessage('');
     setSubmitStatus('idle');
-    setResumeNote('');
 
+    // Build form data without file first (text-only always works)
     const buildFormData = (includeFile: boolean) => {
       const fd = new FormData();
       fd.append('First Name', formData.firstName);
@@ -119,9 +102,14 @@ export default function JoinPage() {
         });
 
         if (res.ok) {
+          // Succeeded without file - show success with email note
           setSubmitStatus('success');
           setResumeNote(`Your application was submitted! However, the resume couldn't be attached. Please email "${resumeFile.name}" to brightonroadlandscaping@gmail.com`);
-          resetForm();
+          setFormData({
+            firstName: '', lastName: '', email: '', phone: '',
+            driversLicense: '', residence: '', availability: '', experience: '',
+          });
+          setResumeFile(null);
           setIsSubmitting(false);
           return;
         }
@@ -130,7 +118,11 @@ export default function JoinPage() {
       if (res.ok) {
         setSubmitStatus('success');
         setResumeNote('');
-        resetForm();
+        setFormData({
+          firstName: '', lastName: '', email: '', phone: '',
+          driversLicense: '', residence: '', availability: '', experience: '',
+        });
+        setResumeFile(null);
       } else {
         setErrorMessage('Something went wrong. Please try again or call us at (484) 535-1936.');
         setSubmitStatus('error');
@@ -173,144 +165,82 @@ export default function JoinPage() {
           {submitStatus !== 'success' && (
             <form onSubmit={handleSubmit} className="space-y-5 bg-white p-5 sm:p-6 rounded-lg shadow-md">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
-                    First Name <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    id="firstName"
-                    placeholder="First Name"
-                    required
-                    autoComplete="given-name"
-                    className="border border-gray-300 p-3 rounded-lg w-full text-base"
-                    value={formData.firstName}
-                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
-                    Last Name <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    id="lastName"
-                    placeholder="Last Name"
-                    required
-                    autoComplete="family-name"
-                    className="border border-gray-300 p-3 rounded-lg w-full text-base"
-                    value={formData.lastName}
-                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                  Email <span className="text-red-500">*</span>
-                </label>
                 <input
-                  id="email"
-                  type="email"
-                  placeholder="you@example.com"
+                  placeholder="First Name"
                   required
-                  autoComplete="email"
-                  className="border border-gray-300 w-full p-3 rounded-lg text-base"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="border border-gray-300 p-3 rounded-lg w-full text-base"
+                  value={formData.firstName}
+                  onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                 />
-              </div>
-
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                  Phone <span className="text-red-500">*</span>
-                </label>
                 <input
-                  id="phone"
-                  type="tel"
-                  placeholder="(555) 555-5555"
+                  placeholder="Last Name"
                   required
-                  autoComplete="tel"
-                  className="border border-gray-300 w-full p-3 rounded-lg text-base"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="border border-gray-300 p-3 rounded-lg w-full text-base"
+                  value={formData.lastName}
+                  onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                 />
               </div>
 
-              <div>
-                <label htmlFor="driversLicense" className="block text-sm font-medium text-gray-700 mb-1">
-                  Driver&apos;s License <span className="text-red-500">*</span>
-                </label>
-                <select
-                  id="driversLicense"
-                  required
-                  className="border border-gray-300 w-full p-3 rounded-lg text-base bg-white"
-                  value={formData.driversLicense}
-                  onChange={(e) => setFormData({ ...formData, driversLicense: e.target.value })}
-                >
-                  <option value="">Do you have a valid Driver&apos;s License?</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
-              </div>
+              <input
+                type="email"
+                placeholder="Email"
+                required
+                autoComplete="email"
+                className="border border-gray-300 w-full p-3 rounded-lg text-base"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              />
 
-              <div>
-                <label htmlFor="residence" className="block text-sm font-medium text-gray-700 mb-1">
-                  Primary Residence <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="residence"
-                  placeholder="City, State"
-                  required
-                  autoComplete="address-level2"
-                  className="border border-gray-300 w-full p-3 rounded-lg text-base"
-                  value={formData.residence}
-                  onChange={(e) => setFormData({ ...formData, residence: e.target.value })}
-                />
-              </div>
+              <input
+                type="tel"
+                placeholder="Phone"
+                required
+                autoComplete="tel"
+                className="border border-gray-300 w-full p-3 rounded-lg text-base"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              />
 
-              <div>
-                <label htmlFor="availability" className="block text-sm font-medium text-gray-700 mb-1">
-                  Availability <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="availability"
-                  placeholder="e.g. Weekdays, Weekends, Full-time"
-                  required
-                  className="border border-gray-300 w-full p-3 rounded-lg text-base"
-                  value={formData.availability}
-                  onChange={(e) => setFormData({ ...formData, availability: e.target.value })}
-                />
-              </div>
+              <select
+                required
+                className="border border-gray-300 w-full p-3 rounded-lg text-base bg-white"
+                value={formData.driversLicense}
+                onChange={(e) => setFormData({ ...formData, driversLicense: e.target.value })}
+              >
+                <option value="">Do you have a valid Drivers License?</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
 
-              <div>
-                <label htmlFor="experience" className="block text-sm font-medium text-gray-700 mb-1">
-                  Work Experience <span className="text-gray-400 font-normal">(optional)</span>
-                </label>
-                <textarea
-                  id="experience"
-                  placeholder="Tell us about your related work experience"
-                  rows={4}
-                  className="border border-gray-300 w-full p-3 rounded-lg text-base"
-                  value={formData.experience}
-                  onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
-                />
-              </div>
+              <input
+                placeholder="Where is your primary residence?"
+                required
+                autoComplete="address-level2"
+                className="border border-gray-300 w-full p-3 rounded-lg text-base"
+                value={formData.residence}
+                onChange={(e) => setFormData({ ...formData, residence: e.target.value })}
+              />
 
-              <div>
-                <label htmlFor="resume" className="block text-sm font-medium text-gray-700 mb-1">
-                  Resume <span className="text-gray-400 font-normal">(optional - PDF or Word)</span>
-                </label>
-                <input
-                  id="resume"
-                  ref={fileInputRef}
-                  type="file"
-                  accept=".pdf,.doc,.docx"
-                  onChange={handleFileChange}
-                  className="block w-full text-sm text-gray-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100 file:cursor-pointer cursor-pointer border border-gray-300 rounded-lg"
-                />
-              </div>
+              <input
+                placeholder="What's your availability?"
+                required
+                className="border border-gray-300 w-full p-3 rounded-lg text-base"
+                value={formData.availability}
+                onChange={(e) => setFormData({ ...formData, availability: e.target.value })}
+              />
+
+              <textarea
+                placeholder="Tell us about your related work experience (optional)"
+                rows={4}
+                className="border border-gray-300 w-full p-3 rounded-lg text-base"
+                value={formData.experience}
+                onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
+              />
+
+
 
               {errorMessage && (
-                <div className="bg-red-50 border border-red-300 text-red-700 p-3 rounded-lg text-sm" role="alert">
+                <div className="bg-red-50 border border-red-300 text-red-700 p-3 rounded-lg text-sm">
                   {errorMessage}
                 </div>
               )}

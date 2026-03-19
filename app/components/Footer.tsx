@@ -31,8 +31,8 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-gray-300">
               <li><Link href="/" className="hover:text-white transition">Home</Link></li>
               <li><Link href="/services" className="hover:text-white transition">Services</Link></li>
-              <li><Link href="/gallery" className="hover:text-white transition">Gallery</Link></li>
               <li><Link href="/about" className="hover:text-white transition">About Us</Link></li>
+              <li><Link href="/gallery" className="hover:text-white transition">Gallery</Link></li>
               <li><Link href="/join" className="hover:text-white transition">Join Our Team</Link></li>
               <li><Link href="/quote" className="hover:text-white transition">Get a Free Quote</Link></li>
               <li><Link href="/contact" className="hover:text-white transition">Contact Us</Link></li>
@@ -82,10 +82,6 @@ export default function Footer() {
           <div className="flex justify-center items-center space-x-6 text-sm">
             <Link href="/services" className="text-gray-400 hover:text-white transition">
               Services
-            </Link>
-            <span className="text-gray-600">|</span>
-            <Link href="/gallery" className="text-gray-400 hover:text-white transition">
-              Gallery
             </Link>
             <span className="text-gray-600">|</span>
             <Link href="/quote" className="text-gray-400 hover:text-white transition">

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 import Footer from '@/components/Footer';
 import { StarIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 
@@ -25,19 +25,13 @@ export default function TestimonialsPage() {
   const featuredTestimonials = testimonials.slice(0, 3);
   const remainingTestimonials = testimonials.slice(3);
 
-  const nextTestimonial = useCallback(() => {
+  const nextTestimonial = () => {
     setActiveIndex((prev) => (prev + 1) % featuredTestimonials.length);
-  }, [featuredTestimonials.length]);
+  };
 
-  const prevTestimonial = useCallback(() => {
+  const prevTestimonial = () => {
     setActiveIndex((prev) => (prev - 1 + featuredTestimonials.length) % featuredTestimonials.length);
-  }, [featuredTestimonials.length]);
-
-  // Auto-advance carousel
-  useEffect(() => {
-    const timer = setInterval(nextTestimonial, 6000);
-    return () => clearInterval(timer);
-  }, [nextTestimonial]);
+  };
 
   return (
     <>
