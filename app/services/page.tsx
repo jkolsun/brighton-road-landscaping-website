@@ -4,23 +4,24 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
-import { 
+import {
   ArrowRightIcon,
   SparklesIcon,
   HomeIcon,
   ScissorsIcon,
   BeakerIcon,
-  WrenchScrewdriverIcon,
-  CloudIcon
+  WrenchScrewdriverIcon
 } from '@heroicons/react/24/solid';
 
+// Ordered by value: signature design/build work first, then recurring
+// maintenance, then seasonal — mirrors the homepage hero order.
 const services = [
   {
-    name: 'Lawn Mowing',
-    slug: 'lawn-mowing',
-    description: 'Professional weekly and bi-weekly cutting services with no contracts',
-    image: '/images/lawns.jpg',
-    icon: ScissorsIcon,
+    name: 'Landscape Design & Installation',
+    slug: 'landscape-design',
+    description: 'Professional landscape architecture and installation services',
+    image: '/images/install.JPG',
+    icon: HomeIcon,
   },
   {
     name: 'Hardscaping',
@@ -30,18 +31,11 @@ const services = [
     icon: WrenchScrewdriverIcon,
   },
   {
-    name: 'Tree Service',
-    slug: 'tree-service',
-    description: 'Expert trimming, pruning, and removal for trees of all sizes',
-    image: '/images/tree.jpg',
-    icon: CloudIcon,
-  },
-  {
-    name: 'Landscape Design & Installation',
-    slug: 'landscape-design',
-    description: 'Professional landscape architecture and installation services',
-    image: '/images/install.JPG',
-    icon: HomeIcon,
+    name: 'Property Maintenance',
+    slug: 'lawn-mowing',
+    description: 'Reliable mowing, trimming, edging, and ongoing property upkeep — no contracts',
+    image: '/images/lawns.jpg',
+    icon: ScissorsIcon,
   },
   {
     name: 'Lawn Care',

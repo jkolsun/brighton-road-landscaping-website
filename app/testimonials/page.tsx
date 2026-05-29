@@ -1,222 +1,118 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from 'react';
+import Link from "next/link";
 import Footer from '@/components/Footer';
-import { StarIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
+import { StarIcon } from '@heroicons/react/24/solid';
+import { REVIEWS } from '@/data/reviews';
 
-const testimonials = [
-  { name: "Michael R.", text: "Declan did work on my front yard today and was professional beyond his years. Bright future ahead of this hard working kid. Highly recommend.", rating: 5, service: "Lawn Mowing" },
-  { name: "Danna W.", text: "Declan is our neighbor and he is honestly the hardest working kid I've ever seen. He works late into the night most days. Way to go Declan!!", rating: 5, service: "General Landscaping" },
-  { name: "Bryan S.", text: "I've used Declan for the past three or four seasons. His crew does a great job and are very reliable. Highly recommend.", rating: 5, service: "Seasonal Service" },
-  { name: "Sue K.", text: "They did my lawn several times last year. I can vouch for him, he does a great job!", rating: 5, service: "Lawn Care" },
-  { name: "Maya K.", text: "My garden was a mess. Now it's a masterpiece. Thank you guys!", rating: 5, service: "Garden Design" },
-  { name: "Tom R.", text: "Declan and his team are the best. They transformed my yard in no time.", rating: 5, service: "Yard Transformation" },
-  { name: "Lisa M.", text: "Thanks for cutting the grass. You are the best! Venmo sent!", rating: 5, service: "Lawn Mowing" },
-  { name: "Sarah L.", text: "The lawn looks great! I can't believe how fast Declan and his team work.", rating: 5, service: "Lawn Service" },
-  { name: "Bryan S.", text: "Just wanted let you know, the edging alongside the sidewalk looks great! 👍🏼", rating: 5, service: "Edging & Trimming" },
-  { name: "Julia M.", text: "The lawn, bush and fence look beautiful. Thank you!", rating: 5, service: "Complete Care" },
-  { name: "Mark T.", text: "Declan and his team are always on time and do a fantastic job. Highly recommend!", rating: 5, service: "Regular Maintenance" },
-  { name: "Chris D.", text: "Declan is a hard worker and it shows in the quality of his work. Keep it up!", rating: 5, service: "Landscaping" },
-];
+// Official 4-color Google "G".
+function GoogleG({ className = 'w-6 h-6' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} aria-hidden>
+      <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z" />
+      <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z" />
+      <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z" />
+      <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z" />
+    </svg>
+  );
+}
+
+const initials = (name: string) =>
+  name.split(' ').filter(Boolean).slice(0, 2).map((w) => w[0]).join('').toUpperCase();
 
 export default function TestimonialsPage() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const featuredTestimonials = testimonials.slice(0, 3);
-  const remainingTestimonials = testimonials.slice(3);
-
-  const nextTestimonial = () => {
-    setActiveIndex((prev) => (prev + 1) % featuredTestimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setActiveIndex((prev) => (prev - 1 + featuredTestimonials.length) % featuredTestimonials.length);
-  };
-
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-green-800 to-green-600 py-20 overflow-hidden">
+      {/* Hero */}
+      <section className="relative bg-gradient-to-br from-green-800 to-green-700 py-20 overflow-hidden">
         <div className="absolute inset-0 bg-black/20"></div>
-        <motion.div 
-          className="relative z-10 max-w-7xl mx-auto px-6 text-center"
+        <motion.div
+          className="relative z-10 max-w-3xl mx-auto px-6 text-center"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-5xl md:text-7xl font-[impact] text-white mb-6 tracking-wide">
-            CLIENT TESTIMONIALS
+            CLIENT REVIEWS
           </h1>
-          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
-            Don't just take our word for it — hear what our satisfied customers have to say about Brighton Road Landscaping
+          <p className="text-lg md:text-2xl text-white/90">
+            Don&apos;t just take our word for it — here&apos;s what our clients say about Brighton Road Landscaping.
           </p>
-          <div className="mt-8 flex justify-center gap-2">
-            {[...Array(5)].map((_, i) => (
-              <StarIcon key={i} className="w-8 h-8 text-yellow-400" />
-            ))}
+          <div className="mt-8 inline-flex items-center gap-3 bg-white rounded-full px-5 py-3 shadow-lg">
+            <GoogleG className="w-7 h-7" />
+            <span className="flex gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <StarIcon key={i} className="w-5 h-5 text-yellow-400" />
+              ))}
+            </span>
+            <span className="font-bold text-gray-900">5.0 on Google</span>
           </div>
-          <p className="text-white mt-2 text-lg">5.0 Average Rating</p>
         </motion.div>
       </section>
 
-      {/* Featured Testimonial Carousel */}
-      <section className="py-16 bg-white">
-        <div className="max-w-5xl mx-auto px-6">
-          <motion.div 
-            className="relative"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <div className="bg-gradient-to-r from-green-700 to-green-600 rounded-3xl p-12 shadow-2xl">
-              <div className="relative">
-                <div className="text-white/20 text-[120px] absolute -top-12 -left-4 font-serif">"</div>
-                <motion.div
-                  key={activeIndex}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="relative z-10"
-                >
-                  <p className="text-white text-2xl md:text-3xl italic leading-relaxed mb-8">
-                    {featuredTestimonials[activeIndex].text}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-white font-bold text-xl">
-                        — {featuredTestimonials[activeIndex].name}
-                      </p>
-                      <p className="text-white/70 text-sm mt-1">
-                        {featuredTestimonials[activeIndex].service}
-                      </p>
-                    </div>
-                    <div className="flex gap-1">
-                      {[...Array(5)].map((_, i) => (
-                        <StarIcon key={i} className="w-6 h-6 text-yellow-400" />
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-              
-              {/* Navigation Buttons */}
-              <div className="absolute top-1/2 -translate-y-1/2 left-4 right-4 flex justify-between pointer-events-none">
-                <button 
-                  onClick={prevTestimonial}
-                  className="pointer-events-auto bg-white/20 hover:bg-white/30 rounded-full p-2 transition"
-                >
-                  <ChevronLeftIcon className="w-6 h-6 text-white" />
-                </button>
-                <button 
-                  onClick={nextTestimonial}
-                  className="pointer-events-auto bg-white/20 hover:bg-white/30 rounded-full p-2 transition"
-                >
-                  <ChevronRightIcon className="w-6 h-6 text-white" />
-                </button>
-              </div>
-            </div>
-            
-            {/* Dots Indicator */}
-            <div className="flex justify-center gap-2 mt-6">
-              {featuredTestimonials.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveIndex(i)}
-                  className={`h-2 rounded-full transition-all ${
-                    i === activeIndex ? 'w-8 bg-green-600' : 'w-2 bg-gray-300'
-                  }`}
-                />
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Grid of Additional Testimonials */}
-      <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.h2 
-            className="text-3xl md:text-4xl font-[impact] text-center text-gray-900 mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            More Happy Customers
-          </motion.h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {remainingTestimonials.map((testimonial, i) => (
+      {/* Reviews — masonry columns so varying lengths stay tidy */}
+      <section className="py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="columns-1 md:columns-2 lg:columns-3 gap-6 [column-fill:_balance]">
+            {REVIEWS.map((r, i) => (
               <motion.div
-                key={i}
-                className="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
-                initial={{ opacity: 0, y: 30 }}
+                key={r.name}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1, duration: 0.4 }}
+                transition={{ duration: 0.4, delay: (i % 3) * 0.08 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -5 }}
+                className="mb-6 break-inside-avoid bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow border border-gray-100 p-6"
               >
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-600 to-green-500"></div>
-                <div className="p-6">
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, idx) => (
-                      <StarIcon key={idx} className="w-4 h-4 text-yellow-500" />
-                    ))}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-green-700 text-white flex items-center justify-center font-bold text-sm">
+                      {initials(r.name)}
+                    </div>
+                    <div>
+                      <p className="font-bold text-gray-900 leading-tight">{r.name}</p>
+                      <div className="flex gap-0.5 text-yellow-400 text-sm">
+                        {[...Array(5)].map((_, idx) => (<span key={idx}>★</span>))}
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-gray-700 italic leading-relaxed mb-4">
-                    "{testimonial.text}"
-                  </p>
-                  <div className="border-t pt-4">
-                    <p className="font-bold text-green-700">— {testimonial.name}</p>
-                    <p className="text-sm text-gray-500">{testimonial.service}</p>
-                  </div>
+                  <GoogleG className="w-5 h-5 shrink-0" />
                 </div>
+                <p className="text-gray-700 leading-relaxed">{r.text}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* Stats */}
       <section className="bg-green-700 py-16">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4 }}
-              viewport={{ once: true }}
-            >
-              <p className="text-5xl font-[impact] text-white">100+</p>
-              <p className="text-white/80 mt-2">Happy Customers</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              <p className="text-5xl font-[impact] text-white">5.0</p>
-              <p className="text-white/80 mt-2">Star Rating</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <p className="text-5xl font-[impact] text-white">5+</p>
-              <p className="text-white/80 mt-2">Years of Service</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <p className="text-5xl font-[impact] text-white">100%</p>
-              <p className="text-white/80 mt-2">Satisfaction</p>
-            </motion.div>
+            {[
+              { num: '100+', label: 'Happy Customers' },
+              { num: '5.0', label: 'Google Rating' },
+              { num: '5+', label: 'Years of Service' },
+              { num: '100%', label: 'Satisfaction' },
+            ].map((s, i) => (
+              <motion.div
+                key={s.label}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <p className="text-5xl font-[impact] text-white">{s.num}</p>
+                <p className="text-white/80 mt-2">{s.label}</p>
+              </motion.div>
+            ))}
+          </div>
+          <div className="text-center mt-12">
+            <Link href="/quote">
+              <button className="bg-white text-green-800 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transition transform hover:scale-105">
+                Get Your Free Quote
+              </button>
+            </Link>
           </div>
         </div>
       </section>

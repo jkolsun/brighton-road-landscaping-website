@@ -385,7 +385,7 @@ export default function Chatbot() {
     }
 
     // Don't match generic questions about services
-    if (/what.*(service|offer|do|provide)/i.test(lowerText) && !/tree|lawn|mow|hardscap|cleanup|design|care|patio|mulch|trim|prune/i.test(lowerText)) {
+    if (/what.*(service|offer|do|provide)/i.test(lowerText) && !/lawn|mow|hardscap|cleanup|design|care|patio|mulch|trim|prune/i.test(lowerText)) {
       return null;
     }
 
@@ -475,8 +475,8 @@ export default function Chatbot() {
         case 'overgrown':
           return {
             content: `No worries - we can get that under control! For overgrown lawns, we typically:\n\n1. Do an initial cut at a higher setting to avoid shocking the grass\n2. Follow up with a regular-height cut\n3. Edge and trim everything professionally\n4. Blow all debris clean\n\nWant me to set up a quote? We can usually get there within a few days!`,
-            quickReplies: ['Get a Quote', 'View Lawn Mowing', 'Call Us'],
-            links: [{ text: 'Lawn Mowing Service', url: '/services/lawn-mowing' }],
+            quickReplies: ['Get a Quote', 'View Property Maintenance', 'Call Us'],
+            links: [{ text: 'Property Maintenance Service', url: '/services/lawn-mowing' }],
             newContext: { lastTopic: 'overgrown', lastService: 'lawn-mowing' }
           };
         case 'no-time':
@@ -487,13 +487,13 @@ export default function Chatbot() {
           };
         case 'new-home':
           return {
-            content: `Congratulations on the new home! 🏠 We'd love to help you get settled.\n\n**We can help with:**\n• One-time cleanup to get things in shape\n• Regular mowing to maintain the lawn\n• Landscape design if you want to make changes\n• Tree trimming or removal if needed\n\nWhat does the yard currently look like? That'll help me point you in the right direction!`,
+            content: `Congratulations on the new home! 🏠 We'd love to help you get settled.\n\n**We can help with:**\n• One-time cleanup to get things in shape\n• Regular mowing to maintain the lawn\n• Landscape design if you want to make changes\n\nWhat does the yard currently look like? That'll help me point you in the right direction!`,
             quickReplies: ['Get a Quote', 'View Services', 'Seasonal Cleanup'],
             newContext: { lastTopic: 'new-home' }
           };
         case 'referral':
           return {
-            content: `That's great to hear - we love referrals from happy customers! Thank you for giving us a try.\n\nI'd be happy to help you with any of our services:\n• Lawn mowing\n• Lawn care (fertilization, aeration)\n• Tree service\n• Landscape design\n• Hardscaping\n• Seasonal cleanups\n\nWhat are you looking for, or would you like a free quote?`,
+            content: `That's great to hear - we love referrals from happy customers! Thank you for giving us a try.\n\nI'd be happy to help you with any of our services:\n• Lawn mowing\n• Lawn care (fertilization, aeration)\n• Landscape design\n• Hardscaping\n• Seasonal cleanups\n\nWhat are you looking for, or would you like a free quote?`,
             quickReplies: ['Get a Quote', 'View Services', 'Contact Us'],
             newContext: { lastTopic: 'referral' }
           };
@@ -550,7 +550,7 @@ export default function Chatbot() {
     // === HANDLE MENU / START OVER ===
     if (wantsMenu(lowerMessage)) {
       return {
-        content: `No problem! Here's what I can help you with:\n\n• **Get a Quote** - Free estimates within 24 hours\n• **Our Services** - Mowing, hardscaping, trees, and more\n• **Service Areas** - Montgomery County, PA\n• **Contact Us** - Phone, email, and hours\n\nWhat would you like to know about?`,
+        content: `No problem! Here's what I can help you with:\n\n• **Get a Quote** - Free estimates within 24 hours\n• **Our Services** - Mowing, hardscaping, and more\n• **Service Areas** - Montgomery County, PA\n• **Contact Us** - Phone, email, and hours\n\nWhat would you like to know about?`,
         quickReplies: quickReplies.greeting,
         newContext: { lastTopic: 'menu', lastService: null }
       };
@@ -616,7 +616,7 @@ export default function Chatbot() {
     // === ALL SERVICES / WHAT DO YOU OFFER (must come before specific service check) ===
     if (/\b(what|your|all|list|show)\b.*(service|offer|do|provide)/i.test(lowerMessage) ||
         /^services?\??$/i.test(lowerMessage) ||
-        /\b(services?|offerings?)\b/i.test(lowerMessage) && !/tree|lawn|mow|hardscap|cleanup|design|care/i.test(lowerMessage)) {
+        /\b(services?|offerings?)\b/i.test(lowerMessage) && !/lawn|mow|hardscap|cleanup|design|care/i.test(lowerMessage)) {
       return {
         content: `We offer a full range of landscaping services:\n\n${services.map(s => `**${s.name}** - ${s.shortDesc}`).join('\n\n')}\n\nWhich service would you like to learn more about?`,
         quickReplies: quickReplies.services.slice(0, 4),
@@ -761,16 +761,6 @@ export default function Chatbot() {
       };
     }
 
-    // === EMERGENCY / URGENT ===
-    if (/\b(emergency|urgent|asap|fallen\s*tree|storm\s*damage|dangerous|help)\b/i.test(lowerMessage) &&
-        /\b(tree|storm|damage|fallen|down|emergency|urgent)\b/i.test(lowerMessage)) {
-      return {
-        content: `For urgent situations like storm damage or fallen trees, please call us directly at **${businessInfo.phone}**.\n\nWe offer emergency response and will prioritize getting your property safe!`,
-        quickReplies: [`Call ${businessInfo.phone}`, 'Get a Quote'],
-        newContext: { lastTopic: 'emergency' }
-      };
-    }
-
     // === COMPARISON / WHY CHOOSE ===
     if (/\b(why|better|best|compare|different|special|unique|choose|pick)\b/i.test(lowerMessage) &&
         /\b(you|brighton|company|landscap)/i.test(lowerMessage)) {
@@ -893,8 +883,8 @@ export default function Chatbot() {
     // === HANDLE NEGATION ("not", "don't want", "without") ===
     if (/\b(not|don'?t|no|without|never|can'?t)\s+(want|need|like|interested)/i.test(lowerMessage)) {
       return {
-        content: `No problem at all! Let me know what you ARE looking for and I'll point you in the right direction.\n\n**Popular requests:**\n• Regular lawn mowing\n• One-time cleanup\n• Tree trimming\n• Landscape redesign\n\nWhat sounds closer to what you need?`,
-        quickReplies: ['Lawn Mowing', 'Seasonal Cleanup', 'Tree Service', 'Something else'],
+        content: `No problem at all! Let me know what you ARE looking for and I'll point you in the right direction.\n\n**Popular requests:**\n• Regular property maintenance\n• One-time cleanup\n• Landscape redesign\n\nWhat sounds closer to what you need?`,
+        quickReplies: ['Property Maintenance', 'Seasonal Cleanup', 'Something else'],
         newContext: { lastTopic: 'alternative' }
       };
     }
@@ -1105,14 +1095,6 @@ export default function Chatbot() {
           </svg>
         )}
       </button>
-
-      {/* Notification Badge */}
-      {!isOpen && messages.length === 0 && (
-        <div className="fixed bottom-24 right-6 z-50 bg-white rounded-lg shadow-lg p-3 max-w-[200px] border border-green-200">
-          <p className="text-sm text-gray-700 font-medium">Need help? Chat with Brighton!</p>
-          <p className="text-xs text-gray-500 mt-1">Get instant answers</p>
-        </div>
-      )}
 
       {/* Chat Window */}
       {isOpen && (

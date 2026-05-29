@@ -2,3 +2,6 @@ node_modules/
 .DS_Store
 .env
 .next
+.vercel
+*.tsbuildinfo
+/IMG_8175.MP4

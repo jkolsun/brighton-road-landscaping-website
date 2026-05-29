@@ -9,9 +9,9 @@ import { CheckCircleIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
 
 const services = {
   'lawn-mowing': {
-    name: 'Lawn Mowing',
+    name: 'Property Maintenance',
     hero: {
-      title: 'Quality, Reliable Lawn Maintenance',
+      title: 'Quality, Reliable Property Maintenance',
       image: '/images/lawns.jpg'
     },
     sections: [
@@ -76,7 +76,7 @@ const services = {
     sections: [
       {
         title: 'Custom Landscape Architecture',
-        content: 'At Brighton Road Landscaping, our team works with you to design a landscape that fits your preferences and budget. Our trained landscape architects use different landscaping softwares to create a clear outline of how your property will look, including dimensions, lighting, and the different trees, shrubs and/or flowers you want to include in your landscape beds. Then, our team handles full installation of the landscaping bed, including excavating, planting, and laying of mulch or landscape rocks.',
+        content: 'At Brighton Road Landscaping, our team works with you to design a landscape that fits your preferences and budget. Our trained landscape architects use different landscaping softwares to create a clear outline of how your property will look, including dimensions, lighting, and the different shrubs, flowers, and greenery you want to include in your landscape beds. Then, our team handles full installation of the landscaping bed, including excavating, planting, and laying of mulch or landscape rocks.',
         video: '/Landscape.MP4',
         features: ['3D Design Software', 'Custom Plant Selection', 'Professional Installation', 'Seasonal Planning'],
         style: 'normal',
@@ -119,32 +119,6 @@ const services = {
     serviceArea: 'Brighton Road Landscaping proudly offers lawn care throughout Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, and Fort Washington. Our team understands the region’s seasonal changes and soil conditions, giving you customized care that keeps your property beautiful all year long.'
   },
 
-  'tree-service': {
-    name: 'Tree Service',
-    hero: {
-      title: 'Safe, Efficient Tree Care',
-      image: '/images/tree.jpg'
-    },
-    sections: [
-      {
-        title: 'Expert Tree Care Solutions',
-        content: 'At Brighton Road Landscaping, we provide expert tree care solutions that enhance the health, appearance, and safety of your property. Whether you need to prune back overgrown branches, remove a damaged tree, or shape your trees for better structure, our team uses professional equipment and safe practices.',
-        video: '/tree-video.mp4',
-        features: ['Professional Pruning', 'Safe Removal', 'Storm Damage', 'Disease Treatment'],
-        style: 'normal',
-        bgColor: 'white'
-      },
-      {
-        title: 'Tree Trimming, Pruning & Removal',
-        content: 'We offer comprehensive tree trimming and pruning to promote growth, prevent disease, and maintain a beautiful landscape. When a tree is beyond saving or poses a safety hazard, we provide safe and efficient removal services, ensuring minimal impact to your landscape. Our trained crew is skilled in handling trees of all sizes, and we always leave your property clean and hazard-free.',
-        image: '/images/Tree.websiteJPG.JPG',
-        style: 'diagonal-left',
-        bgColor: 'gray'
-      }
-    ],
-    serviceArea: 'Our professional tree services are available throughout Montgomery County, including Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, and Fort Washington. We combine local expertise with reliable service, ensuring your trees and property remain healthy and beautiful year-round.'
-  },
-
   'seasonal-cleanups': {
     name: 'Seasonal Cleanups',
     hero: {
@@ -162,7 +136,7 @@ const services = {
       },
       {
         title: 'FALL CLEANUP',
-        content: 'Brighton Road Landscaping\'s fall cleanup includes removal of all leaves and sticks, as well as any tree, plant, or shrub trimming and pruning. Whether you need your leaves all hauled away or simply placed on the curb, Brighton Road Landscaping will get the job done right.',
+        content: 'Brighton Road Landscaping\'s fall cleanup includes removal of all leaves and sticks, as well as any plant or shrub trimming and pruning. Whether you need your leaves all hauled away or simply placed on the curb, Brighton Road Landscaping will get the job done right.',
         image: '/images/fallcleanup.JPG',
         features: ['Leaf Removal', 'Stick Cleanup', 'Shrub Trimming', 'Property Prep'],
         style: 'diagonal-right',

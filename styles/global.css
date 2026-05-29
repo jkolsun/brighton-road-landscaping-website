@@ -2,8 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px; /* offset sticky navbar when jumping to #anchors */
+  /* Lock the page to vertical scrolling only. `clip` (not `hidden`) prevents
+     horizontal pan/overscroll without creating a scroll container that would
+     break the sticky navbar. */
+  overflow-x: clip;
+}
+
 body {
   font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+  width: 100%;
+}
+
+/* Cleaner mobile feel: no blue tap flash, smoother momentum scroll */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Images never overflow their box (kills the mobile horizontal-scroll jitter) */
+img,
+video {
+  max-width: 100%;
+}
+
+/* Honor reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 

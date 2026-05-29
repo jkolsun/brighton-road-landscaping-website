@@ -26,103 +26,136 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Info Section */}
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-16 bg-white">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            {/* Phone */}
-            <motion.div 
-              className="text-center"
+          {/* ===== MOBILE: CTA first, then compact details (cuts the scrolling) ===== */}
+          <div className="md:hidden">
+            <motion.div
+              className="text-center py-10 px-2 bg-gradient-to-br from-green-50 to-white rounded-2xl border border-green-100"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              transition={{ duration: 0.5 }}
             >
-              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Phone className="text-green-700" size={28} />
+              <h2 className="text-3xl font-[impact] text-gray-900 mb-4">
+                Ready to Get Started?
+              </h2>
+              <p className="text-base text-gray-700 mb-8 max-w-2xl mx-auto px-4">
+                Whether you need regular property maintenance or a complete landscape transformation,
+                we&apos;re here to help. Get your free quote today!
+              </p>
+              <div className="flex flex-col gap-4 justify-center px-4">
+                <Link href="/quote">
+                  <button className="w-full bg-green-700 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transition">
+                    Get a Free Quote
+                  </button>
+                </Link>
+                <a href="tel:4845351936">
+                  <button className="w-full border-2 border-green-700 text-green-700 bg-white hover:bg-green-50 px-8 py-4 rounded-lg font-semibold text-lg transition">
+                    Call Now
+                  </button>
+                </a>
               </div>
-              <h3 className="font-bold text-gray-900 text-lg mb-2">Call Us</h3>
-              <a href="tel:4845351936" className="text-green-700 hover:text-green-600 font-semibold text-lg">
-                (484) 535-1936
+            </motion.div>
+
+            <div className="grid grid-cols-2 gap-3 mt-8">
+              <a href="tel:4845351936" className="flex items-center gap-3 bg-gray-50 hover:bg-green-50 rounded-xl p-4 transition">
+                <div className="bg-green-100 w-11 h-11 rounded-full flex items-center justify-center shrink-0">
+                  <Phone className="text-green-700" size={20} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs text-gray-500">Call Us</p>
+                  <p className="text-green-700 font-semibold text-sm">(484) 535-1936</p>
+                </div>
               </a>
-            </motion.div>
-
-            {/* Email */}
-            <motion.div 
-              className="text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Mail className="text-green-700" size={28} />
-              </div>
-              <h3 className="font-bold text-gray-900 text-lg mb-2">Email Us</h3>
-              <a href="mailto:brightonroadlandscaping@gmail.com" className="text-green-700 hover:text-green-600 break-all">
-                brightonroadlandscaping@gmail.com
+              <a href="mailto:brightonroadlandscaping@gmail.com" className="flex items-center gap-3 bg-gray-50 hover:bg-green-50 rounded-xl p-4 transition">
+                <div className="bg-green-100 w-11 h-11 rounded-full flex items-center justify-center shrink-0">
+                  <Mail className="text-green-700" size={20} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs text-gray-500">Email Us</p>
+                  <p className="text-green-700 font-semibold text-xs break-all leading-tight">brightonroadlandscaping@gmail.com</p>
+                </div>
               </a>
-            </motion.div>
-
-            {/* Location */}
-            <motion.div 
-              className="text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <MapPin className="text-green-700" size={28} />
+              <div className="flex items-center gap-3 bg-gray-50 rounded-xl p-4">
+                <div className="bg-green-100 w-11 h-11 rounded-full flex items-center justify-center shrink-0">
+                  <MapPin className="text-green-700" size={20} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs text-gray-500">Service Area</p>
+                  <p className="text-gray-800 font-semibold text-sm">Plymouth Meeting, PA</p>
+                </div>
               </div>
-              <h3 className="font-bold text-gray-900 text-lg mb-2">Service Area</h3>
-              <p className="text-gray-600">Plymouth Meeting, PA</p>
-              <p className="text-gray-600 text-sm">& Surrounding Areas</p>
-            </motion.div>
-
-            {/* Hours - UPDATED TO 24/7 */}
-            <motion.div 
-              className="text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Clock className="text-green-700" size={28} />
+              <div className="flex items-center gap-3 bg-gray-50 rounded-xl p-4">
+                <div className="bg-green-100 w-11 h-11 rounded-full flex items-center justify-center shrink-0">
+                  <Clock className="text-green-700" size={20} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs text-gray-500">Hours</p>
+                  <p className="text-gray-800 font-semibold text-sm">24/7 · 7 Days</p>
+                </div>
               </div>
-              <h3 className="font-bold text-gray-900 text-lg mb-2">Hours</h3>
-              <p className="text-gray-600 font-semibold">24/7</p>
-              <p className="text-gray-600 text-sm">7 Days a Week</p>
+            </div>
+          </div>
+
+          {/* ===== DESKTOP: original layout — icon cards on top, then CTA ===== */}
+          <div className="hidden md:block">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+              {/* Phone */}
+              <motion.div className="text-center" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
+                <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Phone className="text-green-700" size={28} />
+                </div>
+                <h3 className="font-bold text-gray-900 text-lg mb-2">Call Us</h3>
+                <a href="tel:4845351936" className="text-green-700 hover:text-green-600 font-semibold text-lg">(484) 535-1936</a>
+              </motion.div>
+              {/* Email */}
+              <motion.div className="text-center" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}>
+                <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Mail className="text-green-700" size={28} />
+                </div>
+                <h3 className="font-bold text-gray-900 text-lg mb-2">Email Us</h3>
+                <a href="mailto:brightonroadlandscaping@gmail.com" className="text-green-700 hover:text-green-600 break-all">brightonroadlandscaping@gmail.com</a>
+              </motion.div>
+              {/* Location */}
+              <motion.div className="text-center" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}>
+                <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <MapPin className="text-green-700" size={28} />
+                </div>
+                <h3 className="font-bold text-gray-900 text-lg mb-2">Service Area</h3>
+                <p className="text-gray-600">Plymouth Meeting, PA</p>
+                <p className="text-gray-600 text-sm">& Surrounding Areas</p>
+              </motion.div>
+              {/* Hours */}
+              <motion.div className="text-center" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }}>
+                <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Clock className="text-green-700" size={28} />
+                </div>
+                <h3 className="font-bold text-gray-900 text-lg mb-2">Hours</h3>
+                <p className="text-gray-600 font-semibold">24/7</p>
+                <p className="text-gray-600 text-sm">7 Days a Week</p>
+              </motion.div>
+            </div>
+
+            <motion.div className="text-center py-12 bg-gradient-to-br from-green-50 to-white rounded-2xl" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.5 }}>
+              <h2 className="text-3xl md:text-4xl font-[impact] text-gray-900 mb-6">Ready to Get Started?</h2>
+              <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto px-6">
+                Whether you need regular property maintenance or a complete landscape transformation,
+                we&apos;re here to help. Get your free quote today!
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center px-6">
+                <Link href="/quote">
+                  <button className="bg-green-700 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transform hover:scale-105 transition">Get a Free Quote</button>
+                </Link>
+                <a href="tel:4845351936">
+                  <button className="border-2 border-green-700 text-green-700 bg-white hover:bg-green-50 px-8 py-4 rounded-lg font-semibold text-lg transform hover:scale-105 transition">Call Now</button>
+                </a>
+              </div>
             </motion.div>
           </div>
 
-          {/* CTA Section */}
-          <motion.div 
-            className="text-center py-12 bg-gradient-to-br from-green-50 to-white rounded-2xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-[impact] text-gray-900 mb-6">
-              Ready to Get Started?
-            </h2>
-            <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto px-6">
-              Whether you need regular lawn maintenance or a complete landscape transformation, 
-              we're here to help. Get your free quote today!
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center px-6">
-              <Link href="/quote">
-                <button className="bg-green-700 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transform hover:scale-105 transition">
-                  Get a Free Quote
-                </button>
-              </Link>
-              <a href="tel:4845351936">
-                <button className="border-2 border-green-700 text-green-700 bg-white hover:bg-green-50 px-8 py-4 rounded-lg font-semibold text-lg transform hover:scale-105 transition">
-                  Call Now
-                </button>
-              </a>
-            </div>
-          </motion.div>
-
           {/* Social Media Section - ADDED GOOGLE */}
-          <motion.div 
-            className="text-center mt-16"
+          <motion.div
+            className="text-center mt-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.6 }}

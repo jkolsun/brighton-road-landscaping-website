@@ -10,24 +10,20 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto">
         
         {/* Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-8">
-          
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 mb-8 text-center md:text-left">
+
           {/* Company Info WITHOUT Social Media */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Brighton Road Landscaping</h3>
-            <p className="text-gray-400 text-sm">
-              Servicing Montgomery County with top of the line lawn care and landscaping services. 
-              Our commercial and residential clients can count on us for the design and installation 
-              of landscapes and hardscapes that are beautiful, functional, and guaranteed to stand 
-              the test of time. Brighton Road Landscaping also promises to provide quality, reliable 
-              maintenance of our clients' lawn and landscapes throughout Plymouth Meeting and the 
-              surrounding areas.
+            <h3 className="text-xl font-bold mb-3">Brighton Road Landscaping</h3>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Top-of-the-line lawn care, landscaping, and hardscaping for commercial and residential
+              clients across Plymouth Meeting and Montgomery County — built to last and reliably maintained.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+            <h4 className="text-lg font-semibold mb-3">Quick Links</h4>
             <ul className="space-y-2 text-sm text-gray-300">
               <li><Link href="/" className="hover:text-white transition">Home</Link></li>
               <li><Link href="/services" className="hover:text-white transition">Services</Link></li>
@@ -48,7 +44,7 @@ export default function Footer() {
               <li>Hours: Sun-Sun: 24/7</li>
             </ul>
             {/* Social Media Icons MOVED HERE */}
-            <div className="flex space-x-4 mt-4">
+            <div className="flex justify-center md:justify-start space-x-4 mt-4">
               <a 
                 href="https://www.facebook.com/BrightonRoadLandscaping" 
                 target="_blank" 
@@ -94,15 +90,28 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Partner Logos */}
-        <div className="text-center py-6">
-          <h3 className="text-sm font-semibold text-gray-400 mb-4">Our Trusted Equipment & Partners</h3>
-          <div className="flex flex-wrap justify-center items-center gap-6">
-            <Image src="/logos/cdi.png" alt="CDI" width={80} height={40} />
-            <Image src="/logos/conshy-small-engine.png" alt="Conshohocken Small Engine" width={80} height={40} />
-            <Image src="/logos/scag.png" alt="Scag" width={80} height={40} />
-            <Image src="/logos/williamson.png" alt="Williamson" width={80} height={40} />
-            <Image src="/logos/echo.png" alt="Echo" width={80} height={40} />
+        {/* Partners */}
+        <div className="text-center py-6 border-t border-gray-800">
+          <h3 className="text-xs font-semibold text-gray-400 mb-3 uppercase tracking-widest">Partners</h3>
+          <a
+            href="https://www.brightautomations.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block transition hover:opacity-90 hover:scale-105"
+            aria-label="Bright Automations"
+          >
+            <Image src="/logos/bright-automations.png" alt="Bright Automations" width={300} height={115} className="h-12 md:h-14 w-auto rounded-lg" />
+          </a>
+        </div>
+
+        {/* Trusted Equipment — small */}
+        <div className="text-center pb-6">
+          <h3 className="text-[11px] font-semibold text-gray-500 mb-3 uppercase tracking-widest">Trusted Equipment</h3>
+          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-5">
+            <Image src="/logos/cdi.png" alt="CDI" width={64} height={32} className="h-5 md:h-6 w-auto object-contain opacity-80" />
+            <Image src="/logos/conshy-small-engine.png" alt="Conshohocken Small Engine" width={64} height={32} className="h-5 md:h-6 w-auto object-contain opacity-80" />
+            <Image src="/logos/scag.png" alt="Scag" width={64} height={32} className="h-5 md:h-6 w-auto object-contain opacity-80" />
+            <Image src="/logos/echo.png" alt="Echo" width={64} height={32} className="h-5 md:h-6 w-auto object-contain opacity-80" />
           </div>
         </div>
 
@@ -113,8 +122,19 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="text-center text-xs text-gray-500 border-t border-gray-700 pt-6">
-          <p>© {new Date().getFullYear()} Brighton Road Landscaping LLC. All Rights Reserved. | Licensed & Insured</p>
+        <div className="text-center text-xs text-gray-500 border-t border-gray-700 pt-6 space-y-1.5">
+          <p>© {new Date().getFullYear()} Brighton Road Landscaping LLC. All Rights Reserved. | Licensed &amp; Insured</p>
+          <p>
+            Website built &amp; managed by{' '}
+            <a
+              href="https://www.brightautomations.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white underline underline-offset-2 transition"
+            >
+              Bright Automations
+            </a>
+          </p>
         </div>
       </div>
     </footer>

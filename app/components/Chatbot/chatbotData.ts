@@ -56,18 +56,18 @@ export const paymentMethods = [
 export const services = [
   {
     id: "lawn-mowing",
-    name: "Lawn Mowing",
-    shortDesc: "Weekly and bi-weekly cutting services",
-    fullDesc: "Professional lawn mowing including edging, trimming, and blowing. No contracts, pay-as-you-go. Commercial and residential properties.",
+    name: "Property Maintenance",
+    shortDesc: "Weekly and bi-weekly mowing and upkeep",
+    fullDesc: "Ongoing property maintenance including mowing, edging, trimming, and blowing. No contracts, pay-as-you-go. Commercial and residential properties.",
     features: [
       "Weekly or bi-weekly mowing schedules",
       "Professional edging along walkways and driveways",
-      "String trimming around obstacles, trees, and fences",
+      "String trimming around obstacles and fences",
       "Blowing debris off all hard surfaces",
       "Bagging or mulching options available",
       "Commercial and residential properties"
     ],
-    keywords: ["mow", "mowing", "cut", "cutting", "grass", "lawn cutting", "yard", "weekly", "biweekly", "overgrown", "tall grass", "long grass"],
+    keywords: ["mow", "mowing", "cut", "cutting", "grass", "lawn cutting", "yard", "weekly", "biweekly", "overgrown", "tall grass", "long grass", "maintenance", "property maintenance", "upkeep"],
     priceRange: "Varies by lawn size - contact for free quote",
     frequency: "Weekly recommended during growing season, bi-weekly available",
     link: "/services/lawn-mowing"
@@ -90,26 +90,6 @@ export const services = [
     priceRange: "Custom quotes based on project scope",
     warranty: "Lifetime warranty on workmanship",
     link: "/services/hardscaping"
-  },
-  {
-    id: "tree-service",
-    name: "Tree Service",
-    shortDesc: "Professional trimming, pruning, and removal",
-    fullDesc: "Complete tree care including trimming, pruning, safe removal, storm damage response, and disease treatment. We handle trees of all sizes safely and efficiently.",
-    features: [
-      "Professional tree trimming and shaping",
-      "Crown reduction and thinning",
-      "Deadwood removal",
-      "Complete tree removal (all sizes)",
-      "Stump grinding available",
-      "Storm damage cleanup and emergency response",
-      "Tree health assessment and disease treatment",
-      "Hazardous tree evaluation"
-    ],
-    keywords: ["tree", "trees", "trimming", "trim", "pruning", "prune", "removal", "remove", "stump", "branch", "branches", "dead", "storm", "fallen", "hazard", "disease", "dying", "limb", "limbs", "overgrown tree", "big tree"],
-    priceRange: "Varies by tree size and service - free estimates",
-    emergency: "Storm damage response available",
-    link: "/services/tree-service"
   },
   {
     id: "landscape-design",
@@ -275,7 +255,7 @@ export const faqs = [
   {
     category: "service-details",
     question: "What's included in lawn mowing?",
-    answer: `Every lawn mowing service includes: mowing at the proper height, professional edging along walkways and driveways, string trimming around obstacles and trees, and blowing all debris off hard surfaces. Your lawn will look professionally maintained!`,
+    answer: `Every lawn mowing service includes: mowing at the proper height, professional edging along walkways and driveways, string trimming around obstacles and fences, and blowing all debris off hard surfaces. Your lawn will look professionally maintained!`,
     keywords: ["included", "include", "comes with", "what do you do", "edging", "trimming", "blowing"]
   },
   {
@@ -358,12 +338,6 @@ export const faqs = [
   },
   {
     category: "specific",
-    question: "Can you remove a tree?",
-    answer: `Yes, we handle tree removal for trees of all sizes. We also offer stump grinding. Safety is our priority - we have the equipment and expertise to remove trees safely. Get a free quote!`,
-    keywords: ["remove tree", "tree removal", "cut down", "take down", "stump", "grind"]
-  },
-  {
-    category: "specific",
     question: "Do you do snow removal?",
     answer: `Our primary focus is landscaping services. For snow removal, we recommend contacting a dedicated snow removal service. However, feel free to reach out and we can discuss options!`,
     keywords: ["snow", "ice", "winter", "plow", "plowing", "shovel", "shoveling", "salt", "salting"]
@@ -401,14 +375,6 @@ export const faqs = [
     keywords: ["hiring", "job", "jobs", "work", "employment", "position", "career", "apply", "application"]
   },
 
-  // Emergency
-  {
-    category: "emergency",
-    question: "Do you handle storm damage?",
-    answer: `Yes! We provide storm damage response for fallen trees and branches. Contact us as soon as possible after a storm and we'll prioritize getting your property safe and cleaned up.`,
-    keywords: ["storm", "emergency", "fallen", "damage", "urgent", "asap", "down", "dangerous"]
-  },
-
   // Common Problem Scenarios (Vague Questions)
   {
     category: "problems",
@@ -419,7 +385,7 @@ export const faqs = [
   {
     category: "problems",
     question: "I need help with my yard",
-    answer: `I'd be happy to help! We offer a full range of services including lawn mowing, lawn care (fertilization, aeration), landscape design, tree service, hardscaping, and seasonal cleanups. What's going on with your yard that you'd like to address?`,
+    answer: `I'd be happy to help! We offer a full range of services including lawn mowing, lawn care (fertilization, aeration), landscape design, hardscaping, and seasonal cleanups. What's going on with your yard that you'd like to address?`,
     keywords: ["help", "yard", "need", "want", "looking"]
   },
   {
@@ -427,12 +393,6 @@ export const faqs = [
     question: "My grass is overgrown",
     answer: `We can definitely help with that! We offer lawn mowing services to get your grass back under control. For very overgrown lawns, we may need to do an initial cut at a higher setting, then follow up. Want me to set up a quote for you?`,
     keywords: ["overgrown", "too long", "tall", "jungle", "out of control", "neglected"]
-  },
-  {
-    category: "problems",
-    question: "Something is wrong with my tree",
-    answer: `We can help assess your tree! Our tree service includes health evaluations, disease treatment, trimming, and removal if necessary. Can you describe what you're seeing? Is it dropping leaves, has dead branches, or looks unhealthy?`,
-    keywords: ["wrong", "sick", "unhealthy", "problem", "issue", "dying tree", "dead tree"]
   },
   {
     category: "problems",
@@ -518,7 +478,7 @@ export const keySellingPoints = [
 // Quick reply options for different scenarios
 export const quickReplies = {
   greeting: ["Get a Free Quote", "View Services", "Service Areas", "Contact Info"],
-  services: ["Lawn Mowing", "Hardscaping", "Tree Service", "Landscape Design", "Lawn Care", "Seasonal Cleanups"],
+  services: ["Property Maintenance", "Hardscaping", "Landscape Design", "Lawn Care", "Seasonal Cleanups"],
   afterQuote: ["View Services", "Service Areas", "FAQs"],
   afterService: ["Get a Quote", "Other Services", "Contact Info"],
   fallback: ["Get a Quote", "Call Us", "View Services", "FAQs"],
@@ -586,7 +546,6 @@ export const commonMisspellings: Record<string, string> = {
   "mowwing": "mowing",
   "moweing": "mowing",
   "landscapeing": "landscaping",
-  "treee": "tree",
   "triming": "trimming",
   "prunning": "pruning",
   "fertlizer": "fertilizer",

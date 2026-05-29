@@ -4,8 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
-import { 
-  HomeIcon,
+import {
   WrenchScrewdriverIcon,
   PencilSquareIcon,
   ScissorsIcon,
@@ -41,10 +40,9 @@ const team = [
 ];
 
 const services = [
-  { name: "Lawn Mowing", icon: ScissorsIcon },
+  { name: "Property Maintenance", icon: ScissorsIcon },
   { name: "Hardscaping", icon: WrenchScrewdriverIcon },
   { name: "Landscape Design", icon: PencilSquareIcon },
-  { name: "Tree Services", icon: HomeIcon },
   { name: "Seasonal Cleanups", icon: SparklesIcon },
   { name: "Fertilization", icon: BeakerIcon }
 ];
@@ -96,11 +94,12 @@ export default function AboutUsSection() {
       className="h-[400px] md:h-full md:min-h-[600px] relative order-1 md:order-2"  // Changed height for mobile
     >
       <Image
-        src="/images/flyer.JPG"
-        alt="Brighton Road Landscaping Team"
+        src="/images/about.jpg"
+        alt="The Brighton Road Landscaping crew"
         fill
-        className="object-contain md:object-cover"  // object-contain on mobile, object-cover on desktop
+        className="object-cover"
         sizes="(max-width: 768px) 100vw, 50vw"
+        priority
       />
     </motion.div>
   </div>
@@ -148,12 +147,11 @@ export default function AboutUsSection() {
       Our Services
     </h2>
     
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-12">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
       {[
-        { name: "Lawn Mowing", icon: ScissorsIcon, slug: "lawn-mowing" },
+        { name: "Property Maintenance", icon: ScissorsIcon, slug: "lawn-mowing" },
         { name: "Hardscaping", icon: WrenchScrewdriverIcon, slug: "hardscaping" },
         { name: "Landscape Design", icon: PencilSquareIcon, slug: "landscape-design" },
-        { name: "Tree Services", icon: HomeIcon, slug: "tree-service" },
         { name: "Seasonal Cleanups", icon: SparklesIcon, slug: "seasonal-cleanups" },
         { name: "Fertilization", icon: BeakerIcon, slug: "lawn-care" }
       ].map((service, index) => (
