@@ -219,7 +219,10 @@ export default function Chatbot() {
       };
       setMessages([welcomeMessage]);
     }
-    if (isOpen) {
+    // Only auto-focus on desktop. On mobile, focusing immediately pops the
+    // keyboard and (with <16px inputs) triggers an iOS zoom that visually
+    // breaks the page — let the user tap the field themselves.
+    if (isOpen && typeof window !== 'undefined' && window.matchMedia('(min-width: 768px)').matches) {
       inputRef.current?.focus();
     }
   }, [isOpen, messages.length]);
@@ -1098,7 +1101,7 @@ export default function Chatbot() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 w-[380px] max-w-[calc(100vw-48px)] h-[550px] max-h-[calc(100vh-120px)] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200">
+        <div className="fixed bottom-24 right-6 z-50 w-[380px] max-w-[calc(100vw-48px)] h-[550px] max-h-[calc(100dvh-120px)] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200">
           {/* Header */}
           <div className="bg-gradient-to-r from-green-700 to-green-600 text-white p-4 flex items-center gap-3">
             <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center overflow-hidden shadow-md">

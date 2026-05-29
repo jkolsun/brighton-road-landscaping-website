@@ -38,5 +38,16 @@ video {
   }
 }
 
+/* Prevent iOS Safari from auto-zooming the whole page when a form field is
+   focused. Any input/textarea/select under 16px triggers the zoom, which
+   visually breaks the layout (most noticeably when opening the chatbot). */
+@media (max-width: 767px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
 
 
