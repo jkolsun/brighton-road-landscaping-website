@@ -92,8 +92,8 @@ export default function ServicesPage() {
             Professional. Reliable. Local.
           </p>
 
-          {/* Services Grid - All Equal Size */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Services Grid — centered flex so the last row (5th & 6th) sits in the middle */}
+          <div className="flex flex-wrap justify-center gap-8">
             {services.map((service, index) => (
               <motion.div
                 key={service.name}
@@ -101,8 +101,9 @@ export default function ServicesPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
+                className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)]"
               >
-                <Link href={`/services/${service.slug}`}>
+                <Link href={`/services/${service.slug}`} className="block">
                   <div className="group relative h-[380px] rounded-xl overflow-hidden shadow-xl hover:shadow-2xl cursor-pointer transition-all">
                     {/* Background Image */}
                     <Image
