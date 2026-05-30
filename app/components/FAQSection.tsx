@@ -6,7 +6,7 @@ const faqs = [
   {
     question: 'What areas do you service?',
     answer:
-      'Brighton Road Landscaping serves all of Montgomery County, Pa, mainly focusing on our hometown, Plymouth Meeting and the surrounding areas of Conshohoken, Blue Bell, King of Prussia, Audubon, Fort Washington, and Lafayette Hill.',
+      'Brighton Road Landscaping serves all of Montgomery County, PA and the Main Line, mainly focusing on our hometown of Plymouth Meeting and the surrounding areas of Conshohocken, Blue Bell, King of Prussia, Audubon, Fort Washington, Lafayette Hill, Wayne, Bryn Mawr, Ardmore, Villanova, Radnor, Gladwyne, Devon, and Berwyn.',
   },
     {
         question: 'Do you offer lawn mowing every other week?',
@@ -23,8 +23,8 @@ const faqs = [
       'At Brighton Road Landscaping, we accept cash, check, Venmo, Zelle, Cash App and Apple Pay. Our clients can also choose to be billed once a month if they prefer.',
   },
   {
-    question: 'Do I need to sign a contract for the lawn care service?',
-    answer: 'No, at Brighton Road Landscaping, we do not require our clients to sign any contracts to use our lawn care service.',
+    question: 'Do I need to sign a contract for ongoing service?',
+    answer: 'No, at Brighton Road Landscaping, we do not require our clients to sign any contracts to use our services.',
   },
   {
     question: 'What lawn mowers/equipment do you use?',

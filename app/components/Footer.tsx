@@ -16,8 +16,13 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-3">Brighton Road Landscaping</h3>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Top-of-the-line lawn care, landscaping, and hardscaping for commercial and residential
-              clients across Plymouth Meeting and Montgomery County — built to last and reliably maintained.
+              Brighton Road Landscaping is a full-service landscaping company serving residential and
+              commercial clients across Montgomery County and the Main Line. From landscape design &amp;
+              installation, hardscaping, and paver patios to property maintenance, drainage and French
+              drains, and spring &amp; fall cleanups, our local crew delivers premium work built to last.
+              We proudly serve Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, Lafayette
+              Hill, Fort Washington, Whitemarsh, Wayne, Bryn Mawr, Ardmore, Villanova, Radnor, Gladwyne,
+              Devon, and Berwyn — bringing reliable, professional landscaping to every property we touch.
             </p>
           </div>
 
@@ -118,7 +123,7 @@ export default function Footer() {
         {/* Service Areas */}
         <div className="text-center text-sm text-gray-400 py-4">
           <p className="font-semibold mb-2">Servicing:</p>
-          <p>Plymouth Meeting • Conshohocken • Blue Bell • King of Prussia • Audubon • Fort Washington • Lafayette Hill • Whitemarsh</p>
+          <p>Plymouth Meeting • Conshohocken • Blue Bell • King of Prussia • Audubon • Fort Washington • Lafayette Hill • Whitemarsh • Wayne • Bryn Mawr • Ardmore • Villanova • Radnor • Gladwyne • Devon • Berwyn • The Main Line</p>
         </div>
 
         {/* Copyright */}

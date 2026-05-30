@@ -16,8 +16,8 @@ const services = {
     },
     sections: [
       {
-        title: 'Professional Lawn Care Excellence',
-        content: 'At Brighton Road Landscaping, our experienced team members work diligently to keep our promise of consistent, reliable, high quality lawn care. Our standard lawn mowing service covers all mowing, trimming, edging and blowing. We handle everything so you can simply relax and enjoy the beauty of your outdoor space.',
+        title: 'Professional Property Maintenance',
+        content: 'At Brighton Road Landscaping, our experienced team members work diligently to keep our promise of consistent, reliable, high quality property maintenance. Our standard service covers all mowing, trimming, edging and blowing. We handle everything so you can simply relax and enjoy the beauty of your outdoor space.',
         video: '/lawn-video.mp4',
         features: ['Weekly Service', 'Bi-weekly Options', 'Edge Trimming', 'Professional Blowing'],
         style: 'normal',
@@ -25,7 +25,7 @@ const services = {
       },
       {
         title: 'No Contracts, Transparent Pricing',
-        content: 'For our residential clients, we offer a pay as you go, non-binding lawn care service. You may cancel or reschedule anytime except for the day of, with no cancellation fee. Whether you are in need of weekly lawn mowing, biweekly lawn mowing, or are just looking to for a one time cut, Brighton Road Landscaping is here for all of your lawn care needs.',
+        content: 'For our residential clients, we offer a pay as you go, non-binding property maintenance service. You may cancel or reschedule anytime except for the day of, with no cancellation fee. Whether you are in need of weekly lawn mowing, biweekly lawn mowing, or are just looking for a one time cut, Brighton Road Landscaping is here for all of your property maintenance needs.',
         image: '/images/stripes.jpg',
         style: 'diagonal-left',
         bgColor: 'gray'
@@ -38,7 +38,7 @@ const services = {
         bgColor: 'white'
       }
     ],
-    serviceArea: 'From our home base in Plymouth Meeting, PA, we proudly provide reliable residential and commercial lawn care services throughout Conshohocken, Blue Bell, King of Prussia, Audubon, Lafayette Hill, and Fort Washington. Our crews live and work in the same communities we serve, so we understand the local weather, grass types, and property needs. Choose Brighton Road Landscaping for a team that knows your neighborhood and treats your property like their own.'
+    serviceArea: 'From our home base in Plymouth Meeting, PA, we proudly provide reliable residential and commercial property maintenance throughout Conshohocken, Blue Bell, King of Prussia, Audubon, Lafayette Hill, Fort Washington, Wayne, Bryn Mawr, Ardmore, Radnor, and the greater Main Line. Our crews live and work in the same communities we serve, so we understand the local weather, grass types, and property needs. Choose Brighton Road Landscaping for a team that knows your neighborhood and treats your property like their own.'
   },
   
   'hardscaping': {
@@ -64,7 +64,7 @@ const services = {
         bgColor: 'gray'
       }
     ],
-    serviceArea: 'Our hardscape installation services are available throughout Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, and the greater Montgomery County area. Whether you’re upgrading your home or enhancing a commercial property, we’ll guide you through design, materials, and build a finished product that adds lasting value to your property.'
+    serviceArea: 'Our hardscape installation services are available throughout Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Wayne, Bryn Mawr, Ardmore, Radnor, the Main Line, and the greater Montgomery County area. Whether you’re upgrading your home or enhancing a commercial property, we’ll guide you through design, materials, and build a finished product that adds lasting value to your property.'
   },
 
   'landscape-design': {
@@ -90,33 +90,34 @@ const services = {
         bgColor: 'gray'
       }
     ],
-    serviceArea: 'We proudly design and install landscapes throughout Montgomery County, including Plymouth Meeting, Blue Bell, Conshohocken, King of Prussia, Audubon, and Fort Washington. As a local, family-owned business, we understand the region’s soil, drainage, and weather conditions, ensuring every project is perfectly tailored to your environment.'
+    serviceArea: 'We proudly design and install landscapes throughout Montgomery County and the Main Line, including Plymouth Meeting, Blue Bell, Conshohocken, King of Prussia, Audubon, Fort Washington, Wayne, Bryn Mawr, Ardmore, and Radnor. As a local, family-owned business, we understand the region’s soil, drainage, and weather conditions, ensuring every project is perfectly tailored to your environment.'
   },
 
-  'lawn-care': {
-    name: 'Lawn Care',
+  'drainage': {
+    name: 'Drainage',
     hero: {
-      title: 'Complete Lawn Care Solutions',
-      image: '/images/lawn-care.jpg'
+      title: 'Drainage Solutions That Protect Your Property',
+      image: '/images/drainage-hero.jpg'
     },
     sections: [
       {
-        title: 'Irrigation and Sprinkler Systems',
-        content: 'The most important part of lawn care is ensuring your grass is getting the proper amount of water regardless of the heat or rain throughout the summer. The installation of a sprinkler system is a great, low effort way to ensure this is the case. Here at Brighton Road Landscaping, we provide the installation and maintenance of sprinkler systems. We offer spring start-up and winter shut-down services, routine inspections, customized irrigation zones, and more all on a sustainable budget.',
-        image: '/images/sprinkle.jpg',
-        features: ['System Installation', 'Spring Start-up', 'Winter Shut-down', 'Zone Customization'],
+        title: 'French Drains & Yard Grading',
+        content: 'Standing water and soggy spots in your yard are more than an eyesore — they damage your lawn, your landscaping, and even your foundation. At Brighton Road Landscaping, we install French drains and regrade problem areas to move water away from your home and keep your property dry. We assess how water flows across your property and engineer a solution built to handle heavy Pennsylvania rain, season after season.',
+        image: '/images/drainage-rivrock.jpg',
+        features: ['French Drain Installation', 'Yard Grading & Regrading', 'Standing Water Solutions', 'Erosion Control'],
         style: 'diagonal-right',
         bgColor: 'white'
       },
       {
-        title: 'Comprehensive Lawn Care',
-        content: 'At Brighton Road Landscaping, our team offers comprehensive lawn care from spring through fall that is sure to give your lawn a lush green look. In the spring and fall, we seed any bare spots in the lawn so the grass is full and thick. We then offer fertilization and treatment throughout the cutting season. In the fall, we aerate and overseed the lawn to help it rejuvenate from the summer heat and prepare for the winter months. We provide customer lawn care plans for our clients, so they can hire us for any/all of these services.',
-        image: '/images/fertilizer.jpg',
+        title: 'Downspouts, Catch Basins & Dry Creek Beds',
+        content: 'A complete drainage system manages water from the roof to the street. We handle downspout and gutter drainage, channel drains, catch basins, and decorative dry creek beds that move runoff while looking great. Whether you have a wet basement, a flooded walkway, or a yard that never seems to dry out, our team designs and installs the right drainage solution to fix it for good.',
+        image: '/images/drainage-grate.jpg',
+        features: ['Downspout & Gutter Drainage', 'Catch Basins', 'Dry Creek Beds', 'Foundation Water Protection'],
         style: 'normal',
         bgColor: 'gray'
       }
     ],
-    serviceArea: 'Brighton Road Landscaping proudly offers lawn care throughout Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, and Fort Washington. Our team understands the region’s seasonal changes and soil conditions, giving you customized care that keeps your property beautiful all year long.'
+    serviceArea: 'Brighton Road Landscaping installs drainage solutions throughout Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, Fort Washington, Wayne, Bryn Mawr, Ardmore, Radnor, and the greater Main Line. Our team understands the region’s soil and grading, so we build drainage that keeps your property dry and protected all year long.'
   },
 
   'seasonal-cleanups': {
@@ -143,7 +144,7 @@ const services = {
         bgColor: 'white'
       }
     ],
-    serviceArea: 'We proudly perform seasonal cleanups in Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, and Fort Washington. With Brighton Road Landscaping, your property will always be well-prepared for every season.'
+    serviceArea: 'We proudly perform seasonal cleanups in Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, Fort Washington, Wayne, Bryn Mawr, Ardmore, Radnor, and across the Main Line. With Brighton Road Landscaping, your property will always be well-prepared for every season.'
   }
 }
 

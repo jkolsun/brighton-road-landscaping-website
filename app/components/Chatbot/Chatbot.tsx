@@ -470,9 +470,9 @@ export default function Chatbot() {
       switch (inferredIntent) {
         case 'lawn-problem':
           return {
-            content: `I hear you - lawn issues can be frustrating! Based on what you're describing, it could be a few things:\n\n• **Brown/dead patches** → May need fertilization, aeration, or overseeding\n• **Thin/patchy grass** → Overseeding and proper lawn care program\n• **Weeds taking over** → Weed control treatments\n• **General decline** → Soil testing and customized treatment plan\n\nWould you like a free consultation? We can assess your lawn and recommend the right solution!`,
-            quickReplies: ['Get a Free Consultation', 'Lawn Care Services', 'Contact Us'],
-            links: [{ text: 'View Lawn Care', url: '/services/lawn-care' }],
+            content: `I hear you - standing water and drainage issues can be frustrating! Based on what you're describing, it could be a few things:\n\n• **Water pooling on the lawn** → French drains or yard regrading to move water away\n• **Soggy, always-wet areas** → Catch basins and dry creek beds\n• **Runoff & erosion** → Grading and downspout drainage\n• **Water near the foundation** → Foundation and basement water protection\n\nWould you like a free consultation? We can assess your yard and recommend the right drainage solution!`,
+            quickReplies: ['Get a Free Consultation', 'Drainage Services', 'Contact Us'],
+            links: [{ text: 'View Drainage', url: '/services/drainage' }],
             newContext: { lastTopic: 'lawn-problem' }
           };
         case 'overgrown':
@@ -496,7 +496,7 @@ export default function Chatbot() {
           };
         case 'referral':
           return {
-            content: `That's great to hear - we love referrals from happy customers! Thank you for giving us a try.\n\nI'd be happy to help you with any of our services:\n• Lawn mowing\n• Lawn care (fertilization, aeration)\n• Landscape design\n• Hardscaping\n• Seasonal cleanups\n\nWhat are you looking for, or would you like a free quote?`,
+            content: `That's great to hear - we love referrals from happy customers! Thank you for giving us a try.\n\nI'd be happy to help you with any of our services:\n• Lawn mowing\n• Drainage (French drains, grading)\n• Landscape design\n• Hardscaping\n• Seasonal cleanups\n\nWhat are you looking for, or would you like a free quote?`,
             quickReplies: ['Get a Quote', 'View Services', 'Contact Us'],
             newContext: { lastTopic: 'referral' }
           };

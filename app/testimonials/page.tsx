@@ -39,7 +39,13 @@ export default function TestimonialsPage() {
           <p className="text-lg md:text-2xl text-white/90">
             Don&apos;t just take our word for it — here&apos;s what our clients say about Brighton Road Landscaping.
           </p>
-          <div className="mt-8 inline-flex items-center gap-3 bg-white rounded-full px-5 py-3 shadow-lg">
+          <a
+            href="https://share.google/5v5xiQz6FsFcyhFgh"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 inline-flex items-center gap-3 bg-white rounded-full px-5 py-3 shadow-lg hover:shadow-xl hover:scale-105 transition"
+            aria-label="Read our reviews on Google"
+          >
             <GoogleG className="w-7 h-7" />
             <span className="flex gap-0.5">
               {[...Array(5)].map((_, i) => (
@@ -47,7 +53,8 @@ export default function TestimonialsPage() {
               ))}
             </span>
             <span className="font-bold text-gray-900">5.0 on Google</span>
-          </div>
+            <span className="text-green-700 font-semibold text-sm">→</span>
+          </a>
         </motion.div>
       </section>
 

@@ -48,7 +48,7 @@ const IMAGES: string[] = [
   '/images/homepage2.JPG',
   '/images/homepage4.jpg',
   '/images/fallcleanup.JPG',
-  '/images/fertilizer.jpg',
+  '/images/drainage-rivrock.jpg',
   '/images/sprinkle.jpg',
 ];
 

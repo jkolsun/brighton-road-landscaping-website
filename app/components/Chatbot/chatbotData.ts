@@ -40,6 +40,15 @@ export const serviceAreas = [
   "Oreland",
   "Wyndmoor",
   "Chestnut Hill",
+  "Wayne",
+  "Bryn Mawr",
+  "Ardmore",
+  "Villanova",
+  "Radnor",
+  "Gladwyne",
+  "Devon",
+  "Berwyn",
+  "Wynnewood",
   "Greater Montgomery County, PA"
 ];
 
@@ -112,26 +121,21 @@ export const services = [
     link: "/services/landscape-design"
   },
   {
-    id: "lawn-care",
-    name: "Lawn Care",
-    shortDesc: "Irrigation, fertilization, and seasonal treatments",
-    fullDesc: "Comprehensive lawn care programs including irrigation system installation and maintenance, fertilization, aeration, overseeding, and seasonal treatments to keep your lawn healthy and green.",
+    id: "drainage",
+    name: "Drainage",
+    shortDesc: "French drains, grading & yard water solutions",
+    fullDesc: "Drainage solutions that fix standing water and runoff — French drains, channel drains, downspout drainage, dry creek beds, catch basins, and yard regrading to protect your property and foundation.",
     features: [
-      "Irrigation system installation",
-      "Sprinkler repair and maintenance",
-      "Spring start-up services",
-      "Winter shut-down and winterization",
-      "Custom fertilization programs",
-      "Core aeration for root health",
-      "Overseeding for thick, lush lawns",
-      "Weed control treatments",
-      "Grub and pest control",
-      "Soil testing and amendments"
+      "French drain installation",
+      "Yard grading & regrading",
+      "Downspout & gutter drainage",
+      "Dry creek beds & catch basins",
+      "Standing water & runoff solutions",
+      "Foundation & basement water protection"
     ],
-    keywords: ["lawn care", "lawncare", "fertilizer", "fertilization", "fertilize", "aeration", "aerate", "overseed", "overseeding", "irrigation", "sprinkler", "sprinklers", "water", "watering", "weed", "weeds", "grub", "pest", "green", "healthy", "thick", "brown spots", "dead spots", "patchy", "thin grass"],
-    priceRange: "Seasonal programs and one-time services available",
-    seasons: "Spring through Fall treatments",
-    link: "/services/lawn-care"
+    keywords: ["drainage", "drain", "french drain", "standing water", "puddle", "puddles", "flooding", "flood", "runoff", "grading", "regrade", "wet yard", "soggy", "water pooling", "downspout", "gutter", "erosion", "catch basin", "dry creek", "sump"],
+    priceRange: "Varies by project - contact for free quote",
+    link: "/services/drainage"
   },
   {
     id: "seasonal-cleanups",
@@ -161,13 +165,13 @@ export const faqs = [
   {
     category: "service-area",
     question: "What areas do you service?",
-    answer: `We proudly serve Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, Lafayette Hill, Fort Washington, Whitemarsh, and the greater Montgomery County, PA area. If you're unsure if we service your area, just ask!`,
+    answer: `We proudly serve Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, Lafayette Hill, Fort Washington, Whitemarsh, Wayne, Bryn Mawr, Ardmore, Radnor, the Main Line, and the greater Montgomery County, PA area. If you're unsure if we service your area, just ask!`,
     keywords: ["area", "areas", "service", "location", "where", "come to", "cover", "serve"]
   },
   {
     category: "service-area",
     question: "Do you service my neighborhood?",
-    answer: `We service most of Montgomery County, PA including Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, and surrounding areas. Tell me your location and I'll confirm!`,
+    answer: `We service most of Montgomery County, PA including Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Wayne, Bryn Mawr, Ardmore, Radnor, the Main Line, and surrounding areas. Tell me your location and I'll confirm!`,
     keywords: ["neighborhood", "town", "city", "zip", "zipcode"]
   },
 
@@ -344,27 +348,9 @@ export const faqs = [
   },
   {
     category: "specific",
-    question: "Can you aerate my lawn?",
-    answer: `Yes! Core aeration is one of our lawn care services. It's best done in fall and helps improve root growth, water absorption, and overall lawn health. We recommend combining it with overseeding for best results.`,
-    keywords: ["aerate", "aeration", "core", "aerating", "plugs"]
-  },
-  {
-    category: "specific",
-    question: "Do you offer fertilization?",
-    answer: `Yes! We offer custom fertilization programs tailored to your lawn's needs. This includes seasonal applications from spring through fall to keep your lawn green and healthy.`,
-    keywords: ["fertilize", "fertilization", "fertilizer", "feed", "feeding", "nutrients", "green up"]
-  },
-  {
-    category: "specific",
     question: "Can you edge my lawn?",
     answer: `Yes! Edging is included with all our lawn mowing services. We edge along walkways, driveways, and bed lines to give your lawn that crisp, professional look.`,
     keywords: ["edge", "edging", "edges", "border", "clean lines"]
-  },
-  {
-    category: "specific",
-    question: "Do you handle weeds?",
-    answer: `Yes! We offer weed control as part of our lawn care services. This includes pre-emergent treatments in spring and targeted weed control throughout the season to keep your lawn weed-free.`,
-    keywords: ["weed", "weeds", "dandelion", "crabgrass", "clover"]
   },
 
   // Employment
@@ -378,14 +364,8 @@ export const faqs = [
   // Common Problem Scenarios (Vague Questions)
   {
     category: "problems",
-    question: "My lawn looks bad",
-    answer: `I'm sorry to hear that! There are several things that could help: regular mowing, fertilization, aeration, or overseeding depending on the issue. Would you like to describe what's wrong, or should I get you a free consultation to assess what your lawn needs?`,
-    keywords: ["looks bad", "ugly", "terrible", "awful", "dying", "dead", "brown", "yellow", "patchy", "thin", "bare", "sparse"]
-  },
-  {
-    category: "problems",
     question: "I need help with my yard",
-    answer: `I'd be happy to help! We offer a full range of services including lawn mowing, lawn care (fertilization, aeration), landscape design, hardscaping, and seasonal cleanups. What's going on with your yard that you'd like to address?`,
+    answer: `I'd be happy to help! We offer a full range of services including property maintenance, drainage, landscape design, hardscaping, and seasonal cleanups. What's going on with your yard that you'd like to address?`,
     keywords: ["help", "yard", "need", "want", "looking"]
   },
   {
@@ -415,7 +395,7 @@ export const faqs = [
   {
     category: "problems",
     question: "My old landscaper stopped showing up",
-    answer: `That's frustrating! We pride ourselves on reliability - we show up when we say we will and communicate if anything changes. We'd be happy to take over your lawn care. Would you like a quote?`,
+    answer: `That's frustrating! We pride ourselves on reliability - we show up when we say we will and communicate if anything changes. We'd be happy to take over your property maintenance. Would you like a quote?`,
     keywords: ["old landscaper", "previous", "stopped", "unreliable", "didn't show", "ghosted", "new landscaper", "switch"]
   },
   {
@@ -478,7 +458,7 @@ export const keySellingPoints = [
 // Quick reply options for different scenarios
 export const quickReplies = {
   greeting: ["Get a Free Quote", "View Services", "Service Areas", "Contact Info"],
-  services: ["Property Maintenance", "Hardscaping", "Landscape Design", "Lawn Care", "Seasonal Cleanups"],
+  services: ["Property Maintenance", "Hardscaping", "Landscape Design", "Drainage", "Seasonal Cleanups"],
   afterQuote: ["View Services", "Service Areas", "FAQs"],
   afterService: ["Get a Quote", "Other Services", "Contact Info"],
   fallback: ["Get a Quote", "Call Us", "View Services", "FAQs"],
@@ -548,8 +528,6 @@ export const commonMisspellings: Record<string, string> = {
   "landscapeing": "landscaping",
   "triming": "trimming",
   "prunning": "pruning",
-  "fertlizer": "fertilizer",
-  "fertlize": "fertilize",
   "areation": "aeration",
   "sprinker": "sprinkler",
   "sprinkelers": "sprinklers",

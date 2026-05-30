@@ -7,12 +7,13 @@ import WhyChoose from '@/components/WhyChoose';
 import FAQSection from '@/components/FAQSection';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
-import { CheckCircleIcon, CurrencyDollarIcon, UserGroupIcon, DocumentTextIcon, BoltIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
+import { CheckCircleIcon, UserGroupIcon, BoltIcon, ChevronLeftIcon, ChevronRightIcon, MapPinIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/solid';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { REVIEWS } from '@/data/reviews';
 
 const FB_URL = 'https://www.facebook.com/BrightonRoadLandscaping';
 const IG_URL = 'https://www.instagram.com/brightonroadlandscaping/';
+const GOOGLE_REVIEWS_URL = 'https://share.google/5v5xiQz6FsFcyhFgh';
 
 // Hero carousel — one full-screen slide per service, each photo matched to the service.
 const SLIDES = [
@@ -208,9 +209,9 @@ export default function Home() {
           Complete Landscaping Services
         </h2>
         <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8">
-          Brighton Road Landscaping offers both residential and commercial landscaping services. 
-          Located in Plymouth Meeting PA, we service the surrounding areas of King of Prussia, 
-          Blue Bell, and Conshohocken, providing comprehensive lawn and landscape services. From the installation of landscapes, hardscapes, and irrigation systems, 
+          Brighton Road Landscaping offers both residential and commercial landscaping services.
+          Located in Plymouth Meeting PA, we service the surrounding areas of King of Prussia,
+          Blue Bell, Conshohocken, Wayne, Bryn Mawr, Ardmore, and the Main Line, providing comprehensive lawn and landscape services. From the installation of landscapes, hardscapes, and drainage systems,
           as well as the maintenance and enhancements of lawns and landscapes,
           Brighton Road Landscaping is here to serve you.
         </p>
@@ -349,25 +350,27 @@ export default function Home() {
           </motion.h3>
           <div className="flex flex-wrap justify-center gap-4 md:gap-6">
             {[
-              { title: 'Landscape Design and Build', desc: 'Custom landscapes designed and built for your property' },
-              { title: 'Hardscaping', desc: 'Patios, walkways, retaining walls & stonework' },
-              { title: 'Maintenance', desc: 'Ongoing landscape upkeep and property enhancements' },
-              { title: 'Drainage', desc: 'French drains & grading that fix water and runoff issues' },
-              { title: 'Seasonal Cleanups', desc: 'Spring and fall cleanup services' },
+              { title: 'Landscape Design and Build', desc: 'Custom landscapes designed and built for your property', href: '/services/landscape-design' },
+              { title: 'Hardscaping', desc: 'Patios, walkways, retaining walls & stonework', href: '/services/hardscaping' },
+              { title: 'Property Maintenance', desc: 'Ongoing mowing, upkeep, and property enhancements', href: '/services/lawn-mowing' },
+              { title: 'Drainage', desc: 'French drains & grading that fix water and runoff issues', href: '/services/drainage' },
+              { title: 'Seasonal Cleanups', desc: 'Spring and fall cleanup services', href: '/services/seasonal-cleanups' },
             ].map((s) => (
               <motion.div
                 key={s.title}
-                className="w-[calc(50%-0.5rem)] md:w-[calc(33.333%-1rem)] bg-white rounded-2xl shadow-md p-4 md:p-8 text-center hover:shadow-xl transition transform hover:-translate-y-1"
+                className="w-[calc(50%-0.5rem)] md:w-[calc(33.333%-1rem)]"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
               >
-                <div className="bg-green-100 rounded-full p-2.5 md:p-3 inline-flex mb-3 md:mb-4">
-                  <CheckCircleIcon className="w-6 h-6 md:w-8 md:h-8 text-green-700" />
-                </div>
-                <h4 className="font-semibold text-gray-900 text-sm md:text-xl mb-1 md:mb-2 leading-tight">{s.title}</h4>
-                <p className="text-gray-600 text-xs md:text-base leading-snug">{s.desc}</p>
+                <Link href={s.href} className="group block h-full bg-white rounded-2xl shadow-md p-4 md:p-8 text-center hover:shadow-xl transition transform hover:-translate-y-1">
+                  <div className="bg-green-100 group-hover:bg-green-200 rounded-full p-2.5 md:p-3 inline-flex mb-3 md:mb-4 transition">
+                    <CheckCircleIcon className="w-6 h-6 md:w-8 md:h-8 text-green-700" />
+                  </div>
+                  <h4 className="font-semibold text-gray-900 text-sm md:text-xl mb-1 md:mb-2 leading-tight group-hover:text-green-700 transition">{s.title}</h4>
+                  <p className="text-gray-600 text-xs md:text-base leading-snug">{s.desc}</p>
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -391,12 +394,12 @@ export default function Home() {
           className="max-w-3xl mx-auto"
         >
           <div className="flex flex-col items-center mb-8 md:mb-10">
-            <div className="flex items-center gap-2 mb-3">
+            <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 mb-3 hover:opacity-80 transition" aria-label="Read our reviews on Google">
               <GoogleG className="w-7 h-7" />
               <span className="text-gray-700 font-semibold text-lg">Google Reviews</span>
               <span className="text-gray-300">·</span>
               <span className="text-yellow-400 text-lg tracking-tight">★★★★★</span>
-            </div>
+            </a>
             <h2 className="text-3xl md:text-4xl font-[impact] text-center text-gray-900">
               What Our Clients Say
             </h2>
@@ -429,7 +432,11 @@ export default function Home() {
             </button>
           </div>
 
-          <div className="text-center mt-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mt-8">
+            <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-white border border-gray-200 shadow-sm hover:shadow-md hover:border-green-300 text-gray-800 font-semibold px-5 py-2.5 rounded-full transition">
+              <GoogleG className="w-5 h-5" />
+              See all reviews on Google
+            </a>
             <Link href="/testimonials" className="text-green-700 font-semibold hover:text-green-600 transition underline-offset-4 hover:underline">
               Read all reviews →
             </Link>
@@ -479,11 +486,11 @@ export default function Home() {
                 
                 <div className="flex items-start group">
                   <div className="bg-green-600 text-white rounded-full p-3 mr-4 group-hover:bg-green-700 transition flex items-center justify-center min-w-[48px] h-12">
-                    <CurrencyDollarIcon className="w-6 h-6" />
+                    <MapPinIcon className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900 text-xl mb-1">Affordable Lawn Care</h4>
-                    <p className="text-gray-600">Competitive pricing with transparent quotes</p>
+                    <h4 className="font-bold text-gray-900 text-xl mb-1">Locally Owned &amp; Operated</h4>
+                    <p className="text-gray-600">Your neighbors, proudly serving the Main Line &amp; Montgomery County</p>
                   </div>
                 </div>
                 
@@ -499,11 +506,11 @@ export default function Home() {
                 
                 <div className="flex items-start group">
                   <div className="bg-green-600 text-white rounded-full p-3 mr-4 group-hover:bg-green-700 transition flex items-center justify-center min-w-[48px] h-12">
-                    <DocumentTextIcon className="w-6 h-6" />
+                    <ChatBubbleLeftRightIcon className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900 text-xl mb-1">No Contracts, No Cancellation Fees</h4>
-                    <p className="text-gray-600">Flexible service on your terms</p>
+                    <h4 className="font-bold text-gray-900 text-xl mb-1">Fast, Reliable Communication</h4>
+                    <p className="text-gray-600">Prompt updates, quick quotes, and we show up when we say we will</p>
                   </div>
                 </div>
                 
@@ -527,11 +534,11 @@ export default function Home() {
       <section className="bg-white md:min-h-[500px]">
         <div className="grid md:grid-cols-2 h-full">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="relative h-[200px] md:h-auto md:min-h-[500px] bg-white flex items-center justify-center p-6 md:p-10"
+            className="relative h-[200px] md:h-auto md:min-h-[500px] bg-white flex items-center justify-center p-6 md:p-10 md:order-2"
           >
             <Image
               src="/logos/williamson.png"
@@ -541,13 +548,13 @@ export default function Home() {
               className="object-contain w-auto h-auto max-w-[60%] max-h-[140px] md:max-w-[400px] md:max-h-[300px]"
             />
           </motion.div>
-          
+
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="flex items-center p-6 py-10 md:p-12 lg:p-20"
+            className="flex items-center p-6 py-10 md:p-12 lg:p-20 md:order-1"
           >
             <div>
               <h3 className="text-3xl md:text-4xl font-[impact] text-gray-900 mb-6">
@@ -571,13 +578,13 @@ export default function Home() {
       {/* Bright Automations Partnership — mirrored: text left, full-teal logo panel right on desktop */}
       <section className="bg-white md:min-h-[500px]">
         <div className="grid md:grid-cols-2 h-full">
-          {/* Teal logo panel — fills the whole slot edge-to-edge, fully clickable. First on mobile, right on desktop */}
+          {/* Teal logo panel — fills the whole slot edge-to-edge, fully clickable. First on mobile, left on desktop */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="relative h-[240px] md:h-auto md:min-h-[500px] bg-[#41808f] md:order-2 overflow-hidden"
+            className="relative h-[240px] md:h-auto md:min-h-[500px] bg-[#41808f] md:order-1 overflow-hidden"
           >
             <a
               href="https://www.brightautomations.org/"
@@ -596,22 +603,23 @@ export default function Home() {
             </a>
           </motion.div>
 
-          {/* Text — second on mobile, left column on desktop */}
+          {/* Text — second on mobile, right column on desktop */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="flex items-center p-6 py-10 md:p-12 lg:p-20 md:order-1"
+            className="flex items-center p-6 py-10 md:p-12 lg:p-20 md:order-2"
           >
             <div>
               <h3 className="text-3xl md:text-4xl font-[impact] text-gray-900 mb-6">
                 Proudly Partnered with Bright Automations
               </h3>
               <p className="text-gray-700 mb-8 leading-relaxed text-lg">
-                Our website, branding, and lead system are built and managed by Bright Automations —
-                a partner that crafts premium websites and automation for local service businesses.
-                Their work keeps our online presence sharp so we can focus on what we do best: your property.
+                Bright Automations is the software and automation partner behind Brighton Road Landscaping.
+                They build and maintain the technology that powers this website and the systems running
+                behind the scenes — so our team can stay focused on what we do best: your property.
+                Bright Automations builds custom software and automation for local service businesses.
               </p>
               <a href="https://www.brightautomations.org/" target="_blank" rel="noopener noreferrer">
                 <button className="bg-green-700 hover:bg-green-600 text-white px-8 py-3 rounded-lg transition transform hover:scale-105 font-semibold shadow-lg">

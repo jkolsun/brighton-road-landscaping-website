@@ -9,7 +9,7 @@ import {
   SparklesIcon,
   HomeIcon,
   ScissorsIcon,
-  BeakerIcon,
+  CloudIcon,
   WrenchScrewdriverIcon
 } from '@heroicons/react/24/solid';
 
@@ -38,11 +38,11 @@ const services = [
     icon: ScissorsIcon,
   },
   {
-    name: 'Lawn Care',
-    slug: 'lawn-care',
-    description: 'Complete lawn treatment programs for a healthy, green lawn',
-    image: '/images/fertilizer.jpg',
-    icon: BeakerIcon,
+    name: 'Drainage',
+    slug: 'drainage',
+    description: 'French drains, grading, and solutions that fix standing water and runoff',
+    image: '/images/drainage-hero.jpg',
+    icon: CloudIcon,
   },
   {
     name: 'Seasonal Cleanups',

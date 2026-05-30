@@ -14,7 +14,7 @@ import { motion } from 'framer-motion';
 const features = [
   {
     icon: <CurrencyDollarIcon className="w-10 h-10 text-white" />,
-    title: 'Affordable Lawn Care',
+    title: 'Locally Owned & Operated',
   },
   {
     icon: <PhoneIcon className="w-10 h-10 text-white" />,
@@ -30,7 +30,7 @@ const features = [
   },
   {
     icon: <WrenchScrewdriverIcon className="w-10 h-10 text-white" />,
-    title: 'Custom Lawn Plans',
+    title: 'Drainage Solutions',
   },
   {
     icon: <ClipboardDocumentCheckIcon className="w-10 h-10 text-white" />,
@@ -62,7 +62,7 @@ export default function WhyChoose() {
           Why Choose Brighton Road Landscaping?
         </h2>
         <p className="text-xl font-inter mb-12">
-          Top-quality lawn care with transparent pricing, excellent communication, and a team that gets the job done right.
+          Top-quality landscaping with transparent pricing, excellent communication, and a team that gets the job done right.
         </p>
   
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 text-left">

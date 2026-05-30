@@ -9,7 +9,7 @@ import {
   PencilSquareIcon,
   ScissorsIcon,
   SparklesIcon,
-  BeakerIcon
+  CloudIcon
 } from '@heroicons/react/24/solid';
 
 const team = [
@@ -44,7 +44,7 @@ const services = [
   { name: "Hardscaping", icon: WrenchScrewdriverIcon },
   { name: "Landscape Design", icon: PencilSquareIcon },
   { name: "Seasonal Cleanups", icon: SparklesIcon },
-  { name: "Fertilization", icon: BeakerIcon }
+  { name: "Drainage", icon: CloudIcon }
 ];
 
 export default function AboutUsSection() {
@@ -64,9 +64,9 @@ export default function AboutUsSection() {
         About Brighton Road Landscaping
       </h1>
       <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8">
-        Brighton Road Landscaping is a family owned and operated business. Serving the areas of 
-        Plymouth Meeting, Conshohocken, Blue Bell and King of Prussia, PA, our mission is to provide 
-        our clients with reliable, high quality lawn care and landscaping services. We aim to create a 
+        Brighton Road Landscaping is a family owned and operated business. Serving Plymouth Meeting,
+        Conshohocken, Blue Bell, King of Prussia, Wayne, Bryn Mawr, Ardmore, and the Main Line, our mission is to provide
+        our clients with reliable, high quality landscaping and property maintenance services. We aim to create a
         culture that is rooted in respect for our clients and each other, and working hard to ensure the job 
         is done right. We accomplish this by practicing what we preach as owners and hiring employees 
         who share our values so that we can continue to build our reputation throughout Montgomery 
@@ -153,7 +153,7 @@ export default function AboutUsSection() {
         { name: "Hardscaping", icon: WrenchScrewdriverIcon, slug: "hardscaping" },
         { name: "Landscape Design", icon: PencilSquareIcon, slug: "landscape-design" },
         { name: "Seasonal Cleanups", icon: SparklesIcon, slug: "seasonal-cleanups" },
-        { name: "Fertilization", icon: BeakerIcon, slug: "lawn-care" }
+        { name: "Drainage", icon: CloudIcon, slug: "drainage" }
       ].map((service, index) => (
         <Link href={`/services/${service.slug}`} key={index}>
           <motion.div
