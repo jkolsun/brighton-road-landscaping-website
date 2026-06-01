@@ -68,24 +68,24 @@ const services = {
   },
 
   'landscape-design': {
-    name: 'Landscape Design and Installation',
+    name: 'Landscape Design & Build',
     hero: {
-      title: 'Professional Landscape Design',
-      image: '/images/install.JPG'
+      title: 'From Blueprint to Backyard — Designed and Built In-House',
+      image: '/images/projects/landscape-design-build-hero.jpg'
     },
     sections: [
       {
-        title: 'Custom Landscape Architecture',
-        content: 'At Brighton Road Landscaping, our team works with you to design a landscape that fits your preferences and budget. Our trained landscape architects use different landscaping softwares to create a clear outline of how your property will look, including dimensions, lighting, and the different shrubs, flowers, and greenery you want to include in your landscape beds. Then, our team handles full installation of the landscaping bed, including excavating, planting, and laying of mulch or landscape rocks.',
+        title: 'It Starts With a Plan',
+        content: 'Every great landscape starts with a plan. At Brighton Road Landscaping, we sit down with you to understand how you actually want to live in your yard — then translate it into a clear, to-scale design using professional landscaping software. You will see exactly where every bed, walkway, tree, shrub, and light belongs before a single shovel hits the ground. We account for sun, slope, drainage, and how your plantings will mature, so the design looks just as good in five years as it does on day one.',
         video: '/Landscape.MP4',
-        features: ['3D Design Software', 'Custom Plant Selection', 'Professional Installation', 'Seasonal Planning'],
+        features: ['3D Design Software', 'Custom Plant Selection', 'Sun & Drainage Planning', 'Built to Mature Beautifully'],
         style: 'normal',
         bgColor: 'white'
       },
       {
-        title: 'Complete Installation Services',
-        content: 'We proudly design and install landscapes throughout Montgomery County. As a local, family-owned business, we understand the region\'s soil, drainage, and weather conditions, ensuring every project is perfectly tailored to your environment.',
-        image: '/images/Installation.JPG',
+        title: 'Designed and Built by One Crew',
+        content: 'Because we design and install in-house, nothing gets lost in translation. The same team that drew your plan is the one excavating beds, amending soil, setting plants, and laying crisp, clean mulch or stone. As a local, family-owned business, we know Montgomery County\'s soil, drainage, and weather firsthand — so every bed is built to thrive right here. The result is a finished landscape with clean lines and healthy plantings that lifts the curb appeal of your entire property.',
+        image: '/images/projects/IMG_8149.JPG',
         style: 'diagonal-left',
         bgColor: 'gray'
       }
@@ -94,9 +94,9 @@ const services = {
   },
 
   'drainage': {
-    name: 'Drainage',
+    name: 'Drainage & Irrigation',
     hero: {
-      title: 'Drainage Solutions That Protect Your Property',
+      title: 'Drainage and Irrigation Solutions for a Healthier Property',
       image: '/images/drainage-hero.jpg'
     },
     sections: [
@@ -115,9 +115,17 @@ const services = {
         features: ['Downspout & Gutter Drainage', 'Catch Basins', 'Dry Creek Beds', 'Foundation Water Protection'],
         style: 'normal',
         bgColor: 'gray'
+      },
+      {
+        title: 'Irrigation & Sprinkler Systems',
+        content: 'Once water is moving away from your home, the next step is getting it exactly where your lawn and plantings actually need it. We design and install automatic irrigation and sprinkler systems that deliver the right amount of water to every zone — turf, beds, and borders — on a schedule that fits the season. Smart, properly-zoned irrigation means a greener lawn, healthier plants, and no more dragging hoses around or guessing. We also handle spring start-ups, summer adjustments, and fall winterizations so your system runs trouble-free year after year.',
+        image: '/images/irrigation-sprinkler.jpg',
+        features: ['Automatic Sprinkler Systems', 'Zoned Watering', 'Smart Controllers', 'Spring Start-Up & Winterization'],
+        style: 'diagonal-right',
+        bgColor: 'white'
       }
     ],
-    serviceArea: 'Brighton Road Landscaping installs drainage solutions throughout Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, Fort Washington, Wayne, Bryn Mawr, Ardmore, Radnor, and the greater Main Line. Our team understands the region’s soil and grading, so we build drainage that keeps your property dry and protected all year long.'
+    serviceArea: 'Brighton Road Landscaping installs drainage and irrigation systems throughout Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, Fort Washington, Wayne, Bryn Mawr, Ardmore, Radnor, and the greater Main Line. Our team understands the region’s soil and grading, so we build drainage and irrigation that keeps your property dry, green, and protected all year long.'
   },
 
   'seasonal-cleanups': {

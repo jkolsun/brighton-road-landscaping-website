@@ -350,10 +350,10 @@ export default function Home() {
           </motion.h3>
           <div className="flex flex-wrap justify-center gap-4 md:gap-6">
             {[
-              { title: 'Landscape Design and Build', desc: 'Custom landscapes designed and built for your property', href: '/services/landscape-design' },
+              { title: 'Landscape Design & Build', desc: 'Custom landscapes designed and built for your property', href: '/services/landscape-design' },
               { title: 'Hardscaping', desc: 'Patios, walkways, retaining walls & stonework', href: '/services/hardscaping' },
               { title: 'Seasonal Cleanups', desc: 'Spring and fall cleanup services', href: '/services/seasonal-cleanups' },
-              { title: 'Drainage', desc: 'French drains & grading that fix water and runoff issues', href: '/services/drainage' },
+              { title: 'Drainage & Irrigation', desc: 'French drains, grading & sprinkler systems that keep your yard dry and green', href: '/services/drainage' },
               { title: 'Property Maintenance', desc: 'Ongoing mowing, upkeep, and property enhancements', href: '/services/lawn-mowing' },
             ].map((s) => (
               <motion.div

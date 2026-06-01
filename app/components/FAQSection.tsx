@@ -7,7 +7,7 @@ const SERVICES = [
   { name: 'Landscape Design & Build', href: '/services/landscape-design' },
   { name: 'Hardscaping', href: '/services/hardscaping' },
   { name: 'Seasonal Cleanups', href: '/services/seasonal-cleanups' },
-  { name: 'Drainage', href: '/services/drainage' },
+  { name: 'Drainage & Irrigation', href: '/services/drainage' },
   { name: 'Property Maintenance', href: '/services/lawn-mowing' },
 ];
 

@@ -42,9 +42,9 @@ const team = [
 const services = [
   { name: "Property Maintenance", icon: ScissorsIcon },
   { name: "Hardscaping", icon: WrenchScrewdriverIcon },
-  { name: "Landscape Design", icon: PencilSquareIcon },
+  { name: "Landscape Design & Build", icon: PencilSquareIcon },
   { name: "Seasonal Cleanups", icon: SparklesIcon },
-  { name: "Drainage", icon: CloudIcon }
+  { name: "Drainage & Irrigation", icon: CloudIcon }
 ];
 
 export default function AboutUsSection() {
@@ -151,9 +151,9 @@ export default function AboutUsSection() {
       {[
         { name: "Property Maintenance", icon: ScissorsIcon, slug: "lawn-mowing" },
         { name: "Hardscaping", icon: WrenchScrewdriverIcon, slug: "hardscaping" },
-        { name: "Landscape Design", icon: PencilSquareIcon, slug: "landscape-design" },
+        { name: "Landscape Design & Build", icon: PencilSquareIcon, slug: "landscape-design" },
         { name: "Seasonal Cleanups", icon: SparklesIcon, slug: "seasonal-cleanups" },
-        { name: "Drainage", icon: CloudIcon, slug: "drainage" }
+        { name: "Drainage & Irrigation", icon: CloudIcon, slug: "drainage" }
       ].map((service, index) => (
         <Link href={`/services/${service.slug}`} key={index}>
           <motion.div

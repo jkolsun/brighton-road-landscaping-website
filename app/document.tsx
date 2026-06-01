@@ -9,8 +9,8 @@ export default function Document() {
         <link rel="shortcut icon" href="/favicon.ico" />
 
         {/* Meta tags */}
-        <meta name="description" content="Brighton Road Landscaping - Landscape Design, Hardscaping, Property Maintenance & Drainage across the Main Line and Montgomery County, PA." />
-        <meta name="keywords" content="Brighton Road Landscaping, Landscaping, Hardscaping, Drainage, Property Maintenance, Main Line, Montgomery County PA, Wayne, Blue Bell" />
+        <meta name="description" content="Brighton Road Landscaping - Landscape Design & Build, Hardscaping, Property Maintenance, Drainage & Irrigation across the Main Line and Montgomery County, PA." />
+        <meta name="keywords" content="Brighton Road Landscaping, Landscaping, Hardscaping, Drainage, Irrigation, Sprinkler Systems, Property Maintenance, Main Line, Montgomery County PA, Wayne, Blue Bell" />
         <meta name="author" content="Brighton Road Landscaping" />
 
         {/* Additional meta tags for SEO */}

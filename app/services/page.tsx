@@ -17,10 +17,10 @@ import {
 // maintenance, then seasonal — mirrors the homepage hero order.
 const services = [
   {
-    name: 'Landscape Design & Installation',
+    name: 'Landscape Design & Build',
     slug: 'landscape-design',
-    description: 'Professional landscape architecture and installation services',
-    image: '/images/install.JPG',
+    description: 'Custom landscape design and full installation, handled by one in-house crew',
+    image: '/images/flowerbeds.jpg',
     icon: HomeIcon,
   },
   {
@@ -38,9 +38,9 @@ const services = [
     icon: SparklesIcon,
   },
   {
-    name: 'Drainage',
+    name: 'Drainage & Irrigation',
     slug: 'drainage',
-    description: 'French drains, grading, and solutions that fix standing water and runoff',
+    description: 'French drains and grading to fix standing water, plus sprinkler systems that keep it green',
     image: '/images/drainage-hero.jpg',
     icon: CloudIcon,
   },
