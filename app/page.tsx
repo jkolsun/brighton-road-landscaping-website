@@ -352,9 +352,9 @@ export default function Home() {
             {[
               { title: 'Landscape Design and Build', desc: 'Custom landscapes designed and built for your property', href: '/services/landscape-design' },
               { title: 'Hardscaping', desc: 'Patios, walkways, retaining walls & stonework', href: '/services/hardscaping' },
-              { title: 'Property Maintenance', desc: 'Ongoing mowing, upkeep, and property enhancements', href: '/services/lawn-mowing' },
-              { title: 'Drainage', desc: 'French drains & grading that fix water and runoff issues', href: '/services/drainage' },
               { title: 'Seasonal Cleanups', desc: 'Spring and fall cleanup services', href: '/services/seasonal-cleanups' },
+              { title: 'Drainage', desc: 'French drains & grading that fix water and runoff issues', href: '/services/drainage' },
+              { title: 'Property Maintenance', desc: 'Ongoing mowing, upkeep, and property enhancements', href: '/services/lawn-mowing' },
             ].map((s) => (
               <motion.div
                 key={s.title}

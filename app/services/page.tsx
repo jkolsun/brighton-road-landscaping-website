@@ -31,11 +31,11 @@ const services = [
     icon: WrenchScrewdriverIcon,
   },
   {
-    name: 'Property Maintenance',
-    slug: 'lawn-mowing',
-    description: 'Reliable mowing, trimming, edging, and ongoing property upkeep — no contracts',
-    image: '/images/lawns.jpg',
-    icon: ScissorsIcon,
+    name: 'Seasonal Cleanups',
+    slug: 'seasonal-cleanups',
+    description: 'Spring and fall cleanup services to keep your property pristine',
+    image: '/images/cleanups.jpg',
+    icon: SparklesIcon,
   },
   {
     name: 'Drainage',
@@ -45,11 +45,11 @@ const services = [
     icon: CloudIcon,
   },
   {
-    name: 'Seasonal Cleanups',
-    slug: 'seasonal-cleanups',
-    description: 'Spring and fall cleanup services to keep your property pristine',
-    image: '/images/cleanups.jpg',
-    icon: SparklesIcon,
+    name: 'Property Maintenance',
+    slug: 'lawn-mowing',
+    description: 'Reliable mowing, trimming, edging, and ongoing property upkeep — no contracts',
+    image: '/images/lawns.jpg',
+    icon: ScissorsIcon,
   }
 ];
 
