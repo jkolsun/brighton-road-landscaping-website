@@ -152,6 +152,14 @@ const services = {
         bgColor: 'white'
       }
     ],
+    beforeAfter: {
+      title: 'Fall Cleanup: Before & After',
+      subtitle: 'Real Brighton Road fall cleanups — from leaf-buried lawns and storm-downed limbs to crisp, winter-ready yards.',
+      pairs: [
+        { before: '/images/fall-ba1-before.jpg', after: '/images/fall-ba1-after.jpg', label: 'Full Leaf Removal', aspect: 'aspect-[3/4]' },
+        { before: '/images/fall-ba2-before.jpg', after: '/images/fall-ba2-after.jpg', label: 'Storm & Tree Debris Cleanup', aspect: 'aspect-[4/3]' }
+      ]
+    },
     serviceArea: 'We proudly perform seasonal cleanups in Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, Fort Washington, Wayne, Bryn Mawr, Ardmore, Radnor, and across the Main Line. With Brighton Road Landscaping, your property will always be well-prepared for every season.'
   }
 }
@@ -274,6 +282,72 @@ export default function ServiceDetailPage() {
           </section>
         )
       })}
+
+      {/* Before & After Showcase */}
+      {'beforeAfter' in service && service.beforeAfter && (
+        <section className="bg-gradient-to-br from-gray-900 to-green-900 py-20 md:py-28">
+          <div className="max-w-6xl mx-auto px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center mb-12 md:mb-16"
+            >
+              <span className="inline-block bg-green-500/20 text-green-300 font-semibold px-4 py-1.5 rounded-full text-sm tracking-wide mb-4">
+                REAL RESULTS
+              </span>
+              <h2 className="text-4xl md:text-5xl font-[impact] text-white mb-4">{service.beforeAfter.title}</h2>
+              <p className="text-lg text-gray-300 max-w-2xl mx-auto">{service.beforeAfter.subtitle}</p>
+            </motion.div>
+
+            <div className="space-y-12 md:space-y-16">
+              {service.beforeAfter.pairs.map((pair, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="grid grid-cols-2 gap-3 sm:gap-5 md:gap-6">
+                    {[
+                      { src: pair.before, tag: 'Before', badge: 'bg-gray-900/85' },
+                      { src: pair.after, tag: 'After', badge: 'bg-green-600' },
+                    ].map((im) => (
+                      <figure
+                        key={im.tag}
+                        className={`group relative ${pair.aspect} overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10`}
+                      >
+                        <Image
+                          src={im.src}
+                          alt={`${pair.label} — ${im.tag}`}
+                          fill
+                          sizes="(max-width: 768px) 50vw, 33vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <span className={`absolute top-3 left-3 ${im.badge} text-white text-[11px] sm:text-xs font-bold uppercase tracking-wide px-3 py-1 rounded-full backdrop-blur-sm`}>
+                          {im.tag}
+                        </span>
+                      </figure>
+                    ))}
+                  </div>
+                  <p className="text-center text-green-300 font-semibold mt-4 text-sm sm:text-base">{pair.label}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="text-center mt-12 md:mt-16">
+              <Link href="/quote">
+                <button className="bg-green-600 hover:bg-green-500 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transform hover:scale-105 transition inline-flex items-center gap-2">
+                  Get Your Free Estimate
+                  <ArrowRightIcon className="w-5 h-5" />
+                </button>
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Service Area Section */}
       <section className="bg-gradient-to-br from-green-50 to-white py-16">
