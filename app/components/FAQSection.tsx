@@ -60,7 +60,8 @@ const faqs: { question: string; answer: React.ReactNode }[] = [
     answer: (
       <p>
         For weekly maintenance, our clients receive a bill via email that can be paid with either a credit/debit card
-        or an ACH bank transfer. Payments are processed securely through Stripe.
+        or an ACH bank transfer. Payments are processed securely through Stripe. For our other services, we accept cash,
+        check, Venmo, Zelle, or credit/debit card (a 3% transaction fee applies).
       </p>
     ),
   },
