@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import Footer from '@/components/Footer'
+import Slideshow from '@/components/Slideshow'
 import { CheckCircleIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
 
 const services = {
@@ -26,7 +27,7 @@ const services = {
       {
         title: 'No Contracts, Transparent Pricing',
         content: 'For our residential clients, we offer a pay as you go, non-binding property maintenance service. You may cancel or reschedule anytime except for the day of, with no cancellation fee. Whether you are in need of weekly lawn mowing, biweekly lawn mowing, or are just looking for a one time cut, Brighton Road Landscaping is here for all of your property maintenance needs.',
-        image: '/images/stripes.jpg',
+        image: '/images/maintenance-stripes.jpg',
         style: 'diagonal-left',
         bgColor: 'gray'
       },
@@ -51,7 +52,7 @@ const services = {
       {
         title: 'Expert Hardscape Design & Installation',
         content: 'At Brighton Road Landscaping, we offer a full range of hardscape features that are both functional and visually stunning. From new patios, walk ways, retaining walls, stairs, and fireplaces, our trained team meticulously designs and installs hardscapes that will stand the test of time. Our team is experienced with a variety of hardscaping materials, including pavers, bricks, and stones. Each installation is customized to complement your property’s layout, style, and elevation. If you’re looking to add life to your property, Brighton Road Hardscaping will get the job done right.',
-        image: '/images/hardscape2.jpg',
+        image: '/images/hardscape-estate.jpg',
         features: ['Custom Design', 'Premium Materials', 'Expert Installation', 'Lifetime Warranty'],
         style: 'diagonal-right',
         bgColor: 'white'
@@ -77,7 +78,13 @@ const services = {
       {
         title: 'It Starts With a Plan',
         content: 'Every great landscape starts with a plan. At Brighton Road Landscaping, we sit down with you to understand how you actually want to live in your yard — then translate it into a clear, to-scale design using professional landscaping software. You will see exactly where every bed, walkway, tree, shrub, and light belongs before a single shovel hits the ground. We account for sun, slope, drainage, and how your plantings will mature, so the design looks just as good in five years as it does on day one.',
-        video: '/Landscape.MP4',
+        slideshow: [
+          { src: '/images/projects/design-slide-1.jpg' },
+          { src: '/images/projects/design-slide-2.jpg' },
+          { src: '/images/projects/design-slide-3.jpg' },
+          { src: '/images/projects/design-slide-4.jpg' },
+          { src: '/images/projects/design-slide-5.jpg' },
+        ],
         features: ['3D Design Software', 'Custom Plant Selection', 'Sun & Drainage Planning', 'Built to Mature Beautifully'],
         style: 'normal',
         bgColor: 'white'
@@ -97,7 +104,7 @@ const services = {
     name: 'Drainage & Irrigation',
     hero: {
       title: 'Drainage and Irrigation Solutions for a Healthier Property',
-      image: '/images/drainage-hero.jpg'
+      image: '/images/drainage-cover.jpg'
     },
     sections: [
       {
@@ -138,7 +145,14 @@ const services = {
       {
         title: 'SPRING CLEANUP',
         content: 'Brighton Road Landscaping\'s spring cleanups include all weeding, edging and installation of fresh mulch, as well as any trimming or pruning that is necessary. Our team will ensure that all plants will grow, bloom and thrive during the warm months.',
-        video: '/springcleanup.MP4',
+        slideshow: [
+          { src: '/images/projects/spring-slide-1.jpg' },
+          { src: '/images/projects/spring-slide-2.jpg' },
+          { src: '/images/projects/spring-slide-3.jpg' },
+          { src: '/images/projects/spring-slide-4.jpg' },
+          { src: '/images/projects/spring-slide-5.jpg' },
+          { src: '/images/projects/spring-slide-6.jpg' },
+        ],
         features: ['Weeding & Edging', 'Fresh Mulch', 'Trimming & Pruning', 'Bed Cleanup'],
         style: 'normal',
         bgColor: 'gray'
@@ -146,20 +160,17 @@ const services = {
       {
         title: 'FALL CLEANUP',
         content: 'Brighton Road Landscaping\'s fall cleanup includes removal of all leaves and sticks, as well as any plant or shrub trimming and pruning. Brighton Road Landscaping will ensure your property is clean and ready for the winter.',
-        image: '/images/fallcleanup.JPG',
+        slideshow: [
+          { src: '/images/fall-ba1-before.jpg', label: 'Before — Leaf Removal' },
+          { src: '/images/fall-ba1-after.jpg', label: 'After — Leaf Removal' },
+          { src: '/images/fall-ba2-before.jpg', label: 'Before — Storm Debris' },
+          { src: '/images/fall-ba2-after.jpg', label: 'After — Storm Debris' },
+        ],
         features: ['Leaf Removal', 'Stick Cleanup', 'Trimming & Pruning', 'Winter Prep'],
         style: 'diagonal-right',
         bgColor: 'white'
       }
     ],
-    beforeAfter: {
-      title: 'Fall Cleanup: Before & After',
-      subtitle: 'Real Brighton Road fall cleanups — from leaf-buried lawns and storm-downed limbs to crisp, winter-ready yards.',
-      pairs: [
-        { before: '/images/fall-ba1-before.jpg', after: '/images/fall-ba1-after.jpg', label: 'Full Leaf Removal', aspect: 'aspect-[3/4]' },
-        { before: '/images/fall-ba2-before.jpg', after: '/images/fall-ba2-after.jpg', label: 'Storm & Tree Debris Cleanup', aspect: 'aspect-[4/3]' }
-      ]
-    },
     serviceArea: 'We proudly perform seasonal cleanups in Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, Fort Washington, Wayne, Bryn Mawr, Ardmore, Radnor, and across the Main Line. With Brighton Road Landscaping, your property will always be well-prepared for every season.'
   }
 }
@@ -260,7 +271,9 @@ export default function ServiceDetailPage() {
                 viewport={{ once: true }}
                 className={`relative min-h-[400px] md:min-h-[600px] ${imageOnRight ? 'md:order-2' : ''}`}
               >
-                {section.video ? (
+                {'slideshow' in section && section.slideshow ? (
+                  <Slideshow slides={section.slideshow} />
+                ) : section.video ? (
                   <video
                     src={section.video}
                     autoPlay
@@ -282,72 +295,6 @@ export default function ServiceDetailPage() {
           </section>
         )
       })}
-
-      {/* Before & After Showcase */}
-      {'beforeAfter' in service && service.beforeAfter && (
-        <section className="bg-gradient-to-br from-gray-900 to-green-900 py-20 md:py-28">
-          <div className="max-w-6xl mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="text-center mb-12 md:mb-16"
-            >
-              <span className="inline-block bg-green-500/20 text-green-300 font-semibold px-4 py-1.5 rounded-full text-sm tracking-wide mb-4">
-                REAL RESULTS
-              </span>
-              <h2 className="text-4xl md:text-5xl font-[impact] text-white mb-4">{service.beforeAfter.title}</h2>
-              <p className="text-lg text-gray-300 max-w-2xl mx-auto">{service.beforeAfter.subtitle}</p>
-            </motion.div>
-
-            <div className="space-y-12 md:space-y-16">
-              {service.beforeAfter.pairs.map((pair, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: i * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <div className="grid grid-cols-2 gap-3 sm:gap-5 md:gap-6">
-                    {[
-                      { src: pair.before, tag: 'Before', badge: 'bg-gray-900/85' },
-                      { src: pair.after, tag: 'After', badge: 'bg-green-600' },
-                    ].map((im) => (
-                      <figure
-                        key={im.tag}
-                        className={`group relative ${pair.aspect} overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10`}
-                      >
-                        <Image
-                          src={im.src}
-                          alt={`${pair.label} — ${im.tag}`}
-                          fill
-                          sizes="(max-width: 768px) 50vw, 33vw"
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <span className={`absolute top-3 left-3 ${im.badge} text-white text-[11px] sm:text-xs font-bold uppercase tracking-wide px-3 py-1 rounded-full backdrop-blur-sm`}>
-                          {im.tag}
-                        </span>
-                      </figure>
-                    ))}
-                  </div>
-                  <p className="text-center text-green-300 font-semibold mt-4 text-sm sm:text-base">{pair.label}</p>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="text-center mt-12 md:mt-16">
-              <Link href="/quote">
-                <button className="bg-green-600 hover:bg-green-500 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transform hover:scale-105 transition inline-flex items-center gap-2">
-                  Get Your Free Estimate
-                  <ArrowRightIcon className="w-5 h-5" />
-                </button>
-              </Link>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Service Area Section */}
       <section className="bg-gradient-to-br from-green-50 to-white py-16">

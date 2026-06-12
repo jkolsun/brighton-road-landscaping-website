@@ -41,7 +41,7 @@ const services = [
     name: 'Drainage & Irrigation',
     slug: 'drainage',
     description: 'French drains and grading to fix standing water, plus sprinkler systems that keep it green',
-    image: '/images/drainage-hero.jpg',
+    image: '/images/drainage-cover.jpg',
     icon: CloudIcon,
   },
   {
