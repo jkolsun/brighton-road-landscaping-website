@@ -168,9 +168,12 @@ export default function Home() {
             <p className="text-green-300 font-semibold uppercase tracking-[0.32em] text-xs md:text-sm mb-4 drop-shadow">Brighton Road Landscaping</p>
             <h1 className="text-white font-[impact] leading-[0.95] text-5xl md:text-7xl lg:text-8xl drop-shadow-2xl">{slide.name}</h1>
             <p className="text-white/90 text-lg md:text-2xl mt-6 max-w-2xl mx-auto drop-shadow-lg">{slide.tagline}</p>
-            <div className="flex flex-wrap gap-4 justify-center mt-9 md:mt-11">
-              <Link href="/quote"><button className="bg-green-600 hover:bg-green-500 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-2xl transition transform hover:scale-105">Get a Free Quote</button></Link>
-              <Link href="/gallery"><button className="bg-white/10 backdrop-blur border border-white/40 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/20 transition">See Our Work</button></Link>
+            <div className="mt-10 md:mt-14 flex justify-center">
+              <Link href="/quote" className="w-full max-w-md sm:w-auto">
+                <button className="w-full bg-green-600 hover:bg-green-500 text-white px-12 sm:px-20 py-5 sm:py-7 rounded-2xl font-bold text-xl sm:text-3xl tracking-tight shadow-2xl shadow-green-950/50 ring-1 ring-white/20 transition transform hover:scale-[1.03]">
+                  Get a Free Quote
+                </button>
+              </Link>
             </div>
           </motion.div>
         </div>
