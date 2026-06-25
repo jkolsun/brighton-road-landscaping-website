@@ -25,6 +25,50 @@ export default function QuotePage() {
     };
   }, []);
 
+  // Fire the Meta Pixel "Lead" event when the Jobber quote form is submitted.
+  // The form is a cross-origin Jobber embed with no thank-you page, so we detect
+  // completion two ways and fire at most once: (1) a submission/redirect message
+  // from Jobber, and (2) the embed iframe navigating to its confirmation screen.
+  useEffect(() => {
+    let fired = false;
+    const fireLead = () => {
+      if (fired) return;
+      fired = true;
+      const w = window as unknown as { fbq?: (...args: unknown[]) => void };
+      if (typeof w.fbq === 'function') w.fbq('track', 'Lead');
+    };
+
+    const onMessage = (e: MessageEvent) => {
+      if (!/getjobber\.com|cloudfront\.net/i.test(String(e.origin || ''))) return;
+      const data = typeof e.data === 'string' ? e.data : JSON.stringify(e.data ?? '');
+      if (/submit|success|created|complete|thank|request[_\s-]?sent|redirect/i.test(data)) fireLead();
+    };
+    window.addEventListener('message', onMessage);
+
+    // Attach a load counter to the Jobber iframe: first load is the form,
+    // a subsequent load is the confirmation shown after submitting.
+    let loads = 0;
+    const poll = setInterval(() => {
+      const host = document.getElementById('b2edca5b-1c2f-4cd9-8249-7ef93bc14365-2186808');
+      const iframe = host?.querySelector('iframe') as HTMLIFrameElement | null;
+      if (iframe && !iframe.dataset.leadHook) {
+        iframe.dataset.leadHook = '1';
+        iframe.addEventListener('load', () => {
+          loads += 1;
+          if (loads >= 2) fireLead();
+        });
+        clearInterval(poll);
+      }
+    }, 500);
+    const stopPoll = setTimeout(() => clearInterval(poll), 30000);
+
+    return () => {
+      window.removeEventListener('message', onMessage);
+      clearInterval(poll);
+      clearTimeout(stopPoll);
+    };
+  }, []);
+
   return (
     <div>
       <section
