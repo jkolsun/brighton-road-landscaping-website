@@ -26,9 +26,11 @@ export default function QuotePage() {
   }, []);
 
   // Fire the Meta Pixel "Lead" event when the Jobber quote form is submitted.
-  // The form is a cross-origin Jobber embed with no thank-you page, so we detect
-  // completion two ways and fire at most once: (1) a submission/redirect message
-  // from Jobber, and (2) the embed iframe navigating to its confirmation screen.
+  // The form is a cross-origin Jobber embed (no thank-you page or submit button
+  // in our code to hook), so we detect a completed submission and fire EXACTLY
+  // ONCE, two independent ways for reliability:
+  //   (1) a submission/success postMessage from the Jobber/CloudFront embed, and
+  //   (2) the embed iframe NAVIGATING to its confirmation screen after submit.
   useEffect(() => {
     let fired = false;
     const fireLead = () => {
@@ -38,28 +40,33 @@ export default function QuotePage() {
       if (typeof w.fbq === 'function') w.fbq('track', 'Lead');
     };
 
+    // (1) postMessage from the Jobber/CloudFront embed signalling success.
     const onMessage = (e: MessageEvent) => {
       if (!/getjobber\.com|cloudfront\.net/i.test(String(e.origin || ''))) return;
       const data = typeof e.data === 'string' ? e.data : JSON.stringify(e.data ?? '');
-      if (/submit|success|created|complete|thank|request[_\s-]?sent|redirect/i.test(data)) fireLead();
+      if (/submit|success|created|complete|thank|request[_\s-]?sent|confirmation|redirect/i.test(data)) fireLead();
     };
     window.addEventListener('message', onMessage);
 
-    // Attach a load counter to the Jobber iframe: first load is the form,
-    // a subsequent load is the confirmation shown after submitting.
-    let loads = 0;
+    // (2) Watch the embed iframe. The initial form renders within the first few
+    // seconds; the post-submit confirmation is a LATER navigation/load. We
+    // time-gate instead of counting loads, so it still fires even if we attach
+    // the listener after the form's first load already happened (the old
+    // `loads >= 2` counter silently missed that race).
+    let attachTime = 0;
+    const onIframeLoad = () => {
+      if (Date.now() - attachTime > 4000) fireLead();
+    };
     const poll = setInterval(() => {
       const host = document.getElementById('b2edca5b-1c2f-4cd9-8249-7ef93bc14365-2186808');
       const iframe = host?.querySelector('iframe') as HTMLIFrameElement | null;
       if (iframe && !iframe.dataset.leadHook) {
         iframe.dataset.leadHook = '1';
-        iframe.addEventListener('load', () => {
-          loads += 1;
-          if (loads >= 2) fireLead();
-        });
+        attachTime = Date.now();
+        iframe.addEventListener('load', onIframeLoad);
         clearInterval(poll);
       }
-    }, 500);
+    }, 400);
     const stopPoll = setTimeout(() => clearInterval(poll), 30000);
 
     return () => {
