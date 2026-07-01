@@ -37,6 +37,7 @@ export default function Footer() {
               <li><Link href="/join" className="hover:text-white transition">Join Our Team</Link></li>
               <li><Link href="/quote" className="hover:text-white transition">Get a Free Quote</Link></li>
               <li><Link href="/contact" className="hover:text-white transition">Contact Us</Link></li>
+              <li><Link href="/privacy" className="hover:text-white transition">Privacy Policy</Link></li>
             </ul>
           </div>
 
@@ -91,6 +92,10 @@ export default function Footer() {
             <span className="text-gray-600">|</span>
             <Link href="/join" className="text-gray-400 hover:text-white transition">
               Apply Now
+            </Link>
+            <span className="text-gray-600">|</span>
+            <Link href="/privacy" className="text-gray-400 hover:text-white transition">
+              Privacy Policy
             </Link>
           </div>
         </div>

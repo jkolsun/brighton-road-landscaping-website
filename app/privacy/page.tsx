@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ShieldCheck, Mail, Phone } from 'lucide-react';
+import Footer from '@/components/Footer';
 
 export const metadata = {
   title: 'Privacy Policy | Brighton Road Landscaping',
@@ -24,6 +25,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 export default function PrivacyPolicyPage() {
   return (
+    <>
     <div className="bg-white">
       {/* Header band */}
       <div className="bg-gradient-to-b from-green-800 to-green-700 text-white">
@@ -195,5 +197,7 @@ export default function PrivacyPolicyPage() {
         </div>
       </div>
     </div>
+    <Footer />
+    </>
   );
 }

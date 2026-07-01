@@ -7,3 +7,4 @@ node_modules/
 /IMG_8175.MP4
 .env.local
 .env*.local
+.env*
