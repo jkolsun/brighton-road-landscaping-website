@@ -125,6 +125,14 @@ mutation CreateRequest($input: RequestCreateInput!) {
   }
 }`;
 
+const REQUEST_CREATE_NOTE = `
+mutation CreateRequestNote($requestId: EncodedId!, $input: RequestCreateNoteInput!) {
+  requestCreateNote(requestId: $requestId, input: $input) {
+    requestNote { id }
+    userErrors { message }
+  }
+}`;
+
 // Creates the client (with a property at the lead's address) then a work request.
 export async function createClientAndRequest(token: string, lead: LeadMapped) {
   // ── 1) Client (+ property) ──
@@ -153,11 +161,11 @@ export async function createClientAndRequest(token: string, lead: LeadMapped) {
   const propertyId = clientPayload?.client?.properties?.[0]?.id;
   if (!clientId) throw new Error(`clientCreate returned no client id: ${JSON.stringify(cRes)}`);
 
-  // ── 2) Work request ──
+  // ── 2) Work request. RequestCreateInput has no free-text field, so the
+  //     lead's message is attached as a pinned note in step 3. ──
   const requestInput: any = {
     clientId,
     title: "Website Lead — Landscaping",
-    instructions: lead.note,
   };
   if (propertyId) requestInput.propertyId = propertyId;
 
@@ -167,5 +175,19 @@ export async function createClientAndRequest(token: string, lead: LeadMapped) {
   if (rErrors?.length) throw new Error(`requestCreate userErrors: ${JSON.stringify(rErrors)}`);
   const requestId = requestPayload?.request?.id;
 
-  return { clientId, propertyId, requestId };
+  // ── 3) Attach the lead's message as a pinned note on the request ──
+  let noteId: string | undefined;
+  if (requestId && lead.note) {
+    const nRes = await jobberGraphQL(token, REQUEST_CREATE_NOTE, {
+      requestId,
+      input: { message: lead.note, pinned: true },
+    });
+    const notePayload = nRes?.data?.requestCreateNote;
+    if (notePayload?.userErrors?.length) {
+      console.error("requestCreateNote userErrors:", JSON.stringify(notePayload.userErrors));
+    }
+    noteId = notePayload?.requestNote?.id;
+  }
+
+  return { clientId, propertyId, requestId, noteId };
 }
