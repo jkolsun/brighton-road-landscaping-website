@@ -112,7 +112,7 @@ export async function jobberGraphQL(accessToken: string, query: string, variable
 const CLIENT_CREATE = `
 mutation CreateClient($input: ClientCreateInput!) {
   clientCreate(input: $input) {
-    client { id firstName lastName properties(first: 1) { nodes { id } } }
+    client { id firstName lastName properties { id } }
     userErrors { message path }
   }
 }`;
@@ -150,7 +150,7 @@ export async function createClientAndRequest(token: string, lead: LeadMapped) {
   const cErrors = clientPayload?.userErrors;
   if (cErrors?.length) throw new Error(`clientCreate userErrors: ${JSON.stringify(cErrors)}`);
   const clientId = clientPayload?.client?.id;
-  const propertyId = clientPayload?.client?.properties?.nodes?.[0]?.id;
+  const propertyId = clientPayload?.client?.properties?.[0]?.id;
   if (!clientId) throw new Error(`clientCreate returned no client id: ${JSON.stringify(cRes)}`);
 
   // ── 2) Work request ──
