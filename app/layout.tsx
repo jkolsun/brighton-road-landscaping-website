@@ -7,6 +7,7 @@ import { Chatbot } from './components/Chatbot';
 const META_PIXEL_ID = '27377318761933530';
 
 export const metadata = {
+  metadataBase: new URL('https://www.brightonroadlandscaping.com'),
   title: 'Brighton Road Landscaping | Main Line & Montgomery County, PA',
   description:
     'Brighton Road Landscaping provides landscape design, hardscaping, paver patios, property maintenance, drainage & French drains, and seasonal cleanups across the Main Line and Montgomery County, PA — including Plymouth Meeting, Wayne, Blue Bell, Bryn Mawr, Ardmore, Conshohocken, King of Prussia, and Radnor.',
@@ -21,6 +22,15 @@ export const metadata = {
     description:
       'Landscape design, hardscaping, property maintenance, drainage, and seasonal cleanups across the Main Line and Montgomery County, PA.',
     type: 'website',
+    url: "/",
+    siteName: "Brighton Road Landscaping",
+    locale: "en_US",
+    images: [{ url: "/images/projects/landscape-design-build-hero.jpg", width: 1200, height: 630, alt: "Brighton Road Landscaping — Main Line & Montgomery County, PA" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Brighton Road Landscaping | Main Line & Montgomery County, PA",
+    images: ["/images/projects/landscape-design-build-hero.jpg"],
   },
 };
 
@@ -54,6 +64,7 @@ fbq('track', 'PageView');`}
             src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
           />
         </noscript>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: "{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":[\"LandscapingBusiness\",\"LocalBusiness\"],\"@id\":\"https://www.brightonroadlandscaping.com/#business\",\"name\":\"Brighton Road Landscaping\",\"url\":\"https://www.brightonroadlandscaping.com/\",\"telephone\":\"+14845351936\",\"image\":\"https://www.brightonroadlandscaping.com/images/projects/landscape-design-build-hero.jpg\",\"description\":\"Landscape design, hardscaping, paver patios, drainage, French drains and property maintenance across the Main Line and Montgomery County, PA.\",\"priceRange\":\"$\",\"address\":{\"@type\":\"PostalAddress\",\"addressRegion\":\"PA\",\"addressCountry\":\"US\"},\"areaServed\":[{\"@type\":\"City\",\"name\":\"Plymouth Meeting, PA\"},{\"@type\":\"City\",\"name\":\"Wayne, PA\"},{\"@type\":\"City\",\"name\":\"Blue Bell, PA\"},{\"@type\":\"City\",\"name\":\"Bryn Mawr, PA\"},{\"@type\":\"City\",\"name\":\"Ardmore, PA\"},{\"@type\":\"City\",\"name\":\"Conshohocken, PA\"},{\"@type\":\"City\",\"name\":\"King of Prussia, PA\"},{\"@type\":\"City\",\"name\":\"Radnor, PA\"},{\"@type\":\"City\",\"name\":\"Villanova, PA\"},{\"@type\":\"City\",\"name\":\"Gladwyne, PA\"},{\"@type\":\"AdministrativeArea\",\"name\":\"Montgomery County, PA\"}],\"knowsAbout\":[\"Landscape Design\",\"Hardscaping\",\"Paver Patios\",\"Drainage\",\"French Drains\",\"Property Maintenance\",\"Seasonal Cleanups\"]},{\"@type\":\"WebSite\",\"@id\":\"https://www.brightonroadlandscaping.com/#website\",\"url\":\"https://www.brightonroadlandscaping.com/\",\"name\":\"Brighton Road Landscaping\",\"publisher\":{\"@id\":\"https://www.brightonroadlandscaping.com/#business\"},\"inLanguage\":\"en-US\"}]}" }} />
       <ScrollToTop />
         <Header />
         <main>{children}</main>
