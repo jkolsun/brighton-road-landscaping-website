@@ -7,6 +7,7 @@ import { Chatbot } from './components/Chatbot';
 const META_PIXEL_ID = '27377318761933530';
 
 export const metadata = {
+  verification: { google: "E26-CkopmKb4mKYL1qjNbLy83dCPxOLoMwrHgdKcnMU" },
   metadataBase: new URL('https://www.brightonroadlandscaping.com'),
   title: 'Brighton Road Landscaping | Main Line & Montgomery County, PA',
   description:
