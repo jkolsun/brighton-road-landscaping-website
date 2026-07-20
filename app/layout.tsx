@@ -8,7 +8,8 @@ const META_PIXEL_ID = '27377318761933530';
 
 export const metadata = {
   verification: { google: "E26-CkopmKb4mKYL1qjNbLy83dCPxOLoMwrHgdKcnMU" },
-  metadataBase: new URL('https://www.brightonroadlandscaping.com'),
+  metadataBase: new URL("https://www.brightonroadlandscaping.com"),
+  alternates: { canonical: "./" },
   title: 'Brighton Road Landscaping | Main Line & Montgomery County, PA',
   description:
     'Brighton Road Landscaping provides landscape design, hardscaping, paver patios, property maintenance, drainage & French drains, and seasonal cleanups across the Main Line and Montgomery County, PA — including Plymouth Meeting, Wayne, Blue Bell, Bryn Mawr, Ardmore, Conshohocken, King of Prussia, and Radnor.',
