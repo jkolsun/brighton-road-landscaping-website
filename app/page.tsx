@@ -16,11 +16,11 @@ const IG_URL = 'https://www.instagram.com/brightonroadlandscaping/';
 const GOOGLE_REVIEWS_URL = 'https://share.google/5v5xiQz6FsFcyhFgh';
 
 // Hero carousel — one full-screen slide per service, each photo matched to the service.
-const SLIDES = [
+const SLIDES: { name: string; tagline: string; img: string; video?: string }[] = [
   { name: 'Landscape Design & Build', tagline: 'Custom landscapes, designed and installed for your property.', img: '/images/projects/landscape-design-build-hero.jpg' },
   { name: 'Hardscaping', tagline: 'Paver patios, walkways, and stonework built to last.', img: '/images/projects/hardscaping-hero.jpg' },
   { name: 'Mulch & Garden Beds', tagline: 'Crisp, fresh beds that make the whole yard pop.', img: '/images/projects/IMG_2122.JPG' },
-  { name: 'Property Maintenance', tagline: 'Ongoing care that keeps your property looking brand new.', img: '/images/projects/IMG_2122.JPG', video: '/Grass.Cutting.mp4' },
+  { name: 'Commercial Snow Removal', tagline: 'Plowing, salting, and sidewalk clearing that keep your property safe all winter.', img: '/images/snow.jpg' },
 ];
 const NAV = [
   { label: 'Services', href: '/services' },
@@ -357,7 +357,7 @@ export default function Home() {
               { title: 'Hardscaping', desc: 'Patios, walkways, retaining walls & stonework', href: '/services/hardscaping' },
               { title: 'Seasonal Cleanups', desc: 'Spring and fall cleanup services', href: '/services/seasonal-cleanups' },
               { title: 'Drainage & Irrigation', desc: 'French drains, grading & sprinkler systems that keep your yard dry and green', href: '/services/drainage' },
-              { title: 'Property Maintenance', desc: 'Ongoing mowing, upkeep, and property enhancements', href: '/services/lawn-mowing' },
+              { title: 'Commercial Snow Removal', desc: 'Plowing, salting & sidewalk clearing for commercial properties', href: '/services/commercial-snow-removal' },
             ].map((s) => (
               <motion.div
                 key={s.title}

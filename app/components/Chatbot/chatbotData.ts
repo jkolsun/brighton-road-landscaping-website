@@ -64,22 +64,21 @@ export const paymentMethods = [
 
 export const services = [
   {
-    id: "lawn-mowing",
-    name: "Property Maintenance",
-    shortDesc: "Weekly and bi-weekly mowing and upkeep",
-    fullDesc: "Ongoing property maintenance including mowing, edging, trimming, and blowing. No contracts, pay-as-you-go. Commercial and residential properties.",
+    id: "commercial-snow-removal",
+    name: "Commercial Snow Removal",
+    shortDesc: "Plowing, salting & sidewalk clearing for commercial properties",
+    fullDesc: "Commercial snow removal including plowing, salting/de-icing, and sidewalk clearing for parking lots, HOA communities, office parks, and retail centers. Seasonal contracts and per-storm service available.",
     features: [
-      "Weekly or bi-weekly mowing schedules",
-      "Professional edging along walkways and driveways",
-      "String trimming around obstacles and fences",
-      "Blowing debris off all hard surfaces",
-      "Bagging or mulching options available",
-      "Commercial and residential properties"
+      "Snow plowing for parking lots and drive lanes",
+      "Salting and de-icing treatment",
+      "Sidewalk and walkway clearing",
+      "HOA communities, office parks, and retail centers",
+      "Seasonal contracts or per-storm service"
     ],
-    keywords: ["mow", "mowing", "cut", "cutting", "grass", "lawn cutting", "yard", "weekly", "biweekly", "overgrown", "tall grass", "long grass", "maintenance", "property maintenance", "upkeep"],
-    priceRange: "Varies by lawn size - contact for free quote",
-    frequency: "Weekly recommended during growing season, bi-weekly available",
-    link: "/services/lawn-mowing"
+    keywords: ["snow", "snow removal", "plow", "plowing", "salt", "salting", "de-ice", "deice", "ice", "winter", "shovel", "shoveling", "sidewalk", "parking lot", "storm", "commercial snow"],
+    priceRange: "Varies by property - contact for a quote",
+    frequency: "Seasonal contracts and per-storm service",
+    link: "/services/commercial-snow-removal"
   },
   {
     id: "hardscaping",
@@ -178,8 +177,8 @@ export const faqs = [
   // Pricing Questions
   {
     category: "pricing",
-    question: "How much does lawn mowing cost?",
-    answer: `Lawn mowing prices vary based on your lawn size, terrain, and frequency. We offer competitive rates with no contracts. The best way to get an accurate price is to request a free quote - we'll come out and give you an exact price within 24 hours!`,
+    question: "How much does snow removal cost?",
+    answer: `Commercial snow removal pricing depends on your property size, lot layout, and whether you want a seasonal contract or per-storm service. The best way to get an accurate price is to request a free quote - we'll assess your property and put together a plan!`,
     keywords: ["price", "pricing", "cost", "much", "rate", "rates", "charge", "fee", "expensive", "cheap", "affordable"]
   },
   {
@@ -196,12 +195,6 @@ export const faqs = [
   },
 
   // Scheduling Questions
-  {
-    category: "scheduling",
-    question: "How often should I mow my lawn?",
-    answer: `During the growing season (spring through fall), we recommend weekly mowing for the healthiest lawn. Bi-weekly is also an option for slower-growing lawns or budget-conscious customers. We'll help you determine the best schedule for your property.`,
-    keywords: ["often", "frequency", "weekly", "biweekly", "schedule", "how often"]
-  },
   {
     category: "scheduling",
     question: "Can I schedule a specific day?",
@@ -258,15 +251,9 @@ export const faqs = [
   // Service Details
   {
     category: "service-details",
-    question: "What's included in lawn mowing?",
-    answer: `Every lawn mowing service includes: mowing at the proper height, professional edging along walkways and driveways, string trimming around obstacles and fences, and blowing all debris off hard surfaces. Your lawn will look professionally maintained!`,
-    keywords: ["included", "include", "comes with", "what do you do", "edging", "trimming", "blowing"]
-  },
-  {
-    category: "service-details",
-    question: "Do you bag or mulch grass clippings?",
-    answer: `We typically mulch clippings, which is actually healthier for your lawn as it returns nutrients to the soil. However, we can bag clippings upon request if you prefer. Just let us know your preference!`,
-    keywords: ["bag", "bagging", "mulch", "mulching", "clippings", "grass clippings", "leave"]
+    question: "What's included in commercial snow removal?",
+    answer: `Our commercial snow service covers plowing for parking lots and drive lanes, salting and de-icing treatment, and sidewalk and walkway clearing. We offer seasonal contracts or per-storm service - whatever fits your property best.`,
+    keywords: ["included", "include", "comes with", "what do you do", "plowing", "salting", "sidewalks"]
   },
   {
     category: "service-details",
@@ -343,16 +330,15 @@ export const faqs = [
   {
     category: "specific",
     question: "Do you do snow removal?",
-    answer: `Our primary focus is landscaping services. For snow removal, we recommend contacting a dedicated snow removal service. However, feel free to reach out and we can discuss options!`,
+    answer: `Yes! We offer commercial snow removal - plowing, salting/de-icing, and sidewalk clearing for parking lots, HOA communities, office parks, and retail centers. Seasonal contracts and per-storm service available. Want a quote for your property?`,
     keywords: ["snow", "ice", "winter", "plow", "plowing", "shovel", "shoveling", "salt", "salting"]
   },
   {
     category: "specific",
-    question: "Can you edge my lawn?",
-    answer: `Yes! Edging is included with all our lawn mowing services. We edge along walkways, driveways, and bed lines to give your lawn that crisp, professional look.`,
-    keywords: ["edge", "edging", "edges", "border", "clean lines"]
+    question: "Do you offer lawn mowing?",
+    answer: `We no longer offer recurring lawn mowing service. Our focus is landscape design & build, hardscaping, drainage, seasonal cleanups - and commercial snow removal in the winter. If your yard needs a one-time cut-back or cleanup, our seasonal cleanup crew can absolutely help!`,
+    keywords: ["mow", "mowing", "lawn mowing", "grass cutting", "weekly mowing", "cut my grass", "lawn care"]
   },
-
   // Employment
   {
     category: "employment",
@@ -365,13 +351,13 @@ export const faqs = [
   {
     category: "problems",
     question: "I need help with my yard",
-    answer: `I'd be happy to help! We offer a full range of services including property maintenance, drainage, landscape design, hardscaping, and seasonal cleanups. What's going on with your yard that you'd like to address?`,
+    answer: `I'd be happy to help! We offer a full range of services including landscape design, hardscaping, drainage, seasonal cleanups, and commercial snow removal. What's going on with your yard that you'd like to address?`,
     keywords: ["help", "yard", "need", "want", "looking"]
   },
   {
     category: "problems",
     question: "My grass is overgrown",
-    answer: `We can definitely help with that! We offer lawn mowing services to get your grass back under control. For very overgrown lawns, we may need to do an initial cut at a higher setting, then follow up. Want me to set up a quote for you?`,
+    answer: `We can help get that back under control! Our seasonal cleanup crew handles overgrown and neglected yards - cutting everything back, clearing debris, and leaving the property looking sharp. Want me to set up a quote for you?`,
     keywords: ["overgrown", "too long", "tall", "jungle", "out of control", "neglected"]
   },
   {
@@ -383,19 +369,13 @@ export const faqs = [
   {
     category: "problems",
     question: "I'm moving and need the yard cleaned up",
-    answer: `We can definitely help get your property ready for sale or move-in! We offer one-time cleanups, lawn mowing, mulching, and more to make your yard look its best. How soon do you need it done?`,
+    answer: `We can definitely help get your property ready for sale or move-in! We offer one-time cleanups, mulching, and more to make your yard look its best. How soon do you need it done?`,
     keywords: ["moving", "selling", "sale", "real estate", "move in", "new house", "new home"]
   },
   {
     category: "problems",
-    question: "I don't have time to maintain my lawn",
-    answer: `That's exactly why we're here! We offer weekly or bi-weekly lawn mowing with no contracts - we take care of everything so you don't have to. Many of our customers are busy professionals who just want a great-looking lawn without the hassle.`,
-    keywords: ["no time", "busy", "don't have time", "can't", "too busy", "hassle", "convenient"]
-  },
-  {
-    category: "problems",
     question: "My old landscaper stopped showing up",
-    answer: `That's frustrating! We pride ourselves on reliability - we show up when we say we will and communicate if anything changes. We'd be happy to take over your property maintenance. Would you like a quote?`,
+    answer: `That's frustrating! Reliability is the foundation of our business - we show up when we say we will and communicate if anything changes. We'd be happy to take over your landscaping. Would you like a quote?`,
     keywords: ["old landscaper", "previous", "stopped", "unreliable", "didn't show", "ghosted", "new landscaper", "switch"]
   },
   {
@@ -458,7 +438,7 @@ export const keySellingPoints = [
 // Quick reply options for different scenarios
 export const quickReplies = {
   greeting: ["Get a Free Quote", "View Services", "Service Areas", "Contact Info"],
-  services: ["Property Maintenance", "Hardscaping", "Landscape Design", "Drainage", "Seasonal Cleanups"],
+  services: ["Commercial Snow Removal", "Hardscaping", "Landscape Design", "Drainage", "Seasonal Cleanups"],
   afterQuote: ["View Services", "Service Areas", "FAQs"],
   afterService: ["Get a Quote", "Other Services", "Contact Info"],
   fallback: ["Get a Quote", "Call Us", "View Services", "FAQs"],

@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
+import SnowflakeIcon from '@/components/SnowflakeIcon';
 import {
   WrenchScrewdriverIcon,
   PencilSquareIcon,
-  ScissorsIcon,
   SparklesIcon,
   CloudIcon
 } from '@heroicons/react/24/solid';
@@ -40,7 +40,7 @@ const team = [
 ];
 
 const services = [
-  { name: "Property Maintenance", icon: ScissorsIcon },
+  { name: "Commercial Snow Removal", icon: SnowflakeIcon },
   { name: "Hardscaping", icon: WrenchScrewdriverIcon },
   { name: "Landscape Design & Build", icon: PencilSquareIcon },
   { name: "Seasonal Cleanups", icon: SparklesIcon },
@@ -66,7 +66,7 @@ export default function AboutUsSection() {
       <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8">
         Brighton Road Landscaping is a family owned and operated business. Serving Plymouth Meeting,
         Conshohocken, Blue Bell, King of Prussia, Wayne, Bryn Mawr, Ardmore, and the Main Line, our mission is to provide
-        our clients with reliable, high quality landscaping and property maintenance services. We aim to create a
+        our clients with reliable, high quality landscaping and commercial snow services. We aim to create a
         culture that is rooted in respect for our clients and each other, and working hard to ensure the job 
         is done right. We accomplish this by practicing what we preach as owners and hiring employees 
         who share our values so that we can continue to build our reputation throughout Montgomery 
@@ -149,7 +149,7 @@ export default function AboutUsSection() {
     
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
       {[
-        { name: "Property Maintenance", icon: ScissorsIcon, slug: "lawn-mowing" },
+        { name: "Commercial Snow Removal", icon: SnowflakeIcon, slug: "commercial-snow-removal" },
         { name: "Hardscaping", icon: WrenchScrewdriverIcon, slug: "hardscaping" },
         { name: "Landscape Design & Build", icon: PencilSquareIcon, slug: "landscape-design" },
         { name: "Seasonal Cleanups", icon: SparklesIcon, slug: "seasonal-cleanups" },

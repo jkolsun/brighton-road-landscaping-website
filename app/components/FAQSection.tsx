@@ -8,7 +8,7 @@ const SERVICES = [
   { name: 'Hardscaping', href: '/services/hardscaping' },
   { name: 'Seasonal Cleanups', href: '/services/seasonal-cleanups' },
   { name: 'Drainage & Irrigation', href: '/services/drainage' },
-  { name: 'Property Maintenance', href: '/services/lawn-mowing' },
+  { name: 'Commercial Snow Removal', href: '/services/commercial-snow-removal' },
 ];
 
 const faqs: { question: string; answer: React.ReactNode }[] = [

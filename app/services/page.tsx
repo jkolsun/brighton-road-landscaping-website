@@ -8,10 +8,10 @@ import {
   ArrowRightIcon,
   SparklesIcon,
   HomeIcon,
-  ScissorsIcon,
   CloudIcon,
   WrenchScrewdriverIcon
 } from '@heroicons/react/24/solid';
+import SnowflakeIcon from '@/components/SnowflakeIcon';
 
 // Ordered by value: signature design/build work first, then recurring
 // maintenance, then seasonal — mirrors the homepage hero order.
@@ -45,11 +45,11 @@ const services = [
     icon: CloudIcon,
   },
   {
-    name: 'Property Maintenance',
-    slug: 'lawn-mowing',
-    description: 'Reliable mowing, trimming, edging, and ongoing property upkeep — no contracts',
-    image: '/images/lawns.jpg',
-    icon: ScissorsIcon,
+    name: 'Commercial Snow Removal',
+    slug: 'commercial-snow-removal',
+    description: 'Plowing, salting, and sidewalk clearing that keep commercial properties safe and open all winter',
+    image: '/images/snow.jpg',
+    icon: SnowflakeIcon,
   }
 ];
 

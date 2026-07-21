@@ -313,9 +313,9 @@ export default function Chatbot() {
     if (questionType === 'timing' && context.lastService) {
       const service = services.find(s => s.id === context.lastService);
       if (service) {
-        if (service.id === 'lawn-mowing') {
+        if (service.id === 'commercial-snow-removal') {
           return {
-            content: `For lawn mowing, we recommend:\n\n• **Weekly** during peak growing season (spring/summer)\n• **Bi-weekly** for slower growth periods or budget-conscious customers\n• **One-time** cuts are also available\n\nWe can start within a few days of receiving your request!`,
+            content: `For commercial snow removal, timing works two ways:\n\n• **Seasonal contracts** - your property is on our route for the whole winter\n• **Per-storm service** - we come out as storms hit\n\nThe best move is to get set up before the season starts. Want a quote for your property?`,
             quickReplies: ['Get a Quote', 'What\'s included?', 'Service Areas'],
             newContext: { lastTopic: 'timing' }
           };
@@ -477,26 +477,26 @@ export default function Chatbot() {
           };
         case 'overgrown':
           return {
-            content: `No worries - we can get that under control! For overgrown lawns, we typically:\n\n1. Do an initial cut at a higher setting to avoid shocking the grass\n2. Follow up with a regular-height cut\n3. Edge and trim everything professionally\n4. Blow all debris clean\n\nWant me to set up a quote? We can usually get there within a few days!`,
-            quickReplies: ['Get a Quote', 'View Property Maintenance', 'Call Us'],
-            links: [{ text: 'Property Maintenance Service', url: '/services/lawn-mowing' }],
-            newContext: { lastTopic: 'overgrown', lastService: 'lawn-mowing' }
+            content: `No worries - we can get that under control! Our seasonal cleanup crew handles overgrown and neglected yards:\n\n1. Cut everything back to a manageable state\n2. Clear and haul away all the debris\n3. Edge and clean up beds and borders\n4. Leave the property looking sharp\n\nWant me to set up a quote? We can usually get there within a few days!`,
+            quickReplies: ['Get a Quote', 'View Seasonal Cleanups', 'Call Us'],
+            links: [{ text: 'Seasonal Cleanup Service', url: '/services/seasonal-cleanups' }],
+            newContext: { lastTopic: 'overgrown', lastService: 'seasonal-cleanups' }
           };
         case 'no-time':
           return {
-            content: `Totally understand - life gets busy! That's exactly why we're here.\n\n**Our hassle-free service includes:**\n• Weekly or bi-weekly mowing (your choice)\n• No contracts - cancel anytime\n• You don't need to be home\n• We handle everything: mowing, edging, trimming, blowing\n\nMany of our customers are busy professionals who just want a great lawn without the work. Ready to get started?`,
+            content: `Totally understand - life gets busy! That's exactly why we're here.\n\n**We make it hassle-free:**\n• Free estimates within 24 hours\n• You don't need to be home\n• One crew handles the whole job start to finish\n\nWhether it's a cleanup, new landscaping, or drainage, we take it off your plate. Ready to get started?`,
             quickReplies: ['Get a Quote', 'View Services', 'Call Us'],
             newContext: { lastTopic: 'convenience' }
           };
         case 'new-home':
           return {
-            content: `Congratulations on the new home! 🏠 We'd love to help you get settled.\n\n**We can help with:**\n• One-time cleanup to get things in shape\n• Regular mowing to maintain the lawn\n• Landscape design if you want to make changes\n\nWhat does the yard currently look like? That'll help me point you in the right direction!`,
+            content: `Congratulations on the new home! 🏠 We'd love to help you get settled.\n\n**We can help with:**\n• One-time cleanup to get things in shape\n• Landscape design if you want to make changes\n• Drainage fixes if water is pooling anywhere\n\nWhat does the yard currently look like? That'll help me point you in the right direction!`,
             quickReplies: ['Get a Quote', 'View Services', 'Seasonal Cleanup'],
             newContext: { lastTopic: 'new-home' }
           };
         case 'referral':
           return {
-            content: `That's great to hear - we love referrals from happy customers! Thank you for giving us a try.\n\nI'd be happy to help you with any of our services:\n• Lawn mowing\n• Drainage (French drains, grading)\n• Landscape design\n• Hardscaping\n• Seasonal cleanups\n\nWhat are you looking for, or would you like a free quote?`,
+            content: `That's great to hear - we love referrals from happy customers! Thank you for giving us a try.\n\nI'd be happy to help you with any of our services:\n• Landscape design\n• Hardscaping\n• Drainage (French drains, grading)\n• Seasonal cleanups\n• Commercial snow removal\n\nWhat are you looking for, or would you like a free quote?`,
             quickReplies: ['Get a Quote', 'View Services', 'Contact Us'],
             newContext: { lastTopic: 'referral' }
           };
@@ -886,8 +886,8 @@ export default function Chatbot() {
     // === HANDLE NEGATION ("not", "don't want", "without") ===
     if (/\b(not|don'?t|no|without|never|can'?t)\s+(want|need|like|interested)/i.test(lowerMessage)) {
       return {
-        content: `No problem at all! Let me know what you ARE looking for and I'll point you in the right direction.\n\n**Popular requests:**\n• Regular property maintenance\n• One-time cleanup\n• Landscape redesign\n\nWhat sounds closer to what you need?`,
-        quickReplies: ['Property Maintenance', 'Seasonal Cleanup', 'Something else'],
+        content: `No problem at all! Let me know what you ARE looking for and I'll point you in the right direction.\n\n**Popular requests:**\n• One-time cleanup\n• Landscape redesign\n• Commercial snow removal\n\nWhat sounds closer to what you need?`,
+        quickReplies: ['Commercial Snow', 'Seasonal Cleanup', 'Something else'],
         newContext: { lastTopic: 'alternative' }
       };
     }

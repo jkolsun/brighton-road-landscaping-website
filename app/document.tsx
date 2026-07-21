@@ -9,18 +9,18 @@ export default function Document() {
         <link rel="shortcut icon" href="/favicon.ico" />
 
         {/* Meta tags */}
-        <meta name="description" content="Brighton Road Landscaping - Landscape Design & Build, Hardscaping, Property Maintenance, Drainage & Irrigation across the Main Line and Montgomery County, PA." />
-        <meta name="keywords" content="Brighton Road Landscaping, Landscaping, Hardscaping, Drainage, Irrigation, Sprinkler Systems, Property Maintenance, Main Line, Montgomery County PA, Wayne, Blue Bell" />
+        <meta name="description" content="Brighton Road Landscaping - Landscape Design & Build, Hardscaping, Commercial Snow Removal, Drainage & Irrigation across the Main Line and Montgomery County, PA." />
+        <meta name="keywords" content="Brighton Road Landscaping, Landscaping, Hardscaping, Drainage, Irrigation, Sprinkler Systems, Commercial Snow Removal, Main Line, Montgomery County PA, Wayne, Blue Bell" />
         <meta name="author" content="Brighton Road Landscaping" />
 
         {/* Additional meta tags for SEO */}
         <meta property="og:title" content="Brighton Road Landscaping - Landscaping, Hardscaping & Drainage" />
-        <meta property="og:description" content="Serving the Main Line and Montgomery County with quality landscaping, hardscaping, property maintenance, and drainage. Reliable, professional, and local." />
+        <meta property="og:description" content="Serving the Main Line and Montgomery County with quality landscaping, hardscaping, commercial snow removal, and drainage. Reliable, professional, and local." />
         <meta property="og:image" content="/favicon.ico" />
         <meta property="og:url" content="https://brightonroadlandscaping.com" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Brighton Road Landscaping - Landscaping, Hardscaping & Drainage" />
-        <meta name="twitter:description" content="Serving the Main Line and Montgomery County with quality landscaping, hardscaping, property maintenance, and drainage. Reliable, professional, and local." />
+        <meta name="twitter:description" content="Serving the Main Line and Montgomery County with quality landscaping, hardscaping, commercial snow removal, and drainage. Reliable, professional, and local." />
         <meta name="twitter:image" content="/favicon.ico" />
       </Head>
       <body>

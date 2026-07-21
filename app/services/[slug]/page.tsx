@@ -9,39 +9,6 @@ import Slideshow from '@/components/Slideshow'
 import { CheckCircleIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
 
 const services = {
-  'lawn-mowing': {
-    name: 'Property Maintenance',
-    hero: {
-      title: 'Quality, Reliable Property Maintenance',
-      image: '/images/lawns.jpg'
-    },
-    sections: [
-      {
-        title: 'Professional Property Maintenance',
-        content: 'At Brighton Road Landscaping, our experienced team members work diligently to keep our promise of consistent, reliable, high quality property maintenance. Our standard service covers all mowing, trimming, edging and blowing. We handle everything so you can simply relax and enjoy the beauty of your outdoor space.',
-        video: '/lawn-video.mp4',
-        features: ['Weekly Service', 'Bi-weekly Options', 'Edge Trimming', 'Professional Blowing'],
-        style: 'normal',
-        bgColor: 'white'
-      },
-      {
-        title: 'No Contracts, Transparent Pricing',
-        content: 'For our residential clients, we offer a pay as you go, non-binding property maintenance service. You may cancel or reschedule anytime except for the day of, with no cancellation fee. Whether you are in need of weekly lawn mowing, biweekly lawn mowing, or are just looking for a one time cut, Brighton Road Landscaping is here for all of your property maintenance needs.',
-        image: '/images/maintenance-stripes.jpg',
-        style: 'diagonal-left',
-        bgColor: 'gray'
-      },
-      {
-        title: 'Commercial Landscape Maintenance',
-        content: 'Brighton Road Landscaping offers complete landscape maintenance for our commercial clients. Your outdoor space is the first impression for customers and tenants, and we know how important it is for every detail of the landscape to be up to par. We work with you to create a custom landscape maintenance plan at the beginning of each contract. We believe this is the foundation of a mutually beneficial relationship. Then, our experienced team members execute the landscape maintenance services, clearly communicated by the field manager. We proudly service HOA communities, office parks, retail centers, parks and public places, and more throughout Montgomery County.',
-        image: '/images/jaguar.jpg',
-        style: 'normal',
-        bgColor: 'white'
-      }
-    ],
-    serviceArea: 'From our home base in Plymouth Meeting, PA, we proudly provide reliable residential and commercial property maintenance throughout Conshohocken, Blue Bell, King of Prussia, Audubon, Lafayette Hill, Fort Washington, Wayne, Bryn Mawr, Ardmore, Radnor, and the greater Main Line. Our crews live and work in the same communities we serve, so we understand the local weather, grass types, and property needs. Choose Brighton Road Landscaping for a team that knows your neighborhood and treats your property like their own.'
-  },
-  
   'hardscaping': {
     name: 'Hardscaping',
     hero: {
@@ -138,7 +105,7 @@ const services = {
   'seasonal-cleanups': {
     name: 'Seasonal Cleanups',
     hero: {
-      title: 'Year-Round Property Maintenance',
+      title: 'Year-Round Property Care',
       image: '/images/seasonal.jpg'
     },
     sections: [

@@ -40,7 +40,7 @@ export default function ContactPage() {
                 Ready to Get Started?
               </h2>
               <p className="text-base text-gray-700 mb-8 max-w-2xl mx-auto px-4">
-                Whether you need regular property maintenance or a complete landscape transformation,
+                Whether you need a seasonal cleanup, winter snow service, or a complete landscape transformation,
                 we&apos;re here to help. Get your free quote today!
               </p>
               <div className="flex flex-col gap-4 justify-center px-4">
@@ -139,7 +139,7 @@ export default function ContactPage() {
             <motion.div className="text-center py-12 bg-gradient-to-br from-green-50 to-white rounded-2xl" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.5 }}>
               <h2 className="text-3xl md:text-4xl font-[impact] text-gray-900 mb-6">Ready to Get Started?</h2>
               <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto px-6">
-                Whether you need regular property maintenance or a complete landscape transformation,
+                Whether you need a seasonal cleanup, winter snow service, or a complete landscape transformation,
                 we&apos;re here to help. Get your free quote today!
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center px-6">
