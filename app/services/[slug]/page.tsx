@@ -105,10 +105,23 @@ const services = {
   'seasonal-cleanups': {
     name: 'Seasonal Cleanups',
     hero: {
-      title: 'Year-Round Property Care',
+      title: 'Fall Cleanups & Leaf Removal, Spring Cleanups & Mulch',
       image: '/images/seasonal.jpg'
     },
     sections: [
+      {
+        title: 'FALL CLEANUP',
+        content: 'Brighton Road Landscaping\'s fall cleanup removes all the leaves and sticks from your lawn, beds and borders, trims and prunes the plants and shrubs that need it, and clears storm debris. Your property is left clean and ready for the winter, and we also handle sprinkler system winterization.',
+        slideshow: [
+          { src: '/images/fall-ba1-before.jpg', label: 'Before — Leaf Removal' },
+          { src: '/images/fall-ba1-after.jpg', label: 'After — Leaf Removal' },
+          { src: '/images/fall-ba2-before.jpg', label: 'Before — Storm Debris' },
+          { src: '/images/fall-ba2-after.jpg', label: 'After — Storm Debris' },
+        ],
+        features: ['Leaf Removal', 'Stick Cleanup', 'Trimming & Pruning', 'Winter Prep'],
+        style: 'normal',
+        bgColor: 'white'
+      },
       {
         title: 'SPRING CLEANUP',
         content: 'Brighton Road Landscaping\'s spring cleanups include all weeding, edging and installation of fresh mulch, as well as any trimming or pruning that is necessary. Our team will ensure that all plants will grow, bloom and thrive during the warm months.',
@@ -121,21 +134,8 @@ const services = {
           { src: '/images/projects/spring-slide-6.jpg' },
         ],
         features: ['Weeding & Edging', 'Fresh Mulch', 'Trimming & Pruning', 'Bed Cleanup'],
-        style: 'normal',
-        bgColor: 'gray'
-      },
-      {
-        title: 'FALL CLEANUP',
-        content: 'Brighton Road Landscaping\'s fall cleanup includes removal of all leaves and sticks, as well as any plant or shrub trimming and pruning. Brighton Road Landscaping will ensure your property is clean and ready for the winter.',
-        slideshow: [
-          { src: '/images/fall-ba1-before.jpg', label: 'Before — Leaf Removal' },
-          { src: '/images/fall-ba1-after.jpg', label: 'After — Leaf Removal' },
-          { src: '/images/fall-ba2-before.jpg', label: 'Before — Storm Debris' },
-          { src: '/images/fall-ba2-after.jpg', label: 'After — Storm Debris' },
-        ],
-        features: ['Leaf Removal', 'Stick Cleanup', 'Trimming & Pruning', 'Winter Prep'],
         style: 'diagonal-right',
-        bgColor: 'white'
+        bgColor: 'gray'
       }
     ],
     serviceArea: 'We proudly perform seasonal cleanups in Plymouth Meeting, Conshohocken, Blue Bell, King of Prussia, Audubon, Fort Washington, Wayne, Bryn Mawr, Ardmore, Radnor, and across the Main Line. With Brighton Road Landscaping, your property will always be well-prepared for every season.'

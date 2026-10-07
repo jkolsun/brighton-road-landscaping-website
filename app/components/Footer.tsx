@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaFacebookF, FaInstagram, FaGoogle } from 'react-icons/fa';
+import { AREAS } from '@/lib/areas';
 
 export default function Footer() {
   return (
@@ -10,7 +11,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto">
         
         {/* Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 mb-8 text-center md:text-left">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-10 mb-8 text-center md:text-left">
 
           {/* Company Info WITHOUT Social Media */}
           <div>
@@ -32,12 +33,23 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-gray-300">
               <li><Link href="/" className="hover:text-white transition">Home</Link></li>
               <li><Link href="/services" className="hover:text-white transition">Services</Link></li>
+              <li><Link href="/fall-cleanup" className="hover:text-white transition">Fall Cleanup &amp; Leaf Removal</Link></li>
               <li><Link href="/about" className="hover:text-white transition">About Us</Link></li>
               <li><Link href="/gallery" className="hover:text-white transition">Gallery</Link></li>
               <li><Link href="/join" className="hover:text-white transition">Join Our Team</Link></li>
               <li><Link href="/quote" className="hover:text-white transition">Get a Free Quote</Link></li>
               <li><Link href="/contact" className="hover:text-white transition">Contact Us</Link></li>
               <li><Link href="/privacy" className="hover:text-white transition">Privacy Policy</Link></li>
+            </ul>
+          </div>
+
+          {/* Service areas: one page per town */}
+          <div>
+            <h4 className="text-lg font-semibold mb-3">Service Areas</h4>
+            <ul className="space-y-2 text-sm text-gray-300">
+              {AREAS.map((a) => (
+                <li key={a.slug}><Link href={`/landscaping/${a.slug}`} className="hover:text-white transition">{a.name}, PA</Link></li>
+              ))}
             </ul>
           </div>
 
